@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Smoke tests — all public pages load", () => {
+test.describe("Smoke tests - all public pages load", () => {
   test("home page loads with hero", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Enneagram Growth/);
@@ -59,7 +59,7 @@ test.describe("Smoke tests — all public pages load", () => {
   });
 });
 
-test.describe("Type pages — all 9 types load", () => {
+test.describe("Type pages - all 9 types load", () => {
   const types = [
     { n: 1, name: "Reformer" },
     { n: 2, name: "Helper" },
@@ -73,7 +73,7 @@ test.describe("Type pages — all 9 types load", () => {
   ];
 
   for (const { n, name } of types) {
-    test(`Type ${n} — ${name} page loads with content`, async ({ page }) => {
+    test(`Type ${n} - ${name} page loads with content`, async ({ page }) => {
       await page.goto(`/enneagram/types/${n}`);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect(page.getByText(name)).toBeVisible();
@@ -84,7 +84,7 @@ test.describe("Type pages — all 9 types load", () => {
   }
 });
 
-test.describe("Learn section — lessons load", () => {
+test.describe("Learn section - lessons load", () => {
   const lessons = [
     "what-is-the-enneagram",
     "the-three-centers",

@@ -23,19 +23,19 @@ export const CENTER_INFO: Record<Center, CenterInfo> = {
     name: "body",
     label: "Body Center",
     types: [8, 9, 1],
-    theme: "Anger & autonomy — how you assert boundaries and move through the world.",
+    theme: "Anger and autonomy: how you assert boundaries and move through the world.",
   },
   heart: {
     name: "heart",
     label: "Heart Center",
     types: [2, 3, 4],
-    theme: "Shame & identity — how you seek value, connection, and a sense of self.",
+    theme: "Shame and identity: how you seek value, connection, and a sense of self.",
   },
   head: {
     name: "head",
     label: "Head Center",
     types: [5, 6, 7],
-    theme: "Fear & security — how you seek certainty, safety, and understanding.",
+    theme: "Fear and security: how you seek certainty, safety, and understanding.",
   },
 };
 

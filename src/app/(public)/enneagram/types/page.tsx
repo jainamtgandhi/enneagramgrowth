@@ -8,7 +8,7 @@ import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
 export const metadata: Metadata = {
   title: "The Nine Types",
   description:
-    "Explore all nine Enneagram types — their core patterns, motivations, and paths to growth.",
+    "Explore all nine Enneagram types: their core patterns, motivations, and paths to growth.",
 };
 
 const CENTER_ORDER: Center[] = ["body", "heart", "head"];
@@ -21,7 +21,7 @@ export default function TypesOverviewPage() {
       </h1>
       <p className="text-body-lg text-ink-muted max-w-[68ch] mb-12">
         Nine patterns of attention, motivation, and habit. Each a different way
-        of navigating the world — none better than another.
+        of navigating the world, none better than another.
       </p>
 
       <div className="mx-auto max-w-[400px] mb-16">

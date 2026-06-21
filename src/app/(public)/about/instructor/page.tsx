@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 export const metadata: Metadata = {
   title: "Meet Your Instructor",
   description:
-    "Get to know the person behind Enneagram Growth — background, teaching philosophy, and approach.",
+    "Get to know the person behind Enneagram Growth: background, teaching philosophy, and approach.",
 };
 
 export default function InstructorPage() {
@@ -39,7 +39,7 @@ export default function InstructorPage() {
 
         <div className="rounded-xl bg-surface-sunken p-6 text-center">
           <p className="text-body text-ink-muted">
-            In the meantime, explore the site — everything is free and ready
+            In the meantime, explore the site. Everything is free and ready
             for you.
           </p>
         </div>

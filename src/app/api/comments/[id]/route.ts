@@ -7,7 +7,7 @@ const UpdateStatusSchema = z.object({
 });
 
 /**
- * PATCH /api/comments/[id] — Update comment status (auth required).
+ * PATCH /api/comments/[id] - Update comment status (auth required).
  * Used by moderators to approve or flag comments.
  */
 export async function PATCH(
@@ -61,7 +61,7 @@ export async function PATCH(
 }
 
 /**
- * DELETE /api/comments/[id] — Remove a comment (auth required).
+ * DELETE /api/comments/[id] - Remove a comment (auth required).
  * Cascade delete will also remove child replies (handled by DB FK constraint).
  */
 export async function DELETE(

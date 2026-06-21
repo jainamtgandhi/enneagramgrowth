@@ -5,7 +5,7 @@ import { DiscoveryFlow } from "@/components/discovery/discovery-flow";
 export const metadata: Metadata = {
   title: "Find Your Way In",
   description:
-    "A guided, non-diagnostic reflection to help you explore which Enneagram types resonate — not a test, not a verdict.",
+    "A guided, non-diagnostic reflection to help you explore which Enneagram types resonate. Not a test, not a verdict.",
 };
 
 export default function DiscoverPage() {
@@ -28,7 +28,7 @@ export default function DiscoverPage() {
       <p className="text-body-lg text-ink-muted max-w-[68ch] mb-12">
         This isn&apos;t a personality quiz and it won&apos;t tell you &ldquo;what
         you are.&rdquo; It&apos;s a 30-question guided reflection across three
-        phases — designed to help you notice which patterns resonate. A starting
+        phases, designed to help you notice which patterns resonate. A starting
         point, not a verdict.
       </p>
 

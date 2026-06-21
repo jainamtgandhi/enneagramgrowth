@@ -10,7 +10,7 @@ export function Footer() {
               Enneagram Growth
             </h3>
             <p className="mt-2 text-small text-ink-muted max-w-[28ch]">
-              A mirror for self-awareness — not a diagnosis, label, or
+              A mirror for self-awareness, not a diagnosis, label, or
               replacement for therapy.
             </p>
           </div>

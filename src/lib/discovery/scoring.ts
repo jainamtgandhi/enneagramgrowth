@@ -27,7 +27,7 @@ export function getDominantCenter(
   const entries = Object.entries(scores) as [Center, number][];
   entries.sort((a, b) => b[1] - a[1]);
   // If top two centers are tied, prefer heart (most common center of
-  // misidentification), then body, then head — this is a tiebreaker
+  // misidentification), then body, then head. This is a tiebreaker
   // heuristic, not a definitive determination.
   if (entries.length >= 2 && entries[0][1] === entries[1][1]) {
     const tied = entries.filter(([, s]) => s === entries[0][1]).map(([c]) => c);

@@ -4,7 +4,7 @@ import { ArticlePage } from "@/components/enneagram/article-page";
 export const metadata: Metadata = {
   title: "Common Misidentifications",
   description:
-    "Why people mistype — and how to tell similar types apart.",
+    "Why people mistype, and how to tell similar types apart.",
 };
 
 export default function MistypingPage() {

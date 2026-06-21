@@ -68,7 +68,7 @@ export default function PrivacyPage() {
           <h2>How We Use Your Information</h2>
           <p>We use the information we collect to:</p>
           <ul>
-            <li>Display your comments (name only — never your email)</li>
+            <li>Display your comments (name only, never your email)</li>
             <li>Moderate comments for quality and safety</li>
             <li>Improve our content and user experience</li>
             <li>Respond to your inquiries if you contact us</li>
@@ -99,10 +99,10 @@ export default function PrivacyPage() {
           <p>We use the following third-party services:</p>
           <ul>
             <li>
-              <strong>Vercel</strong> — hosting and deployment
+              <strong>Vercel</strong>: hosting and deployment
             </li>
             <li>
-              <strong>Supabase</strong> — database and authentication
+              <strong>Supabase</strong>: database and authentication
             </li>
           </ul>
           <p>

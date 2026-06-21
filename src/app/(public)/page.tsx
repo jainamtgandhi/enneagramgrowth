@@ -27,8 +27,8 @@ export default async function HomePage() {
             <span className="text-brand"> doing this?</span>
           </h1>
           <p className="mx-auto mt-6 max-w-[52ch] text-body-lg text-ink-muted leading-relaxed">
-            That question — the one you ask after the argument, the overthinking,
-            the pattern you swore you&apos;d break — is where the Enneagram starts.
+            That question, the one you ask after the argument, the overthinking,
+            the pattern you swore you&apos;d break, is where the Enneagram starts.
             Not with a label. With recognition.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -62,7 +62,7 @@ export default async function HomePage() {
         </h2>
         <p className="mt-5 text-body-lg text-ink-muted max-w-[56ch] mx-auto text-center leading-relaxed">
           Most tests sort you into a box. The Enneagram shows you the box you&apos;ve
-          been living in — and the door out. It maps the core motivation beneath
+          been living in, and the door out. It maps the core motivation beneath
           your behavior: why you get defensive, why you people-please, why you
           withdraw, why you can&apos;t stop planning.
         </p>
@@ -118,7 +118,7 @@ export default async function HomePage() {
                 Discover
               </h3>
               <p className="text-body text-ink-muted mb-5 leading-relaxed">
-                A guided reflection — not a quiz — that helps you notice which
+                A guided reflection, not a quiz, that helps you notice which
                 patterns feel like yours. Ten minutes, and you&apos;ll know where
                 to look.
               </p>
@@ -142,7 +142,7 @@ export default async function HomePage() {
               </h3>
               <p className="text-body text-ink-muted mb-5 leading-relaxed">
                 5,000+ word profiles for every type. Subtypes, wings, growth
-                arrows, relationship dynamics, and real practices — not
+                arrows, relationship dynamics, and real practices, not
                 horoscope fluff.
               </p>
               <Link
@@ -163,7 +163,7 @@ export default async function HomePage() {
             Three centers. Nine types.
           </h2>
           <p className="mt-4 text-body-lg text-ink-muted max-w-[52ch] mx-auto leading-relaxed">
-            Everyone leads from one center — Body, Heart, or Head. It shapes how
+            Everyone leads from one center: Body, Heart, or Head. It shapes how
             you react before you even think about it.
           </p>
         </div>
@@ -303,44 +303,44 @@ export default async function HomePage() {
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">9 deep type profiles</strong>{" "}
-                — 5,000+ words each, with subtypes, wings, arrows, and growth
+                <strong className="text-ink font-medium">9 deep type profiles</strong>:
+                5,000+ words each, with subtypes, wings, arrows, and growth
                 practices
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">7 primer lessons</strong>{" "}
-                — from &ldquo;what is this?&rdquo; to reading your own patterns
+                <strong className="text-ink font-medium">7 primer lessons</strong>:
+                from &ldquo;what is this?&rdquo; to reading your own patterns
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">Guided discovery</strong>{" "}
-                — a reflection-based process, not a Buzzfeed quiz
+                <strong className="text-ink font-medium">Guided discovery</strong>:
+                a reflection-based process, not a Buzzfeed quiz
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">Library articles</strong>{" "}
-                — wings, instincts, arrows, mistyping, and responsible use
+                <strong className="text-ink font-medium">Library articles</strong>:
+                wings, instincts, arrows, mistyping, and responsible use
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">All 27 subtypes</strong>{" "}
-                — self-preservation, social, and sexual for every type
+                <strong className="text-ink font-medium">All 27 subtypes</strong>:
+                self-preservation, social, and sexual for every type
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">No paywall</strong>{" "}
-                — everything is free, no account needed, no upsell
+                <strong className="text-ink font-medium">No paywall</strong>:
+                everything is free, no account needed, no upsell
               </p>
             </div>
           </div>
@@ -410,7 +410,7 @@ export default async function HomePage() {
           <p className="mt-5 text-body-lg text-ink-muted leading-relaxed">
             The pattern you can&apos;t quite name. The reaction that surprises you.
             The thing you do that you wish you didn&apos;t. The Enneagram won&apos;t
-            fix it — but it will help you see it. And seeing is where change begins.
+            fix it, but it will help you see it. And seeing is where change begins.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button

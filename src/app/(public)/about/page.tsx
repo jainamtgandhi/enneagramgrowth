@@ -7,7 +7,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Enneagram Growth is a place to watch yourself — with depth, care, and a teacher who knows the territory.",
+    "Enneagram Growth is a place to watch yourself, with depth, care, and a teacher who knows the territory.",
 };
 
 export default function AboutPage() {
@@ -36,13 +36,13 @@ export default function AboutPage() {
       </h1>
       <p className="mt-6 text-body-lg text-ink-muted">
         The internet has a hundred free Enneagram encyclopedias and none of them
-        change anyone. Change happens in a loop — practice, reflection, being
+        change anyone. Change happens in a loop: practice, reflection, being
         seen by a group, a teacher reflecting your pattern back, and time.
       </p>
       <p className="mt-4 text-body text-ink-muted">
         Enneagram Growth is the container for that kind of work. Reference
         content is table stakes, built once. The living product is the journey
-        — a teacher who knows the territory, a group walking beside you, and
+        : a teacher who knows the territory, a group walking beside you, and
         enough time to actually change.
       </p>
 

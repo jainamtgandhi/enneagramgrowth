@@ -91,7 +91,7 @@ const TRIANGLE_PATH = polylinePath([3, 6, 9]);
 const HEXAD_PATH = polylinePath([1, 4, 2, 8, 5, 7]);
 
 /* ------------------------------------------------------------------ */
-/*  Tooltip label positions — push labels slightly outward             */
+/*  Tooltip label positions - push labels slightly outward             */
 /* ------------------------------------------------------------------ */
 
 function labelPosition(type: EnneagramType): { x: number; y: number } {
@@ -224,7 +224,7 @@ export function EnneagramDiagram({
                   {typeNum}
                 </text>
 
-                {/* Tooltip label — visible on hover / active */}
+                {/* Tooltip label - visible on hover / active */}
                 <text
                   x={labelPos.x}
                   y={labelPos.y}

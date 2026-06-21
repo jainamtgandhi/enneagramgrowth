@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Enneagram Growth",
   },
   description:
-    "A place to watch yourself — with depth, not diagnosis. Explore the nine Enneagram types, discover your path, and grow at your own pace.",
+    "A place to watch yourself, with depth, not diagnosis. Explore the nine Enneagram types, discover your path, and grow at your own pace.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   ),

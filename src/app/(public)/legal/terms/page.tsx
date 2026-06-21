@@ -92,8 +92,8 @@ export default function TermsPage() {
         <section>
           <h2>Intellectual Property</h2>
           <p>
-            All content on Enneagram Growth — including text, design, graphics,
-            and the selection and arrangement of content — is the property of
+            All content on Enneagram Growth, including text, design, graphics,
+            and the selection and arrangement of content, is the property of
             Enneagram Growth and is protected by applicable intellectual
             property laws.
           </p>

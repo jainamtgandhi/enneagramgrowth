@@ -8,7 +8,7 @@ export default function NotFound() {
           404
         </h1>
         <p className="text-body text-ink-muted max-w-[48ch] mx-auto">
-          This page doesn&apos;t exist — or it moved.
+          This page doesn&apos;t exist, or it moved.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link

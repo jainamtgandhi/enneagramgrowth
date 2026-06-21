@@ -97,7 +97,7 @@ export default async function LessonPage({
           </p>
           <p className="text-body text-ink-muted mb-4">
             Ready to explore which patterns resonate most? Try the Discovery
-            process — a guided reflection, not a test.
+            process, a guided reflection, not a test.
           </p>
           <Link
             href="/discover"

@@ -81,6 +81,6 @@ describe("slugify", () => {
   });
 
   it("preserves numbers", () => {
-    expect(slugify("Type 9 — The Peacemaker")).toBe("type-9-the-peacemaker");
+    expect(slugify("Type 9 - The Peacemaker")).toBe("type-9-the-peacemaker");
   });
 });

@@ -37,7 +37,7 @@ export async function generateMetadata({
   const num = Number(n) as EnneagramType;
   const info = TYPE_INFO[num];
   return {
-    title: `Type ${n} — ${info.name}`,
+    title: `Type ${n}: ${info.name}`,
     description: info.brief,
   };
 }
@@ -63,7 +63,7 @@ export default async function TypeDetailPage({
         items={[
           { label: "Enneagram", href: "/enneagram" },
           { label: "Types", href: "/enneagram/types" },
-          { label: `Type ${n} — ${info.name}` },
+          { label: `Type ${n}: ${info.name}` },
         ]}
       />
 
@@ -81,7 +81,7 @@ export default async function TypeDetailPage({
       </div>
 
       <h1 className="font-serif text-[2rem] sm:text-display font-semibold text-ink mb-2">
-        Type {n} — {info.name}
+        Type {n}: {info.name}
       </h1>
       <p className="text-body-lg text-ink-muted mb-2">{info.altName}</p>
       <p className="text-body text-ink-muted mb-12 max-w-[60ch]">{info.brief}</p>

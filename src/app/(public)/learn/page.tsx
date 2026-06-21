@@ -8,7 +8,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 export const metadata: Metadata = {
   title: "Learn the Enneagram",
   description:
-    "A free, self-paced introduction to the Enneagram — from the basics to finding your type.",
+    "A free, self-paced introduction to the Enneagram, from the basics to finding your type.",
 };
 
 function estimateReadingTime(content: string): number {
@@ -50,7 +50,7 @@ export default function LearnHubPage() {
         Learn the Enneagram
       </h1>
       <p className="text-body-lg text-ink-muted max-w-[68ch] mb-3">
-        A free, self-paced primer. No login, no rush — just a clear path
+        A free, self-paced primer. No login, no rush, just a clear path
         through the essentials, at your own pace.
       </p>
       <p className="text-small text-ink-muted mb-12">
@@ -94,7 +94,7 @@ export default function LearnHubPage() {
           Ready to explore your type?
         </p>
         <p className="text-body text-ink-muted mb-4">
-          After the primer, try the Discovery process — a guided reflection to
+          After the primer, try the Discovery process, a guided reflection to
           notice which patterns resonate most.
         </p>
         <Link

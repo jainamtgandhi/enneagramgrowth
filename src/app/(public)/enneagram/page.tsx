@@ -10,19 +10,19 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "The Enneagram",
   description:
-    "Explore the Enneagram — nine paths to self-understanding. Learn about the types, centers, wings, arrows, and more.",
+    "Explore the Enneagram: nine paths to self-understanding. Learn about the types, centers, wings, arrows, and more.",
 };
 
 const articles = [
-  { href: "/enneagram/what-is-it", label: "What Is the Enneagram?", description: "The basics — a map, not a box." },
+  { href: "/enneagram/what-is-it", label: "What Is the Enneagram?", description: "The basics: a map, not a box." },
   { href: "/enneagram/centers", label: "The Three Centers", description: "Body, Heart, and Head intelligence." },
   { href: "/enneagram/wings", label: "Wings", description: "The types that shade your core pattern." },
   { href: "/enneagram/arrows", label: "Arrows & Growth Paths", description: "How you move in growth and stress." },
   { href: "/enneagram/instincts", label: "The Three Instincts", description: "Self-preservation, social, and one-to-one." },
-  { href: "/enneagram/mistyping", label: "Common Misidentifications", description: "Why types get confused — and how to tell." },
+  { href: "/enneagram/mistyping", label: "Common Misidentifications", description: "Why types get confused, and how to tell." },
   { href: "/enneagram/responsible-use", label: "Using It Responsibly", description: "Principles for ethical application." },
   { href: "/enneagram/glossary", label: "Glossary", description: "Key terms and definitions." },
-  { href: "/enneagram/growth-practices", label: "Growth Practices", description: "From autopilot to awareness — practices for every type." },
+  { href: "/enneagram/growth-practices", label: "Growth Practices", description: "From autopilot to awareness: practices for every type." },
   { href: "/enneagram/relationships", label: "Relationships", description: "How to love and connect with each type." },
 ];
 
@@ -35,7 +35,7 @@ export default function EnneagramHubPage() {
         The Enneagram
       </h1>
       <p className="text-body-lg text-ink-muted max-w-[68ch] mb-8">
-        A map of nine ways people meet the world — not to label, but to notice.
+        A map of nine ways people meet the world, not to label, but to notice.
         Start wherever draws you.
       </p>
 
@@ -47,7 +47,7 @@ export default function EnneagramHubPage() {
           </h2>
           <p className="text-body text-ink-muted">
             Our free 7-lesson primer takes you from &ldquo;what is
-            this?&rdquo; to &ldquo;I see it in myself&rdquo; — no login
+            this?&rdquo; to &ldquo;I see it in myself&rdquo;, no login
             needed.
           </p>
         </div>
@@ -112,13 +112,13 @@ export default function EnneagramHubPage() {
         </Link>
       </section>
 
-      {/* Explore the System — numbered learning path */}
+      {/* Explore the System - numbered learning path */}
       <section>
         <h2 className="font-serif text-h2 font-semibold text-ink mb-3">
           Explore the System
         </h2>
         <p className="text-body text-ink-muted mb-8 max-w-[56ch]">
-          Go deeper into the framework — concepts build on each other, so
+          Go deeper into the framework. Concepts build on each other, so
           reading in order helps, but jump wherever you like.
         </p>
         <div className="space-y-3">

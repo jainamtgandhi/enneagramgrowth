@@ -4,7 +4,7 @@ import { ArticlePage } from "@/components/enneagram/article-page";
 export const metadata: Metadata = {
   title: "Growth Practices",
   description:
-    "The inner process of growth — from autopilot to awareness — and practical exercises for each type and center.",
+    "The inner process of growth, from autopilot to awareness, and practical exercises for each type and center.",
 };
 
 export default function GrowthPracticesPage() {

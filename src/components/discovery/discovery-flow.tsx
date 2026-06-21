@@ -130,13 +130,13 @@ export function DiscoveryFlow() {
             Before you begin
           </h2>
           <ul className="space-y-2 text-body text-ink-muted">
-            <li>This is not a test — there are no right or wrong answers.</li>
+            <li>This is not a test; there are no right or wrong answers.</li>
             <li>
               It will not tell you &ldquo;what you are.&rdquo; It will suggest
               types worth exploring.
             </li>
             <li>
-              Answer based on your deep patterns — not how you act in your best
+              Answer based on your deep patterns, not how you act in your best
               moments, but how you tend to be when you&apos;re not trying.
             </li>
             <li>30 questions across three phases. Takes about 10 minutes.</li>
@@ -155,8 +155,8 @@ export function DiscoveryFlow() {
               <p>
                 <strong className="text-ink font-medium">
                   Finding your center
-                </strong>{" "}
-                — 12 questions to discover whether you lead from Body, Heart, or
+                </strong>:
+                12 questions to discover whether you lead from Body, Heart, or
                 Head.
               </p>
             </div>
@@ -167,8 +167,8 @@ export function DiscoveryFlow() {
               <p>
                 <strong className="text-ink font-medium">
                   Exploring your type
-                </strong>{" "}
-                — 9 questions to narrow down which of the three types in your
+                </strong>:
+                9 questions to narrow down which of the three types in your
                 center resonates most.
               </p>
             </div>
@@ -177,8 +177,8 @@ export function DiscoveryFlow() {
                 3
               </span>
               <p>
-                <strong className="text-ink font-medium">Going deeper</strong>{" "}
-                — 9 more questions exploring childhood patterns, shadow
+                <strong className="text-ink font-medium">Going deeper</strong>:
+                9 more questions exploring childhood patterns, shadow
                 behaviors, and relationship dynamics.
               </p>
             </div>
@@ -219,7 +219,7 @@ export function DiscoveryFlow() {
       <div>
         <div className="mb-6 rounded-lg bg-brand-soft px-4 py-2 text-small text-brand font-medium">
           Your responses point toward the{" "}
-          <strong>{CENTER_LABEL[dominantCenter]}</strong> — now let&apos;s
+          <strong>{CENTER_LABEL[dominantCenter]}</strong>. Now let&apos;s
           explore which type within it.
         </div>
         <QuestionCard
@@ -243,7 +243,7 @@ export function DiscoveryFlow() {
     return (
       <div>
         <div className="mb-6 rounded-lg bg-brand-soft px-4 py-2 text-small text-brand font-medium">
-          Final phase — deeper scenarios to confirm what resonates.
+          Final phase: deeper scenarios to confirm what resonates.
         </div>
         <QuestionCard
           phaseName={PHASE_NAMES.confirm}
@@ -362,7 +362,7 @@ function ResultView({
         </h3>
         <p className="text-body text-ink-muted mb-6">
           Based on 30 questions across three phases, here are the types that
-          resonate most with your answers. Read each profile and see what fits —
+          resonate most with your answers. Read each profile and see what fits;
           no assessment can replace your own reflection.
         </p>
         <div className="grid gap-4 sm:grid-cols-3">
@@ -411,14 +411,14 @@ function ResultView({
           What this means
         </h3>
         <p className="text-body text-ink-muted mb-3">
-          This is a starting point — not a verdict. The Enneagram is about
+          This is a starting point, not a verdict. The Enneagram is about
           motivation, not behavior. Two people can act identically for
           completely different reasons.
         </p>
         <p className="text-body text-ink-muted">
           Read your top type&apos;s full profile. If the core fear and
           desire hit home, you&apos;re likely on the right track. If not,
-          explore the other types in your center — or browse all nine.
+          explore the other types in your center, or browse all nine.
         </p>
       </div>
 
