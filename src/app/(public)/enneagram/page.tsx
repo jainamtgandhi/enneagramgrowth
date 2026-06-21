@@ -22,6 +22,8 @@ const articles = [
   { href: "/enneagram/mistyping", label: "Common Misidentifications", description: "Why types get confused — and how to tell." },
   { href: "/enneagram/responsible-use", label: "Using It Responsibly", description: "Principles for ethical application." },
   { href: "/enneagram/glossary", label: "Glossary", description: "Key terms and definitions." },
+  { href: "/enneagram/growth-practices", label: "Growth Practices", description: "From autopilot to awareness — practices for every type." },
+  { href: "/enneagram/relationships", label: "Relationships", description: "How to love and connect with each type." },
 ];
 
 const CENTER_ORDER: Center[] = ["body", "heart", "head"];
