@@ -81,11 +81,13 @@ export function getCandidateTypes(
 
 export function computeResult(
   centerAnswers: DiscoveryOption[],
-  typeAnswers: DiscoveryOption[]
+  typeAnswers: DiscoveryOption[],
+  confirmAnswers: DiscoveryOption[] = []
 ): DiscoveryResult {
   const centerScores = scoreCenterPhase(centerAnswers);
   const center = getDominantCenter(centerScores);
-  const typeScores = scoreTypePhase(typeAnswers, center);
+  const allTypeAnswers = [...typeAnswers, ...confirmAnswers];
+  const typeScores = scoreTypePhase(allTypeAnswers, center);
   const candidateTypes = getCandidateTypes(typeScores);
 
   return {

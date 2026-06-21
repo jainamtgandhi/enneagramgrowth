@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   PHASE_1_QUESTIONS,
   getPhase2Questions,
+  getPhase3Questions,
 } from "@/lib/discovery/questions";
 import type { DiscoveryOption } from "@/lib/discovery/questions";
 import {
@@ -18,7 +19,7 @@ import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { CENTER_INFO } from "@/lib/enneagram/types";
 import type { Center } from "@/lib/enneagram/types";
 
-type Phase = "intro" | "center" | "type" | "result";
+type Phase = "intro" | "center" | "type" | "confirm" | "result";
 
 const CENTER_LABEL: Record<Center, string> = {
   body: "Body Center",
@@ -26,19 +27,36 @@ const CENTER_LABEL: Record<Center, string> = {
   head: "Head Center",
 };
 
+const PHASE_NAMES: Record<string, string> = {
+  center: "Finding your center",
+  type: "Exploring your type",
+  confirm: "Going deeper",
+};
+
 export function DiscoveryFlow() {
   const [phase, setPhase] = useState<Phase>("intro");
   const [centerAnswers, setCenterAnswers] = useState<DiscoveryOption[]>([]);
   const [typeAnswers, setTypeAnswers] = useState<DiscoveryOption[]>([]);
+  const [confirmAnswers, setConfirmAnswers] = useState<DiscoveryOption[]>([]);
   const [currentQ, setCurrentQ] = useState(0);
   const [dominantCenter, setDominantCenter] = useState<Center | null>(null);
   const [result, setResult] = useState<DiscoveryResult | null>(null);
+
+  const totalQuestions = dominantCenter
+    ? PHASE_1_QUESTIONS.length +
+      getPhase2Questions(dominantCenter).length +
+      getPhase3Questions(dominantCenter).length
+    : 30;
+
+  const answeredSoFar =
+    centerAnswers.length + typeAnswers.length + confirmAnswers.length;
 
   const handleStart = useCallback(() => {
     setPhase("center");
     setCurrentQ(0);
     setCenterAnswers([]);
     setTypeAnswers([]);
+    setConfirmAnswers([]);
     setDominantCenter(null);
     setResult(null);
   }, []);
@@ -71,8 +89,26 @@ export function DiscoveryFlow() {
       if (currentQ < phase2Questions.length - 1) {
         setCurrentQ((q) => q + 1);
       } else {
+        setCurrentQ(0);
+        setPhase("confirm");
+      }
+    },
+    [typeAnswers, currentQ, dominantCenter]
+  );
+
+  const handleConfirmAnswer = useCallback(
+    (option: DiscoveryOption) => {
+      if (!dominantCenter) return;
+      const newAnswers = [...confirmAnswers, option];
+      setConfirmAnswers(newAnswers);
+
+      const phase3Questions = getPhase3Questions(dominantCenter);
+      if (currentQ < phase3Questions.length - 1) {
+        setCurrentQ((q) => q + 1);
+      } else {
         const centerScores = scoreCenterPhase(centerAnswers);
-        const typeScores = scoreTypePhase(newAnswers, dominantCenter);
+        const allTypeAnswers = [...typeAnswers, ...newAnswers];
+        const typeScores = scoreTypePhase(allTypeAnswers, dominantCenter);
         const candidateTypes = getCandidateTypes(typeScores);
         setResult({
           center: dominantCenter,
@@ -83,7 +119,7 @@ export function DiscoveryFlow() {
         setPhase("result");
       }
     },
-    [typeAnswers, currentQ, dominantCenter, centerAnswers]
+    [confirmAnswers, currentQ, dominantCenter, centerAnswers, typeAnswers]
   );
 
   if (phase === "intro") {
@@ -101,11 +137,54 @@ export function DiscoveryFlow() {
             </li>
             <li>
               Answer based on your deep patterns — not how you act in your best
-              moments.
+              moments, but how you tend to be when you&apos;re not trying.
             </li>
-            <li>The whole process takes about 3 minutes.</li>
+            <li>30 questions across three phases. Takes about 10 minutes.</li>
           </ul>
         </div>
+
+        <div className="rounded-xl border border-border p-6 bg-surface">
+          <h3 className="font-serif text-h4 font-semibold text-ink mb-2">
+            Three phases
+          </h3>
+          <div className="space-y-3 text-body text-ink-muted">
+            <div className="flex gap-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-soft text-small font-semibold text-brand shrink-0 mt-0.5">
+                1
+              </span>
+              <p>
+                <strong className="text-ink font-medium">
+                  Finding your center
+                </strong>{" "}
+                — 12 questions to discover whether you lead from Body, Heart, or
+                Head.
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-soft text-small font-semibold text-brand shrink-0 mt-0.5">
+                2
+              </span>
+              <p>
+                <strong className="text-ink font-medium">
+                  Exploring your type
+                </strong>{" "}
+                — 9 questions to narrow down which of the three types in your
+                center resonates most.
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-soft text-small font-semibold text-brand shrink-0 mt-0.5">
+                3
+              </span>
+              <p>
+                <strong className="text-ink font-medium">Going deeper</strong>{" "}
+                — 9 more questions exploring childhood patterns, shadow
+                behaviors, and relationship dynamics.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <button
           onClick={handleStart}
           className="rounded-full bg-brand px-8 py-3 text-ui font-medium text-white hover:bg-brand-hover transition-colors"
@@ -118,12 +197,14 @@ export function DiscoveryFlow() {
 
   if (phase === "center") {
     const question = PHASE_1_QUESTIONS[currentQ];
-    const total = PHASE_1_QUESTIONS.length;
     return (
       <QuestionCard
-        phase={1}
+        phaseName={PHASE_NAMES.center}
+        phaseNumber={1}
         current={currentQ + 1}
-        total={total}
+        total={PHASE_1_QUESTIONS.length}
+        overallProgress={answeredSoFar}
+        overallTotal={totalQuestions}
         question={question.text}
         options={question.options}
         onSelect={handleCenterAnswer}
@@ -134,19 +215,46 @@ export function DiscoveryFlow() {
   if (phase === "type" && dominantCenter) {
     const questions = getPhase2Questions(dominantCenter);
     const question = questions[currentQ];
-    const total = questions.length;
     return (
       <div>
-        <div className="mb-6 rounded-lg bg-brand-soft px-4 py-2 text-small text-brand">
-          Exploring the {CENTER_LABEL[dominantCenter]}
+        <div className="mb-6 rounded-lg bg-brand-soft px-4 py-2 text-small text-brand font-medium">
+          Your responses point toward the{" "}
+          <strong>{CENTER_LABEL[dominantCenter]}</strong> — now let&apos;s
+          explore which type within it.
         </div>
         <QuestionCard
-          phase={2}
+          phaseName={PHASE_NAMES.type}
+          phaseNumber={2}
           current={currentQ + 1}
-          total={total}
+          total={questions.length}
+          overallProgress={answeredSoFar}
+          overallTotal={totalQuestions}
           question={question.text}
           options={question.options}
           onSelect={handleTypeAnswer}
+        />
+      </div>
+    );
+  }
+
+  if (phase === "confirm" && dominantCenter) {
+    const questions = getPhase3Questions(dominantCenter);
+    const question = questions[currentQ];
+    return (
+      <div>
+        <div className="mb-6 rounded-lg bg-brand-soft px-4 py-2 text-small text-brand font-medium">
+          Final phase — deeper scenarios to confirm what resonates.
+        </div>
+        <QuestionCard
+          phaseName={PHASE_NAMES.confirm}
+          phaseNumber={3}
+          current={currentQ + 1}
+          total={questions.length}
+          overallProgress={answeredSoFar}
+          overallTotal={totalQuestions}
+          question={question.text}
+          options={question.options}
+          onSelect={handleConfirmAnswer}
         />
       </div>
     );
@@ -160,35 +268,42 @@ export function DiscoveryFlow() {
 }
 
 function QuestionCard({
-  phase,
+  phaseName,
+  phaseNumber,
   current,
   total,
+  overallProgress,
+  overallTotal,
   question,
   options,
   onSelect,
 }: {
-  phase: number;
+  phaseName: string;
+  phaseNumber: number;
   current: number;
   total: number;
+  overallProgress: number;
+  overallTotal: number;
   question: string;
   options: DiscoveryOption[];
   onSelect: (option: DiscoveryOption) => void;
 }) {
+  const progressPercent = Math.round((overallProgress / overallTotal) * 100);
+
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <span className="text-small text-ink-muted">
-          Phase {phase} — Question {current} of {total}
-        </span>
-        <div className="flex gap-1">
-          {Array.from({ length: total }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 w-6 rounded-full ${
-                i < current ? "bg-brand" : "bg-border"
-              }`}
-            />
-          ))}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-small text-ink-muted">
+          <span>
+            Phase {phaseNumber}: {phaseName} &middot; {current} of {total}
+          </span>
+          <span>{progressPercent}% complete</span>
+        </div>
+        <div className="h-1.5 w-full rounded-full bg-border overflow-hidden">
+          <div
+            className="h-full rounded-full bg-brand transition-all duration-300 ease-out"
+            style={{ width: `${progressPercent}%` }}
+          />
         </div>
       </div>
 
@@ -218,11 +333,20 @@ function ResultView({
 }) {
   const centerInfo = CENTER_INFO[result.center];
 
+  const sortedTypes = [...result.candidateTypes].sort((a, b) => {
+    return (result.typeScores[b] ?? 0) - (result.typeScores[a] ?? 0);
+  });
+
+  const maxTypeScore = Math.max(
+    ...Object.values(result.typeScores).filter((v) => v > 0),
+    1
+  );
+
   return (
     <div className="space-y-8">
       <div className="rounded-xl border border-border p-6">
         <p className="text-small text-ink-muted mb-2">
-          Your responses suggest you may lead with the
+          Your responses suggest you lead with the
         </p>
         <h2
           className={`font-serif text-h1 font-bold text-center-${result.center}-ink mb-3`}
@@ -237,14 +361,16 @@ function ResultView({
           Types to explore
         </h3>
         <p className="text-body text-ink-muted mb-6">
-          Based on your answers, you may want to start with these types. Read
-          each one and see what resonates — no test can replace your own
-          reflection.
+          Based on 30 questions across three phases, here are the types that
+          resonate most with your answers. Read each profile and see what fits —
+          no assessment can replace your own reflection.
         </p>
         <div className="grid gap-4 sm:grid-cols-3">
-          {result.candidateTypes.map((n) => {
+          {sortedTypes.map((n) => {
             const info = TYPE_INFO[n as keyof typeof TYPE_INFO];
             if (!info) return null;
+            const score = result.typeScores[n] ?? 0;
+            const strength = Math.round((score / maxTypeScore) * 100);
             return (
               <Link
                 key={n}
@@ -261,6 +387,18 @@ function ResultView({
                     {info.name}
                   </span>
                 </div>
+                <div className="mb-3">
+                  <div className="flex items-center justify-between text-small text-ink-muted mb-1">
+                    <span>Resonance</span>
+                    <span>{strength}%</span>
+                  </div>
+                  <div className="h-1.5 w-full rounded-full bg-border overflow-hidden">
+                    <div
+                      className={`h-full rounded-full bg-center-${result.center} transition-all`}
+                      style={{ width: `${strength}%` }}
+                    />
+                  </div>
+                </div>
                 <p className="text-small text-ink-muted">{info.brief}</p>
               </Link>
             );
@@ -270,13 +408,17 @@ function ResultView({
 
       <div className="rounded-xl bg-surface-sunken p-6">
         <h3 className="font-serif text-h3 font-semibold text-ink mb-2">
-          Remember
+          What this means
         </h3>
+        <p className="text-body text-ink-muted mb-3">
+          This is a starting point — not a verdict. The Enneagram is about
+          motivation, not behavior. Two people can act identically for
+          completely different reasons.
+        </p>
         <p className="text-body text-ink-muted">
-          This is a starting point, not a verdict. Many people relate to 2-3
-          types. The Enneagram is about motivation — read each type deeply and
-          see which core fear and desire resonate most. If none of these feel
-          right, explore the other centers too.
+          Read your top type&apos;s full profile. If the core fear and
+          desire hit home, you&apos;re likely on the right track. If not,
+          explore the other types in your center — or browse all nine.
         </p>
       </div>
 

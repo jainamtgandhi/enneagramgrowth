@@ -157,4 +157,23 @@ describe("computeResult", () => {
     expect(result.center).toBeDefined();
     expect(result.centerScores).toBeDefined();
   });
+
+  it("combines phase 2 and phase 3 type answers", () => {
+    const centerAnswers: DiscoveryOption[] = [
+      { label: "a", center: "body" },
+      { label: "b", center: "body" },
+      { label: "c", center: "head" },
+    ];
+    const typeAnswers: DiscoveryOption[] = [
+      { label: "x", typeWeights: { 8: 2 } },
+    ];
+    const confirmAnswers: DiscoveryOption[] = [
+      { label: "y", typeWeights: { 8: 3 } },
+      { label: "z", typeWeights: { 9: 2 } },
+    ];
+    const result = computeResult(centerAnswers, typeAnswers, confirmAnswers);
+    expect(result.center).toBe("body");
+    expect(result.typeScores[8]).toBe(5);
+    expect(result.typeScores[9]).toBe(2);
+  });
 });

@@ -26,9 +26,10 @@ export default function DiscoverPage() {
         Find Your Way In
       </h1>
       <p className="text-body-lg text-ink-muted max-w-[68ch] mb-12">
-        This isn&apos;t a quiz and it won&apos;t tell you &ldquo;what you
-        are.&rdquo; It&apos;s a short guided reflection to help you notice which
-        patterns resonate — a starting point, not a verdict.
+        This isn&apos;t a personality quiz and it won&apos;t tell you &ldquo;what
+        you are.&rdquo; It&apos;s a 30-question guided reflection across three
+        phases — designed to help you notice which patterns resonate. A starting
+        point, not a verdict.
       </p>
 
       <DiscoveryFlow />
