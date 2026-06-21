@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { FileText, LayoutDashboard } from "lucide-react";
+import { FileText, LayoutDashboard, MessageSquare } from "lucide-react";
 
 const navItems = [
   { href: "/teach", label: "Dashboard", icon: LayoutDashboard },
   { href: "/teach/blog", label: "Blog Posts", icon: FileText },
+  { href: "/teach/comments", label: "Comments", icon: MessageSquare },
 ];
 
 export default function FacilitatorLayout({

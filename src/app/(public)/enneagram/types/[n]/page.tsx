@@ -7,6 +7,13 @@ import type { TypeFrontmatter } from "@/lib/content/mdx";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
+import { CommentSection } from "@/components/comments/comment-section";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+
+function estimateReadingTime(content: string): number {
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 220));
+}
 
 const VALID_TYPES = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
@@ -48,23 +55,29 @@ export default async function TypeDetailPage({
   const center = TYPE_TO_CENTER[num];
   const file = getContentFile<TypeFrontmatter>("types", `type-${n}`);
 
+  const readTime = file ? estimateReadingTime(file.content) : 0;
+
   return (
     <main className="mx-auto max-w-[720px] px-4 py-16">
-      <div className="mb-8">
-        <Link
-          href="/enneagram/types"
-          className="text-small text-ink-muted hover:text-ink transition-colors"
-        >
-          &larr; All Types
-        </Link>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: "Enneagram", href: "/enneagram" },
+          { label: "Types", href: "/enneagram/types" },
+          { label: `Type ${n} — ${info.name}` },
+        ]}
+      />
 
-      <div className="mb-6">
+      <div className="mb-6 flex items-center gap-3">
         <span
           className={`inline-block rounded-full px-3 py-1 text-small font-medium bg-center-${center}-soft text-center-${center}-ink`}
         >
           {CENTER_LABEL[center]}
         </span>
+        {readTime > 0 && (
+          <span className="text-small text-ink-muted">
+            ~{readTime} min read
+          </span>
+        )}
       </div>
 
       <h1 className="font-serif text-display font-semibold text-ink mb-2">
@@ -83,16 +96,25 @@ export default async function TypeDetailPage({
         </p>
       )}
 
-      <div className="mt-16 flex flex-wrap gap-2">
-        {VALID_TYPES.filter((t) => t !== n).map((t) => (
-          <Link
-            key={t}
-            href={`/enneagram/types/${t}`}
-            className="rounded-full border border-border px-4 py-1.5 text-small text-ink-muted hover:text-ink hover:bg-surface-sunken transition-colors"
-          >
-            Type {t}
-          </Link>
-        ))}
+      <CommentSection postType="type" postSlug={`type-${n}`} />
+
+      <div className="mt-16">
+        <h3 className="text-ui font-medium text-ink-muted mb-3">Explore other types</h3>
+        <div className="flex flex-wrap gap-2">
+          {VALID_TYPES.filter((t) => t !== n).map((t) => {
+            const typeNum = Number(t) as EnneagramType;
+            const typeCenter = TYPE_TO_CENTER[typeNum];
+            return (
+              <Link
+                key={t}
+                href={`/enneagram/types/${t}`}
+                className={`rounded-full border border-border px-4 py-1.5 text-small text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
+              >
+                Type {t}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </main>
   );

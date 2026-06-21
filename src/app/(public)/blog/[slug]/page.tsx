@@ -7,6 +7,7 @@ import { ArticleContent } from "@/components/library/article-content";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { Badge } from "@/components/ui/badge";
+import { CommentSection } from "@/components/comments/comment-section";
 import { formatDate } from "@/lib/utils/format";
 
 interface PageProps {
@@ -97,6 +98,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       <div className="mt-12 pt-6 border-t border-border">
         <ShareButtons title={post.title} />
       </div>
+
+      <CommentSection postType="blog" postSlug={slug} />
     </div>
   );
 }

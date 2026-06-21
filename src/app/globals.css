@@ -84,57 +84,60 @@
   --radius-full: 9999px;
 
   /* --- Spec §4 Shadows --- */
-  --shadow-1: 0 1px 2px rgba(28, 26, 23, 0.06);
-  --shadow-2: 0 4px 16px rgba(28, 26, 23, 0.08);
-  --shadow-card: 0 4px 16px rgba(28, 26, 23, 0.08);
+  --shadow-1: 0 1px 2px rgba(45, 52, 54, 0.05);
+  --shadow-2: 0 4px 16px rgba(45, 52, 54, 0.06);
+  --shadow-card: 0 4px 16px rgba(45, 52, 54, 0.06);
 
   /* --- Font heading alias for shadcn components --- */
   --font-heading: var(--font-fraunces);
 }
 
 /* ============================================
-   LIGHT MODE (default) — Spec §4 globals.css
+   LIGHT MODE — Light & Airy Sage palette
    ============================================ */
 :root {
-  --ink: #1C1A17;
-  --ink-muted: #6B655C;
-  --paper: #FAF8F4;
+  --ink: #2D3436;
+  --ink-muted: #7B8794;
+  --paper: #FAFBF9;
   --surface: #FFFFFF;
-  --surface-sunken: #F3EFE8;
-  --border: #E6E0D6;
+  --surface-sunken: #F2F4F1;
+  --border: #E2E6E0;
 
-  --brand: #2E5A52;
-  --brand-hover: #244A43;
-  --brand-soft: #E3ECEA;
-  --gold: #C98A3B;
+  --brand: #7BA889;
+  --brand-hover: #6B9E7E;
+  --brand-soft: #EDF5F0;
+  --gold: #D4A24C;
 
-  --center-body: #B5654A;
-  --center-body-soft: #F2E3DC;
-  --center-body-ink: #7A3E2C;
-  --center-heart: #C26B6B;
-  --center-heart-soft: #F4E1E1;
-  --center-heart-ink: #8A4444;
-  --center-head: #5A7A8C;
-  --center-head-soft: #E0E8ED;
-  --center-head-ink: #3A5160;
+  --center-body: #D4836B;
+  --center-body-soft: #FAF0EB;
+  --center-body-ink: #A05A40;
+  --center-heart: #D98B9B;
+  --center-heart-soft: #FBF0F2;
+  --center-heart-ink: #B06070;
+  --center-head: #8B9DC3;
+  --center-head-soft: #EEF1F8;
+  --center-head-ink: #5C6E94;
 
-  --success: #3E7C5A;
-  --warning: #C98A3B;
-  --danger: #B4493C;
+  --success: #5BA87B;
+  --warning: #D4A24C;
+  --danger: #D06050;
 }
 
 /* ============================================
-   DARK MODE — Spec §4 prefers-color-scheme
+   DARK MODE — prefers-color-scheme
    ============================================ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #16140F;
-    --surface: #1E1B16;
-    --surface-sunken: #211D17;
-    --ink: #EDE8DF;
-    --ink-muted: #A7A096;
-    --border: #33302A;
-    --brand-soft: #1F2E2B;
+    --paper: #141716;
+    --surface: #1C1F1D;
+    --surface-sunken: #1A1D1B;
+    --ink: #E8ECE9;
+    --ink-muted: #8A9690;
+    --border: #2E3330;
+    --brand-soft: #1E2B25;
+    --center-body-soft: #2A201C;
+    --center-heart-soft: #2A1E21;
+    --center-head-soft: #1D2030;
   }
 }
 

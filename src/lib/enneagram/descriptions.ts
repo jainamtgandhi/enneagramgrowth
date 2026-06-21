@@ -7,7 +7,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Perfectionist",
     center: "body",
     brief:
-      "Principled, purposeful, and self-controlled. Driven by the desire to be good and to have integrity.",
+      "Principled, purposeful, and self-controlled. Driven by the desire to be good and to live with integrity.",
     keywords: ["integrity", "improvement", "responsibility", "idealism"],
   },
   2: {
@@ -25,7 +25,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Performer",
     center: "heart",
     brief:
-      "Adaptive, excelling, and driven. Motivated by the desire to be valuable and worthwhile.",
+      "Adaptive, excelling, and image-conscious. Driven by the desire to be valuable and worthwhile.",
     keywords: ["ambition", "efficiency", "image", "success"],
   },
   4: {
@@ -34,7 +34,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Romantic",
     center: "heart",
     brief:
-      "Expressive, dramatic, and introspective. Driven by the desire to be unique and authentic.",
+      "Expressive, dramatic, and introspective. Driven by the desire to find identity and significance.",
     keywords: ["authenticity", "creativity", "depth", "sensitivity"],
   },
   5: {
@@ -43,7 +43,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Observer",
     center: "head",
     brief:
-      "Perceptive, innovative, and secretive. Driven by the desire to understand and be competent.",
+      "Intense, cerebral, and perceptive. Driven by the desire to understand the world and protect their inner resources.",
     keywords: ["knowledge", "observation", "independence", "insight"],
   },
   6: {
@@ -52,7 +52,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Skeptic",
     center: "head",
     brief:
-      "Engaging, responsible, and anxious. Driven by the desire for security and support.",
+      "Committed, security-oriented, and vigilant. Driven by the desire to have support and guidance.",
     keywords: ["loyalty", "courage", "preparedness", "trust"],
   },
   7: {
@@ -61,7 +61,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Epicure",
     center: "head",
     brief:
-      "Spontaneous, versatile, and scattered. Driven by the desire to be happy and avoid pain.",
+      "Spontaneous, versatile, and forward-looking. Driven by the desire to be happy and avoid pain.",
     keywords: ["joy", "adventure", "possibility", "freedom"],
   },
   8: {
@@ -70,7 +70,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Boss",
     center: "body",
     brief:
-      "Self-confident, decisive, and confrontational. Driven by the desire to be strong and in control.",
+      "Powerful, decisive, and protective. Driven by the desire to be strong and control their environment.",
     keywords: ["strength", "justice", "protection", "leadership"],
   },
   9: {
@@ -79,7 +79,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Mediator",
     center: "body",
     brief:
-      "Receptive, reassuring, and agreeable. Driven by the desire for peace and harmony.",
+      "Receptive, reassuring, and agreeable. Driven by the desire to maintain inner and outer peace.",
     keywords: ["harmony", "acceptance", "stability", "mediation"],
   },
 };

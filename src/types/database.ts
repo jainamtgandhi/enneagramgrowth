@@ -12,6 +12,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      comments: {
+        Row: {
+          id: string
+          post_type: string
+          post_slug: string
+          author_name: string
+          author_email: string
+          body: string
+          parent_id: string | null
+          status: Database["public"]["Enums"]["comment_status"]
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          post_type: string
+          post_slug: string
+          author_name: string
+          author_email: string
+          body: string
+          parent_id?: string | null
+          status?: Database["public"]["Enums"]["comment_status"]
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          post_type?: string
+          post_slug?: string
+          author_name?: string
+          author_email?: string
+          body?: string
+          parent_id?: string | null
+          status?: Database["public"]["Enums"]["comment_status"]
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blog_posts: {
         Row: {
           author_id: string | null
@@ -175,6 +219,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      comment_status: "pending" | "approved" | "flagged"
       post_status: "draft" | "published" | "archived"
     }
     CompositeTypes: {
@@ -303,6 +348,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      comment_status: ["pending", "approved", "flagged"],
       post_status: ["draft", "published", "archived"],
     },
   },
