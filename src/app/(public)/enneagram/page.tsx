@@ -28,7 +28,7 @@ const CENTER_ORDER: Center[] = ["body", "heart", "head"];
 
 export default function EnneagramHubPage() {
   return (
-    <main className="mx-auto max-w-[1200px] px-4 py-16">
+    <main className="mx-auto max-w-[1200px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <h1 className="font-serif text-display font-semibold text-ink mb-4">
         The Enneagram
       </h1>

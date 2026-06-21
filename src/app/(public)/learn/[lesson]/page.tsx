@@ -61,7 +61,7 @@ export default async function LessonPage({
   const readTime = estimateReadingTime(file.content);
 
   return (
-    <main className="mx-auto max-w-[720px] px-4 py-16">
+    <main className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

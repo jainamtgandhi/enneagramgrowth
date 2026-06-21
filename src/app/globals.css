@@ -84,61 +84,43 @@
   --radius-full: 9999px;
 
   /* --- Spec §4 Shadows --- */
-  --shadow-1: 0 1px 2px rgba(45, 52, 54, 0.05);
-  --shadow-2: 0 4px 16px rgba(45, 52, 54, 0.06);
-  --shadow-card: 0 4px 16px rgba(45, 52, 54, 0.06);
+  --shadow-1: 0 1px 2px rgba(26, 43, 30, 0.04);
+  --shadow-2: 0 4px 16px rgba(26, 43, 30, 0.06);
+  --shadow-card: 0 4px 20px rgba(26, 43, 30, 0.07);
 
   /* --- Font heading alias for shadcn components --- */
   --font-heading: var(--font-fraunces);
 }
 
 /* ============================================
-   LIGHT MODE — Light & Airy Sage palette
+   LIGHT MODE — Bright & Airy palette
    ============================================ */
 :root {
-  --ink: #2D3436;
-  --ink-muted: #7B8794;
-  --paper: #FAFBF9;
+  --ink: #1A2B1E;
+  --ink-muted: #6B7C72;
+  --paper: #FCFDF9;
   --surface: #FFFFFF;
-  --surface-sunken: #F2F4F1;
-  --border: #E2E6E0;
+  --surface-sunken: #F5F8F2;
+  --border: #E0E8DC;
 
-  --brand: #7BA889;
-  --brand-hover: #6B9E7E;
-  --brand-soft: #EDF5F0;
+  --brand: #3A8F5C;
+  --brand-hover: #2E7A4D;
+  --brand-soft: #EAF5ED;
   --gold: #D4A24C;
 
   --center-body: #D4836B;
-  --center-body-soft: #FAF0EB;
+  --center-body-soft: #FDF4F0;
   --center-body-ink: #A05A40;
   --center-heart: #D98B9B;
-  --center-heart-soft: #FBF0F2;
+  --center-heart-soft: #FDF2F4;
   --center-heart-ink: #B06070;
-  --center-head: #8B9DC3;
-  --center-head-soft: #EEF1F8;
-  --center-head-ink: #5C6E94;
+  --center-head: #6B8DC3;
+  --center-head-soft: #EDF2FA;
+  --center-head-ink: #4A6294;
 
-  --success: #5BA87B;
+  --success: #3A8F5C;
   --warning: #D4A24C;
   --danger: #D06050;
-}
-
-/* ============================================
-   DARK MODE — prefers-color-scheme
-   ============================================ */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #141716;
-    --surface: #1C1F1D;
-    --surface-sunken: #1A1D1B;
-    --ink: #E8ECE9;
-    --ink-muted: #8A9690;
-    --border: #2E3330;
-    --brand-soft: #1E2B25;
-    --center-body-soft: #2A201C;
-    --center-heart-soft: #2A1E21;
-    --center-head-soft: #1D2030;
-  }
 }
 
 @layer base {

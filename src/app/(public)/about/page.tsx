@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "About",
@@ -10,7 +12,25 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-[720px] px-4 py-16 sm:px-6">
+    <div className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "About" },
+        ]}
+      />
+
+      <div className="relative rounded-2xl overflow-hidden mb-10 h-48 sm:h-64">
+        <Image
+          src="/images/hero-nature.jpg"
+          alt="Peaceful nature landscape"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-paper/80 to-transparent" />
+      </div>
+
       <h1 className="font-serif text-display font-semibold text-ink">
         About Enneagram Growth
       </h1>

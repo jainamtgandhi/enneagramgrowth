@@ -19,7 +19,7 @@ export function ArticlePage({ slug }: ArticlePageProps) {
 
   if (!file) {
     return (
-      <main className="mx-auto max-w-[720px] px-4 py-16">
+      <main className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
         <h1 className="font-serif text-display font-semibold text-ink mb-4">
           Coming Soon
         </h1>

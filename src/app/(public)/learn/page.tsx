@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getAllContentFiles } from "@/lib/content/mdx";
 import type { LessonFrontmatter } from "@/lib/content/mdx";
@@ -26,13 +27,24 @@ export default function LearnHubPage() {
   );
 
   return (
-    <main className="mx-auto max-w-[720px] px-4 py-16">
+    <main className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
           { label: "Learn" },
         ]}
       />
+
+      <div className="relative rounded-2xl overflow-hidden mb-10 h-40 sm:h-56">
+        <Image
+          src="/images/learn-books.jpg"
+          alt="Books and learning materials"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-paper/80 to-transparent" />
+      </div>
 
       <h1 className="font-serif text-display font-semibold text-ink mb-4">
         Learn the Enneagram

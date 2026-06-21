@@ -58,7 +58,7 @@ export default async function TypeDetailPage({
   const readTime = file ? estimateReadingTime(file.content) : 0;
 
   return (
-    <main className="mx-auto max-w-[720px] px-4 py-16">
+    <main className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <Breadcrumbs
         items={[
           { label: "Enneagram", href: "/enneagram" },
@@ -67,7 +67,7 @@ export default async function TypeDetailPage({
         ]}
       />
 
-      <div className="mb-6 flex items-center gap-3">
+      <div className="mb-6 flex flex-wrap items-center gap-3">
         <span
           className={`inline-block rounded-full px-3 py-1 text-small font-medium bg-center-${center}-soft text-center-${center}-ink`}
         >
@@ -80,11 +80,11 @@ export default async function TypeDetailPage({
         )}
       </div>
 
-      <h1 className="font-serif text-display font-semibold text-ink mb-2">
+      <h1 className="font-serif text-[2rem] sm:text-display font-semibold text-ink mb-2">
         Type {n} — {info.name}
       </h1>
       <p className="text-body-lg text-ink-muted mb-2">{info.altName}</p>
-      <p className="text-body text-ink-muted mb-12">{info.brief}</p>
+      <p className="text-body text-ink-muted mb-12 max-w-[60ch]">{info.brief}</p>
 
       {file ? (
         <article className="prose prose-ink max-w-none">
@@ -98,9 +98,9 @@ export default async function TypeDetailPage({
 
       <CommentSection postType="type" postSlug={`type-${n}`} />
 
-      <div className="mt-16">
-        <h3 className="text-ui font-medium text-ink-muted mb-3">Explore other types</h3>
-        <div className="flex flex-wrap gap-2">
+      <div className="mt-20">
+        <h3 className="text-ui font-medium text-ink-muted mb-4">Explore other types</h3>
+        <div className="flex flex-wrap gap-2.5">
           {VALID_TYPES.filter((t) => t !== n).map((t) => {
             const typeNum = Number(t) as EnneagramType;
             const typeCenter = TYPE_TO_CENTER[typeNum];
@@ -108,7 +108,7 @@ export default async function TypeDetailPage({
               <Link
                 key={t}
                 href={`/enneagram/types/${t}`}
-                className={`rounded-full border border-border px-4 py-1.5 text-small text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
+                className={`rounded-full border border-border px-5 py-2 text-small font-medium text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
               >
                 Type {t}
               </Link>
