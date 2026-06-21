@@ -1,0 +1,99 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getContentFile } from "@/lib/content/mdx";
+import type { TypeFrontmatter } from "@/lib/content/mdx";
+import { TYPE_INFO } from "@/lib/enneagram/descriptions";
+import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
+import type { EnneagramType } from "@/lib/enneagram/types";
+
+const VALID_TYPES = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+const CENTER_LABEL: Record<string, string> = {
+  body: "Body Center",
+  heart: "Heart Center",
+  head: "Head Center",
+};
+
+export function generateStaticParams() {
+  return VALID_TYPES.map((n) => ({ n }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ n: string }>;
+}): Promise<Metadata> {
+  const { n } = await params;
+  if (!VALID_TYPES.includes(n)) return {};
+  const num = Number(n) as EnneagramType;
+  const info = TYPE_INFO[num];
+  return {
+    title: `Type ${n} — ${info.name}`,
+    description: info.brief,
+  };
+}
+
+export default async function TypeDetailPage({
+  params,
+}: {
+  params: Promise<{ n: string }>;
+}) {
+  const { n } = await params;
+  if (!VALID_TYPES.includes(n)) notFound();
+
+  const num = Number(n) as EnneagramType;
+  const info = TYPE_INFO[num];
+  const center = TYPE_TO_CENTER[num];
+  const file = getContentFile<TypeFrontmatter>("types", `type-${n}`);
+
+  return (
+    <main className="mx-auto max-w-[720px] px-4 py-16">
+      <div className="mb-8">
+        <Link
+          href="/enneagram/types"
+          className="text-small text-ink-muted hover:text-ink transition-colors"
+        >
+          &larr; All Types
+        </Link>
+      </div>
+
+      <div className="mb-6">
+        <span
+          className={`inline-block rounded-full px-3 py-1 text-small font-medium bg-center-${center}-soft text-center-${center}-ink`}
+        >
+          {CENTER_LABEL[center]}
+        </span>
+      </div>
+
+      <h1 className="font-serif text-display font-semibold text-ink mb-2">
+        Type {n} — {info.name}
+      </h1>
+      <p className="text-body-lg text-ink-muted mb-2">{info.altName}</p>
+      <p className="text-body text-ink-muted mb-12">{info.brief}</p>
+
+      {file ? (
+        <article className="prose prose-ink max-w-none">
+          <MDXRemote source={file.content} />
+        </article>
+      ) : (
+        <p className="text-body text-ink-muted">
+          Full type page content coming soon.
+        </p>
+      )}
+
+      <div className="mt-16 flex flex-wrap gap-2">
+        {VALID_TYPES.filter((t) => t !== n).map((t) => (
+          <Link
+            key={t}
+            href={`/enneagram/types/${t}`}
+            className="rounded-full border border-border px-4 py-1.5 text-small text-ink-muted hover:text-ink hover:bg-surface-sunken transition-colors"
+          >
+            Type {t}
+          </Link>
+        ))}
+      </div>
+    </main>
+  );
+}

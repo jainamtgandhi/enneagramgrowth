@@ -11,11 +11,9 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={`space-y-2 ${className}`}>
-      <h2 className="font-heading text-3xl font-bold tracking-tight">
-        {title}
-      </h2>
+      <h2 className="font-serif text-h2 font-semibold text-ink">{title}</h2>
       {description && (
-        <p className="text-lg text-muted-foreground">{description}</p>
+        <p className="text-body-lg text-ink-muted">{description}</p>
       )}
     </div>
   );

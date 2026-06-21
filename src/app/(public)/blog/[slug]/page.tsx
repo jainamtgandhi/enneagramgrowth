@@ -13,14 +13,17 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Not Found" };
 
   return {
     title: post.seo_title || post.title,
-    description: post.seo_description || post.excerpt || post.body_md.slice(0, 160),
+    description:
+      post.seo_description || post.excerpt || post.body_md.slice(0, 160),
     openGraph: {
       title: post.seo_title || post.title,
       description: post.seo_description || post.excerpt || undefined,
@@ -48,13 +51,13 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-[720px] px-4 py-8 sm:px-6">
       <Breadcrumbs
         items={[{ label: "Blog", href: "/blog" }, { label: post.title }]}
       />
 
       {post.cover_image_url && (
-        <div className="relative aspect-[2/1] overflow-hidden rounded-2xl bg-muted mb-8">
+        <div className="relative aspect-[2/1] overflow-hidden rounded-lg bg-surface-sunken mb-8">
           <Image
             src={post.cover_image_url}
             alt={post.title}
@@ -66,10 +69,10 @@ export default async function BlogPostPage({ params }: PageProps) {
       )}
 
       <div className="mb-8">
-        <h1 className="font-heading text-4xl font-bold tracking-tight">
+        <h1 className="font-serif text-display font-semibold text-ink">
           {post.title}
         </h1>
-        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-small text-ink-muted">
           {post.published_at && <time>{formatDate(post.published_at)}</time>}
           {post.reading_time_min && (
             <>
@@ -91,7 +94,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <ArticleContent content={post.body_md} />
 
-      <div className="mt-12 pt-6 border-t">
+      <div className="mt-12 pt-6 border-t border-border">
         <ShareButtons title={post.title} />
       </div>
     </div>

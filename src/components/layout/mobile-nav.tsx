@@ -25,8 +25,8 @@ export function MobileNav({ links }: MobileNavProps) {
       </SheetTrigger>
       <SheetContent side="right" className="w-[280px]">
         <div className="flex items-center justify-between mb-8">
-          <span className="font-heading text-lg font-bold text-primary">
-            The Practice
+          <span className="font-serif text-lg font-bold text-brand">
+            Enneagram Growth
           </span>
           <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
             <X className="h-5 w-5" />
@@ -38,7 +38,7 @@ export function MobileNav({ links }: MobileNavProps) {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-lg font-medium text-ink-muted transition-colors hover:text-ink"
             >
               {link.label}
             </Link>

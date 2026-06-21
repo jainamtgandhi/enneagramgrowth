@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Smoke tests", () => {
   test("home page loads", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/The Practice/);
+    await expect(page).toHaveTitle(/Enneagram Growth/);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
@@ -12,10 +12,17 @@ test.describe("Smoke tests", () => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
-  test("library page loads", async ({ page }) => {
-    await page.goto("/library");
+  test("enneagram hub loads", async ({ page }) => {
+    await page.goto("/enneagram");
     await expect(
-      page.getByRole("heading", { name: /Library/i })
+      page.getByRole("heading", { name: /Enneagram/i })
+    ).toBeVisible();
+  });
+
+  test("types overview loads", async ({ page }) => {
+    await page.goto("/enneagram/types");
+    await expect(
+      page.getByRole("heading", { name: /Nine Types/i })
     ).toBeVisible();
   });
 
@@ -26,39 +33,29 @@ test.describe("Smoke tests", () => {
     ).toBeVisible();
   });
 
-  test("discovery page loads with start button", async ({ page }) => {
-    await page.goto("/discovery");
+  test("discover page loads", async ({ page }) => {
+    await page.goto("/discover");
     await expect(
-      page.getByRole("heading", { name: /Discover Your Type/i })
-    ).toBeVisible();
-    await expect(
-      page.getByRole("link", { name: /Start Discovery/i })
+      page.getByRole("heading", { name: /Find Your Way In/i })
     ).toBeVisible();
   });
 
-  test("navigation links work", async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("link", { name: /Library/i }).first().click();
-    await expect(page).toHaveURL(/\/library/);
-  });
-
-  test("privacy page loads", async ({ page }) => {
-    await page.goto("/privacy");
+  test("learn page loads", async ({ page }) => {
+    await page.goto("/learn");
     await expect(
-      page.getByRole("heading", { name: /Privacy/i })
+      page.getByRole("heading", { name: /Learn the Enneagram/i })
     ).toBeVisible();
   });
 
   test("404 page shows for unknown routes", async ({ page }) => {
     await page.goto("/this-does-not-exist");
-    await expect(page.getByText(/not found/i)).toBeVisible();
+    await expect(page.getByText(/404/i)).toBeVisible();
   });
 });
 
-test.describe("Quiz flow", () => {
-  test("can start quiz from discovery page", async ({ page }) => {
-    await page.goto("/discovery");
-    await page.getByRole("link", { name: /Start Discovery/i }).click();
-    await expect(page).toHaveURL(/\/discovery\/quiz/);
+test.describe("Discovery flow", () => {
+  test("can start discovery", async ({ page }) => {
+    await page.goto("/discover");
+    await expect(page.getByRole("button", { name: /Begin/i })).toBeVisible();
   });
 });

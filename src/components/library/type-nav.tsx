@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
-import { TYPE_COLORS } from "@/lib/enneagram/colors";
-import { ALL_TYPES } from "@/lib/enneagram/descriptions";
+import { ALL_TYPES, TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import { cn } from "@/lib/utils";
 
 export function TypeNav() {
@@ -14,7 +13,8 @@ export function TypeNav() {
     <nav className="space-y-1">
       {ALL_TYPES.map((type) => {
         const info = TYPE_INFO[type];
-        const href = `/library/type-${type}`;
+        const center = TYPE_TO_CENTER[type];
+        const href = `/enneagram/types/${type}`;
         const isActive = pathname === href;
 
         return (
@@ -22,15 +22,14 @@ export function TypeNav() {
             key={type}
             href={href}
             className={cn(
-              "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors",
+              "flex items-center gap-2.5 rounded-lg px-3 py-2 text-ui transition-colors",
               isActive
-                ? "bg-primary/10 text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                ? "bg-brand-soft text-ink font-medium"
+                : "text-ink-muted hover:text-ink hover:bg-surface-sunken"
             )}
           >
             <div
-              className="h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-              style={{ backgroundColor: TYPE_COLORS[type] }}
+              className={`h-5 w-5 rounded-full flex items-center justify-center text-small font-bold bg-center-${center}-soft text-center-${center}-ink`}
             >
               {type}
             </div>
@@ -38,20 +37,6 @@ export function TypeNav() {
           </Link>
         );
       })}
-      <Link
-        href="/library/responsible-use"
-        className={cn(
-          "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors",
-          pathname === "/library/responsible-use"
-            ? "bg-primary/10 text-foreground font-medium"
-            : "text-muted-foreground hover:text-foreground hover:bg-muted"
-        )}
-      >
-        <div className="h-5 w-5 rounded-full bg-muted-foreground/20 flex items-center justify-center text-[10px]">
-          !
-        </div>
-        Responsible Use
-      </Link>
     </nav>
   );
 }
