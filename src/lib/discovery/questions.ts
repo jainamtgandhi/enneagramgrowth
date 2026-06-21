@@ -71,6 +71,63 @@ export const PHASE_1_QUESTIONS: DiscoveryQuestion[] = [
       },
     ],
   },
+  {
+    id: "p1-q4",
+    phase: 1,
+    text: "When someone close to you is struggling, what's your first instinct?",
+    options: [
+      {
+        label: "To do something about it — take action, fix the problem, or protect them.",
+        center: "body",
+      },
+      {
+        label: "To feel with them — I attune to their emotions and want them to feel seen.",
+        center: "heart",
+      },
+      {
+        label: "To understand what happened — I try to figure out the situation and offer perspective.",
+        center: "head",
+      },
+    ],
+  },
+  {
+    id: "p1-q5",
+    phase: 1,
+    text: "What drains you the most?",
+    options: [
+      {
+        label: "Feeling powerless or out of control — when I can't act on what I know is right.",
+        center: "body",
+      },
+      {
+        label: "Feeling invisible or unappreciated — when my efforts go unnoticed.",
+        center: "heart",
+      },
+      {
+        label: "Feeling overwhelmed or unprepared — when things feel chaotic and unpredictable.",
+        center: "head",
+      },
+    ],
+  },
+  {
+    id: "p1-q6",
+    phase: 1,
+    text: "In conflict, what tends to happen?",
+    options: [
+      {
+        label: "I hold my ground — I either confront directly or go quiet while tension builds inside.",
+        center: "body",
+      },
+      {
+        label: "I focus on the relationship — I worry about how the other person sees me and try to repair the connection.",
+        center: "heart",
+      },
+      {
+        label: "I step back to think — I analyze the situation and try to figure out who's right before responding.",
+        center: "head",
+      },
+    ],
+  },
 ];
 
 export const PHASE_2_BODY: DiscoveryQuestion[] = [
@@ -108,6 +165,25 @@ export const PHASE_2_BODY: DiscoveryQuestion[] = [
       },
       {
         label: "The one who holds standards — I notice what needs improving and feel responsible for quality.",
+        typeWeights: { 1: 2 },
+      },
+    ],
+  },
+  {
+    id: "p2-body-q3",
+    phase: 2,
+    text: "What feels most uncomfortable to you?",
+    options: [
+      {
+        label: "Showing vulnerability — I'd rather be strong than let people see me struggle.",
+        typeWeights: { 8: 2 },
+      },
+      {
+        label: "Asserting myself — I'd rather keep things smooth than rock the boat.",
+        typeWeights: { 9: 2 },
+      },
+      {
+        label: "Making mistakes — I hold myself to high standards and hate getting things wrong.",
         typeWeights: { 1: 2 },
       },
     ],
@@ -153,6 +229,25 @@ export const PHASE_2_HEART: DiscoveryQuestion[] = [
       },
     ],
   },
+  {
+    id: "p2-heart-q3",
+    phase: 2,
+    text: "What's your relationship with attention?",
+    options: [
+      {
+        label: "I often deflect attention from myself — I'd rather focus on others.",
+        typeWeights: { 2: 2 },
+      },
+      {
+        label: "I'm comfortable in the spotlight — I know how to present myself well.",
+        typeWeights: { 3: 2 },
+      },
+      {
+        label: "I want to be truly seen, but I feel like most people don't understand me.",
+        typeWeights: { 4: 2 },
+      },
+    ],
+  },
 ];
 
 export const PHASE_2_HEAD: DiscoveryQuestion[] = [
@@ -190,6 +285,25 @@ export const PHASE_2_HEAD: DiscoveryQuestion[] = [
       },
       {
         label: "Staying present — I get restless and chase the next exciting thing to avoid discomfort.",
+        typeWeights: { 7: 2 },
+      },
+    ],
+  },
+  {
+    id: "p2-head-q3",
+    phase: 2,
+    text: "How do you relate to knowledge and information?",
+    options: [
+      {
+        label: "I collect it deeply — I want to master one thing rather than skim many.",
+        typeWeights: { 5: 2 },
+      },
+      {
+        label: "I use it for safety — I want to know what to expect so I can prepare.",
+        typeWeights: { 6: 2 },
+      },
+      {
+        label: "I use it for options — I want to know what's possible so I can stay free.",
         typeWeights: { 7: 2 },
       },
     ],

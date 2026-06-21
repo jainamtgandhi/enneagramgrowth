@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CENTER_INFO } from "@/lib/enneagram/types";
 import type { Center } from "@/lib/enneagram/types";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
+import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
 
 export const metadata: Metadata = {
   title: "The Enneagram",
@@ -38,6 +39,9 @@ export default function EnneagramHubPage() {
         <h2 className="font-serif text-h2 font-semibold text-ink mb-8">
           The Nine Types
         </h2>
+        <div className="mx-auto max-w-[400px] mb-12">
+          <EnneagramDiagram />
+        </div>
         {CENTER_ORDER.map((center) => {
           const info = CENTER_INFO[center];
           return (

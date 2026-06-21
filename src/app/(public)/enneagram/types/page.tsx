@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { CENTER_INFO } from "@/lib/enneagram/types";
 import type { Center } from "@/lib/enneagram/types";
+import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
 
 export const metadata: Metadata = {
   title: "The Nine Types",
@@ -18,10 +19,14 @@ export default function TypesOverviewPage() {
       <h1 className="font-serif text-display font-semibold text-ink mb-4">
         The Nine Types
       </h1>
-      <p className="text-body-lg text-ink-muted max-w-[68ch] mb-16">
+      <p className="text-body-lg text-ink-muted max-w-[68ch] mb-12">
         Nine patterns of attention, motivation, and habit. Each a different way
         of navigating the world — none better than another.
       </p>
+
+      <div className="mx-auto max-w-[400px] mb-16">
+        <EnneagramDiagram />
+      </div>
 
       {CENTER_ORDER.map((center) => {
         const info = CENTER_INFO[center];
