@@ -34,7 +34,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Romantic",
     center: "heart",
     brief:
-      "Expressive, dramatic, and self-absorbed. Driven by the desire to be unique and authentic.",
+      "Expressive, dramatic, and introspective. Driven by the desire to be unique and authentic.",
     keywords: ["authenticity", "creativity", "depth", "sensitivity"],
   },
   5: {
@@ -67,7 +67,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
   8: {
     number: 8,
     name: "The Challenger",
-    altName: "The Protector",
+    altName: "The Boss",
     center: "body",
     brief:
       "Self-confident, decisive, and confrontational. Driven by the desire to be strong and in control.",
@@ -79,7 +79,7 @@ export const TYPE_INFO: Record<EnneagramType, TypeInfo> = {
     altName: "The Mediator",
     center: "body",
     brief:
-      "Receptive, reassuring, and complacent. Driven by the desire for peace and harmony.",
+      "Receptive, reassuring, and agreeable. Driven by the desire for peace and harmony.",
     keywords: ["harmony", "acceptance", "stability", "mediation"],
   },
 };
