@@ -172,7 +172,7 @@ export default async function HomePage() {
                 horoscope fluff.
               </p>
               <Link
-                href="/enneagram/types"
+                href="/types"
                 className="text-ui font-medium text-brand hover:text-brand-hover transition-colors inline-flex items-center gap-1"
               >
                 Explore all types <ChevronRight className="h-4 w-4" />
@@ -212,19 +212,19 @@ export default async function HomePage() {
             </p>
             <div className="space-y-2">
               <Link
-                href="/enneagram/types/8"
+                href="/types/8"
                 className="block text-ui text-ink hover:text-center-body-ink transition-colors"
               >
                 Type 8 &middot; The Challenger
               </Link>
               <Link
-                href="/enneagram/types/9"
+                href="/types/9"
                 className="block text-ui text-ink hover:text-center-body-ink transition-colors"
               >
                 Type 9 &middot; The Peacemaker
               </Link>
               <Link
-                href="/enneagram/types/1"
+                href="/types/1"
                 className="block text-ui text-ink hover:text-center-body-ink transition-colors"
               >
                 Type 1 &middot; The Reformer
@@ -249,19 +249,19 @@ export default async function HomePage() {
             </p>
             <div className="space-y-2">
               <Link
-                href="/enneagram/types/2"
+                href="/types/2"
                 className="block text-ui text-ink hover:text-center-heart-ink transition-colors"
               >
                 Type 2 &middot; The Helper
               </Link>
               <Link
-                href="/enneagram/types/3"
+                href="/types/3"
                 className="block text-ui text-ink hover:text-center-heart-ink transition-colors"
               >
                 Type 3 &middot; The Achiever
               </Link>
               <Link
-                href="/enneagram/types/4"
+                href="/types/4"
                 className="block text-ui text-ink hover:text-center-heart-ink transition-colors"
               >
                 Type 4 &middot; The Individualist
@@ -286,19 +286,19 @@ export default async function HomePage() {
             </p>
             <div className="space-y-2">
               <Link
-                href="/enneagram/types/5"
+                href="/types/5"
                 className="block text-ui text-ink hover:text-center-head-ink transition-colors"
               >
                 Type 5 &middot; The Investigator
               </Link>
               <Link
-                href="/enneagram/types/6"
+                href="/types/6"
                 className="block text-ui text-ink hover:text-center-head-ink transition-colors"
               >
                 Type 6 &middot; The Loyalist
               </Link>
               <Link
-                href="/enneagram/types/7"
+                href="/types/7"
                 className="block text-ui text-ink hover:text-center-head-ink transition-colors"
               >
                 Type 7 &middot; The Enthusiast
@@ -309,7 +309,7 @@ export default async function HomePage() {
 
         <div className="text-center mt-10">
           <Button
-            render={<Link href="/enneagram" />}
+            render={<Link href="/library" />}
             variant="outline"
             className="rounded-full px-6"
           >

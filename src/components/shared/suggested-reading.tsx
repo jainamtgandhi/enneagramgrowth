@@ -5,15 +5,23 @@ import { LevelBadge } from "@/components/shared/level-badge";
 
 interface SuggestedReadingProps {
   slugs: string[];
-  contentType: "learn" | "enneagram";
+  contentType: "learn" | "enneagram" | "coping" | "workplace" | "growth";
 }
 
 type ContentFrontmatter = LessonFrontmatter | ArticleFrontmatter;
 
+const CONTENT_BASE_PATH: Record<string, string> = {
+  learn: "/learn",
+  enneagram: "/library",
+  coping: "/coping",
+  workplace: "/workplace",
+  growth: "/growth",
+};
+
 export function SuggestedReading({ slugs, contentType }: SuggestedReadingProps) {
   if (slugs.length === 0) return null;
 
-  const basePath = contentType === "learn" ? "/learn" : "/enneagram";
+  const basePath = CONTENT_BASE_PATH[contentType] ?? "/library";
 
   const articles = slugs
     .map((slug) => {

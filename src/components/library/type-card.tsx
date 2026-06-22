@@ -10,7 +10,7 @@ interface TypeCardProps {
 export function TypeCard({ type }: TypeCardProps) {
   const info = TYPE_INFO[type];
   const center = TYPE_TO_CENTER[type];
-  const href = `/enneagram/types/${type}`;
+  const href = `/types/${type}`;
 
   return (
     <Link

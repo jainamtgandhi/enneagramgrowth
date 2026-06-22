@@ -4,58 +4,49 @@ import { NavLinks } from "./nav-links";
 import { SearchDialog } from "@/components/shared/search-dialog";
 import { buildSearchIndex } from "@/lib/search/index";
 
-const topLinks = [
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-];
-
-const mainLinks = [
-  { href: "/enneagram/types", label: "Types" },
+const navLinks = [
   { href: "/learn", label: "Learn" },
-  { href: "/enneagram", label: "Library" },
-  { href: "/enneagram/workplace", label: "Workplace" },
+  { href: "/library", label: "Enneagram" },
+  { href: "/types", label: "Types" },
+  { href: "/relationships", label: "Relationships" },
+  { href: "/discover", label: "Discover" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
 ];
 
-// Build the search index once on the server at render time.
-// In production this runs at build time via static rendering.
 const searchEntries = buildSearchIndex();
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/60">
-      {/* Top bar: brand + utility links */}
-      <div className="border-b border-border/30">
-        <div className="mx-auto flex h-10 max-w-[1200px] items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="font-serif text-lg font-bold text-brand">
-              Enneagram Growth
-            </span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <NavLinks links={topLinks} variant="subtle" />
-          </nav>
-        </div>
-      </div>
+    <header className="sticky top-0 z-50 w-full bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/60 shadow-[0_1px_0_var(--border)]">
+      <div className="mx-auto flex h-[60px] max-w-[1200px] items-center px-5 sm:px-6">
+        {/* Brand — fixed width so nav doesn't shift */}
+        <Link href="/" className="mr-10 shrink-0">
+          <span className="font-serif text-[1.3rem] font-bold text-brand leading-none">
+            Enneagram Growth
+          </span>
+        </Link>
 
-      {/* Main bar: content links + CTA */}
-      <div className="border-b border-border/40">
-        <div className="mx-auto flex h-12 max-w-[1200px] items-center justify-between px-4 sm:px-6">
-          <nav className="hidden md:flex items-center gap-8">
-            <NavLinks links={mainLinks} variant="primary" />
-          </nav>
-          <div className="hidden md:flex items-center gap-3">
-            <SearchDialog entries={searchEntries} />
-            <Link
-              href="/discover"
-              className="inline-flex items-center rounded-full bg-brand px-5 py-1.5 text-small font-medium text-white hover:bg-brand-hover transition-colors"
-            >
-              Find Your Type
-            </Link>
-          </div>
-          <div className="flex md:hidden items-center gap-1">
-            <SearchDialog entries={searchEntries} />
-            <MobileNav />
-          </div>
+        {/* Nav — grows to fill, links left-aligned */}
+        <nav className="hidden lg:flex flex-1 items-center">
+          <NavLinks links={navLinks} />
+        </nav>
+
+        {/* Actions — pinned right */}
+        <div className="hidden lg:flex items-center gap-2 ml-6">
+          <SearchDialog entries={searchEntries} />
+          <Link
+            href="/discover"
+            className="inline-flex items-center rounded-full bg-brand px-5 py-2 text-small font-semibold text-white hover:bg-brand-hover transition-colors shadow-sm"
+          >
+            Find Your Type
+          </Link>
+        </div>
+
+        {/* Mobile — pinned right */}
+        <div className="flex lg:hidden items-center gap-1 ml-auto">
+          <SearchDialog entries={searchEntries} />
+          <MobileNav />
         </div>
       </div>
     </header>

@@ -14,7 +14,7 @@ export function TypeNav() {
       {ALL_TYPES.map((type) => {
         const info = TYPE_INFO[type];
         const center = TYPE_TO_CENTER[type];
-        const href = `/enneagram/types/${type}`;
+        const href = `/types/${type}`;
         const isActive = pathname === href;
 
         return (

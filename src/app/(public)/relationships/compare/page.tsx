@@ -18,7 +18,7 @@ export default function ComparePage() {
     <main className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <Breadcrumbs
         items={[
-          { label: "Enneagram", href: "/enneagram" },
+          { label: "Relationships", href: "/relationships" },
           { label: "Compare Types" },
         ]}
       />

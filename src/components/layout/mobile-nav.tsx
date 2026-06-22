@@ -8,23 +8,17 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const navSections = [
-  {
-    heading: null,
-    links: [
-      { href: "/enneagram/types", label: "Types" },
-      { href: "/learn", label: "Learn" },
-      { href: "/enneagram", label: "Library" },
-      { href: "/enneagram/workplace", label: "Workplace" },
-    ],
-  },
-  {
-    heading: "More",
-    links: [
-      { href: "/about", label: "About" },
-      { href: "/blog", label: "Blog" },
-    ],
-  },
+const navLinks = [
+  { href: "/learn", label: "Learn" },
+  { href: "/library", label: "Library" },
+  { href: "/types", label: "The Nine Types" },
+  { href: "/relationships", label: "Relationships" },
+  { href: "/workplace", label: "Workplace" },
+  { href: "/coping", label: "Coping" },
+  { href: "/growth", label: "Growth" },
+  { href: "/discover", label: "Discover" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
 ];
 
 export function MobileNav() {
@@ -60,39 +54,30 @@ export function MobileNav() {
           Find Your Type
         </Link>
 
-        {navSections.map((section, i) => (
-          <div key={i} className={cn(i > 0 && "mt-4 pt-4 border-t border-border/40")}>
-            {section.heading && (
-              <p className="px-3 mb-2 text-small font-medium text-ink-muted">
-                {section.heading}
-              </p>
-            )}
-            <nav className="flex flex-col gap-1">
-              {section.links.map((link) => {
-                const isActive =
-                  link.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(link.href);
+        <nav className="flex flex-col gap-1">
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
 
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className={cn(
-                      "rounded-lg px-3 py-2.5 text-lg font-medium transition-colors",
-                      isActive
-                        ? "text-ink bg-brand-soft/30"
-                        : "text-ink-muted hover:text-ink"
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
-        ))}
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "rounded-lg px-3 py-2.5 text-lg font-medium transition-colors",
+                  isActive
+                    ? "text-ink bg-brand-soft/30"
+                    : "text-ink-muted hover:text-ink"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
       </SheetContent>
     </Sheet>
   );

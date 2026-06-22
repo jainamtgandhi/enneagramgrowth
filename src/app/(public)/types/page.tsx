@@ -51,7 +51,7 @@ export default function TypesOverviewPage() {
                 return (
                   <Link
                     key={n}
-                    href={`/enneagram/types/${n}`}
+                    href={`/types/${n}`}
                     className={`group rounded-xl border border-border p-6 hover:border-center-${center} hover:shadow-card transition-all`}
                   >
                     <div className="flex items-baseline gap-2 mb-2">

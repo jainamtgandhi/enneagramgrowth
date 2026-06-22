@@ -59,7 +59,6 @@ export default function RelationshipsPage() {
     <main className="mx-auto max-w-[720px] px-4 py-16">
       <Breadcrumbs
         items={[
-          { label: "Enneagram", href: "/enneagram" },
           { label: file.frontmatter.title },
         ]}
       />
@@ -136,7 +135,7 @@ export default function RelationshipsPage() {
                       return (
                         <td key={col} className="p-1 text-center">
                           <Link
-                            href={`/enneagram/relationships/${pairKey}`}
+                            href={`/relationships/${pairKey}`}
                             className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-border text-small font-medium text-ink-muted hover:border-brand hover:text-brand hover:bg-brand-soft/20 transition-all"
                             title={`Type ${row} & Type ${col}`}
                           >
@@ -164,7 +163,7 @@ export default function RelationshipsPage() {
       <nav className="mt-16 flex justify-between gap-4">
         {prev ? (
           <Link
-            href={`/enneagram/${prev.slug}`}
+            href={`/library/${prev.slug}`}
             className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
           >
             <span className="text-small text-ink-muted">&larr; Previous</span>
@@ -177,7 +176,7 @@ export default function RelationshipsPage() {
         )}
         {next ? (
           <Link
-            href={`/enneagram/${next.slug}`}
+            href={`/library/${next.slug}`}
             className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
           >
             <span className="text-small text-ink-muted">Next &rarr;</span>

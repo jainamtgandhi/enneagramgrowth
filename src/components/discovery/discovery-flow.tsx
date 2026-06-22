@@ -374,7 +374,7 @@ function ResultView({
             return (
               <Link
                 key={n}
-                href={`/enneagram/types/${n}`}
+                href={`/types/${n}`}
                 className={`rounded-xl border border-border p-5 hover:border-center-${result.center} hover:shadow-card transition-all`}
               >
                 <div className="flex items-baseline gap-2 mb-2">
@@ -430,7 +430,7 @@ function ResultView({
           Start over
         </button>
         <Link
-          href="/enneagram/types"
+          href="/types"
           className="rounded-full bg-brand px-6 py-2.5 text-ui font-medium text-white text-center hover:bg-brand-hover transition-colors"
         >
           Browse all types

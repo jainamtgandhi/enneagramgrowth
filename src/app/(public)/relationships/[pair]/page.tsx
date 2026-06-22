@@ -70,8 +70,7 @@ export default async function PairPage({
     <main className="mx-auto max-w-[720px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <Breadcrumbs
         items={[
-          { label: "Enneagram", href: "/enneagram" },
-          { label: "Relationships", href: "/enneagram/relationships" },
+          { label: "Relationships", href: "/relationships" },
           { label: `Type ${rel.type1} & Type ${rel.type2}` },
         ]}
       />
@@ -79,14 +78,14 @@ export default async function PairPage({
       {/* Type badges */}
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <Link
-          href={`/enneagram/types/${rel.type1}`}
+          href={`/types/${rel.type1}`}
           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-small font-medium bg-center-${center1}-soft text-center-${center1}-ink hover:ring-2 hover:ring-center-${center1}/40 transition-all`}
         >
           <span className="font-bold">{rel.type1}</span> {info1.name}
         </Link>
         <span className="text-ink-muted">&</span>
         <Link
-          href={`/enneagram/types/${rel.type2}`}
+          href={`/types/${rel.type2}`}
           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-small font-medium bg-center-${center2}-soft text-center-${center2}-ink hover:ring-2 hover:ring-center-${center2}/40 transition-all`}
         >
           <span className="font-bold">{rel.type2}</span> {info2.name}
@@ -161,14 +160,14 @@ export default async function PairPage({
       {/* Navigation */}
       <div className="mt-16 flex flex-col sm:flex-row gap-4">
         <Link
-          href="/enneagram/relationships"
+          href="/relationships"
           className="text-ui font-medium text-brand hover:text-brand-hover transition-colors"
         >
           &larr; All relationships
         </Link>
         <span className="hidden sm:inline text-ink-muted">&middot;</span>
         <Link
-          href={`/enneagram/types/${rel.type1}`}
+          href={`/types/${rel.type1}`}
           className="text-ui font-medium text-brand hover:text-brand-hover transition-colors"
         >
           Type {rel.type1}: {info1.name}
@@ -177,7 +176,7 @@ export default async function PairPage({
           <>
             <span className="hidden sm:inline text-ink-muted">&middot;</span>
             <Link
-              href={`/enneagram/types/${rel.type2}`}
+              href={`/types/${rel.type2}`}
               className="text-ui font-medium text-brand hover:text-brand-hover transition-colors"
             >
               Type {rel.type2}: {info2.name}

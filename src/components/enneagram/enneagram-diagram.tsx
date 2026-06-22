@@ -303,7 +303,7 @@ export function EnneagramDiagram({
           return (
             <Link
               key={typeNum}
-              href={`/enneagram/types/${typeNum}`}
+              href={`/types/${typeNum}`}
               aria-label={`Type ${typeNum}: The ${meta.name}`}
             >
               {pointContent}

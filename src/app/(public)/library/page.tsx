@@ -41,30 +41,30 @@ const articleGroups = [
     title: "Foundations",
     description: "Start here. These build on each other.",
     articles: [
-      { href: "/enneagram/what-is-it", label: "What Is the Enneagram?", description: "The basics: a map, not a box." },
-      { href: "/enneagram/centers", label: "The Three Centers", description: "Body, Heart, and Head intelligence." },
-      { href: "/enneagram/wings", label: "Wings", description: "The types that shade your core pattern." },
-      { href: "/enneagram/arrows", label: "Arrows & Growth Paths", description: "How you move in growth and stress." },
+      { href: "/library/what-is-it", label: "What Is the Enneagram?", description: "The basics: a map, not a box." },
+      { href: "/library/centers", label: "The Three Centers", description: "Body, Heart, and Head intelligence." },
+      { href: "/library/wings", label: "Wings", description: "The types that shade your core pattern." },
+      { href: "/library/arrows", label: "Arrows & Growth Paths", description: "How you move in growth and stress." },
     ],
   },
   {
     title: "Going Deeper",
     description: "Nuances that deepen your understanding.",
     articles: [
-      { href: "/enneagram/instincts", label: "The Three Instincts", description: "Self-preservation, social, and one-to-one." },
-      { href: "/enneagram/mistyping", label: "Common Misidentifications", description: "Why types get confused, and how to tell." },
-      { href: "/enneagram/glossary", label: "Glossary", description: "Key terms and definitions." },
+      { href: "/library/instincts", label: "The Three Instincts", description: "Self-preservation, social, and one-to-one." },
+      { href: "/library/mistyping", label: "Common Misidentifications", description: "Why types get confused, and how to tell." },
+      { href: "/library/glossary", label: "Glossary", description: "Key terms and definitions." },
     ],
   },
   {
     title: "Living It",
     description: "From theory to practice.",
     articles: [
-      { href: "/enneagram/growth-practices", label: "Growth Practices", description: "From autopilot to awareness: practices for every type." },
-      { href: "/enneagram/relationships", label: "Relationships", description: "How to love and connect with each type." },
-      { href: "/enneagram/workplace", label: "The Enneagram at Work", description: "How each type shows up in teams, conflict, and leadership." },
-      { href: "/enneagram/coping", label: "Coping & Solutions", description: "When your patterns take over: practical strategies by struggle." },
-      { href: "/enneagram/responsible-use", label: "Using It Responsibly", description: "Principles for ethical application." },
+      { href: "/growth", label: "Growth Practices", description: "From autopilot to awareness: practices for every type." },
+      { href: "/relationships", label: "Relationships", description: "How to love and connect with each type." },
+      { href: "/workplace", label: "The Enneagram at Work", description: "How each type shows up in teams, conflict, and leadership." },
+      { href: "/coping", label: "Coping & Solutions", description: "When your patterns take over: practical strategies by struggle." },
+      { href: "/library/responsible-use", label: "Using It Responsibly", description: "Principles for ethical application." },
     ],
   },
 ];
@@ -135,7 +135,7 @@ export default function EnneagramHubPage() {
                   return (
                     <Link
                       key={n}
-                      href={`/enneagram/types/${n}`}
+                      href={`/types/${n}`}
                       className={`rounded-lg border border-border bg-surface p-4 hover:border-center-${center} hover:shadow-card transition-all`}
                     >
                       <span
@@ -157,7 +157,7 @@ export default function EnneagramHubPage() {
           );
         })}
         <Link
-          href="/enneagram/types"
+          href="/types"
           className="text-ui font-medium text-brand hover:text-brand-hover transition-colors"
         >
           View all types &rarr;

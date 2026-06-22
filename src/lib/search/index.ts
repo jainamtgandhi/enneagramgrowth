@@ -65,7 +65,7 @@ export function buildSearchIndex(): SearchEntry[] {
   const entries: SearchEntry[] = [];
   const BODY_LIMIT = 800;
 
-  // 1. Type profiles  ->  /enneagram/types/{number}
+  // 1. Type profiles  ->  /types/{number}
   const types = getAllContentFiles<TypeFrontmatter>("types");
   for (const file of types) {
     const fm = file.frontmatter;
@@ -73,7 +73,7 @@ export function buildSearchIndex(): SearchEntry[] {
     entries.push({
       title: fm.title,
       description: fm.brief,
-      url: `/enneagram/types/${fm.number}`,
+      url: `/types/${fm.number}`,
       kind: "type",
       body: body.slice(0, BODY_LIMIT),
     });
@@ -93,7 +93,7 @@ export function buildSearchIndex(): SearchEntry[] {
     });
   }
 
-  // 3. Library articles  ->  /enneagram/{slug}
+  // 3. Library articles  ->  /library/{slug}
   const articles = getAllContentFiles<ArticleFrontmatter>("enneagram");
   for (const file of articles) {
     const fm = file.frontmatter;
@@ -101,7 +101,49 @@ export function buildSearchIndex(): SearchEntry[] {
     entries.push({
       title: fm.title,
       description: fm.description,
-      url: `/enneagram/${file.slug}`,
+      url: `/library/${file.slug}`,
+      kind: "article",
+      body: body.slice(0, BODY_LIMIT),
+    });
+  }
+
+  // 4. Coping topics  ->  /coping/{slug}
+  const copingTopics = getAllContentFiles<ArticleFrontmatter>("coping");
+  for (const file of copingTopics) {
+    const fm = file.frontmatter;
+    const body = stripMarkdown(file.content);
+    entries.push({
+      title: fm.title,
+      description: fm.description,
+      url: `/coping/${file.slug}`,
+      kind: "article",
+      body: body.slice(0, BODY_LIMIT),
+    });
+  }
+
+  // 5. Workplace topics  ->  /workplace/{slug}
+  const workplaceTopics = getAllContentFiles<ArticleFrontmatter>("workplace");
+  for (const file of workplaceTopics) {
+    const fm = file.frontmatter;
+    const body = stripMarkdown(file.content);
+    entries.push({
+      title: fm.title,
+      description: fm.description,
+      url: `/workplace/${file.slug}`,
+      kind: "article",
+      body: body.slice(0, BODY_LIMIT),
+    });
+  }
+
+  // 6. Growth topics  ->  /growth/{slug}
+  const growthTopics = getAllContentFiles<ArticleFrontmatter>("growth");
+  for (const file of growthTopics) {
+    const fm = file.frontmatter;
+    const body = stripMarkdown(file.content);
+    entries.push({
+      title: fm.title,
+      description: fm.description,
+      url: `/growth/${file.slug}`,
       kind: "article",
       body: body.slice(0, BODY_LIMIT),
     });

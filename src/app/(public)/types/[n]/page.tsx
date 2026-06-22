@@ -94,8 +94,7 @@ export default async function TypeDetailPage({
         <main>
           <Breadcrumbs
             items={[
-              { label: "Enneagram", href: "/enneagram" },
-              { label: "Types", href: "/enneagram/types" },
+              { label: "Types", href: "/types" },
               { label: `Type ${n}: ${info.name}` },
             ]}
           />
@@ -144,7 +143,7 @@ export default async function TypeDetailPage({
                 return (
                   <Link
                     key={t}
-                    href={`/enneagram/types/${t}`}
+                    href={`/types/${t}`}
                     className={`rounded-full border border-border px-5 py-2 text-small font-medium text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
                   >
                     Type {t}

@@ -6,8 +6,16 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { LevelBadge } from "@/components/shared/level-badge";
 import { SuggestedReading } from "@/components/shared/suggested-reading";
 
+type ContentDir = "enneagram" | "learn" | "coping" | "workplace" | "growth";
+
 interface ArticlePageProps {
   slug: string;
+  /** Filesystem directory under /content/ (e.g. "enneagram", "coping") */
+  contentDir?: ContentDir;
+  /** URL base path for prev/next links (e.g. "/library", "/coping") */
+  basePath?: string;
+  /** Label shown in breadcrumbs (e.g. "Library", "Coping") */
+  hubLabel?: string;
 }
 
 function estimateReadingTime(content: string): number {
@@ -15,8 +23,13 @@ function estimateReadingTime(content: string): number {
   return Math.max(1, Math.round(words / 220));
 }
 
-export function ArticlePage({ slug }: ArticlePageProps) {
-  const file = getContentFile<ArticleFrontmatter>("enneagram", slug);
+export function ArticlePage({
+  slug,
+  contentDir = "enneagram",
+  basePath = "/library",
+  hubLabel = "Library",
+}: ArticlePageProps) {
+  const file = getContentFile<ArticleFrontmatter>(contentDir, slug);
 
   if (!file) {
     return (
@@ -31,7 +44,7 @@ export function ArticlePage({ slug }: ArticlePageProps) {
     );
   }
 
-  const allArticles = getAllContentFiles<ArticleFrontmatter>("enneagram").sort(
+  const allArticles = getAllContentFiles<ArticleFrontmatter>(contentDir).sort(
     (a, b) => a.frontmatter.order - b.frontmatter.order
   );
   const currentIndex = allArticles.findIndex((a) => a.slug === slug);
@@ -46,7 +59,7 @@ export function ArticlePage({ slug }: ArticlePageProps) {
     <main className="mx-auto max-w-[720px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <Breadcrumbs
         items={[
-          { label: "Enneagram", href: "/enneagram" },
+          { label: hubLabel, href: basePath },
           { label: file.frontmatter.title },
         ]}
       />
@@ -97,14 +110,14 @@ export function ArticlePage({ slug }: ArticlePageProps) {
       {file.frontmatter.relatedSlugs && file.frontmatter.relatedSlugs.length > 0 && (
         <SuggestedReading
           slugs={file.frontmatter.relatedSlugs}
-          contentType="enneagram"
+          contentType={contentDir}
         />
       )}
 
       <nav className="mt-16 flex justify-between gap-4">
         {prev ? (
           <Link
-            href={`/enneagram/${prev.slug}`}
+            href={`${basePath}/${prev.slug}`}
             className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
           >
             <span className="text-small text-ink-muted">&larr; Previous</span>
@@ -117,7 +130,7 @@ export function ArticlePage({ slug }: ArticlePageProps) {
         )}
         {next ? (
           <Link
-            href={`/enneagram/${next.slug}`}
+            href={`${basePath}/${next.slug}`}
             className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
           >
             <span className="text-small text-ink-muted">Next &rarr;</span>
