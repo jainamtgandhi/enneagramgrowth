@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getAllContentFiles } from "@/lib/content/mdx";
 import type { LessonFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { LevelBadge } from "@/components/shared/level-badge";
+
 import { ProgressTracker } from "@/components/learn/progress-tracker";
 
 
@@ -116,9 +116,6 @@ export default function LearnHubPage() {
                     </p>
                     <span className="text-small text-ink-muted mt-1 flex items-center gap-2">
                       ~{readTime} min read
-                      {lesson.frontmatter.level && (
-                        <LevelBadge level={lesson.frontmatter.level} />
-                      )}
                     </span>
                   </div>
                 </Link>

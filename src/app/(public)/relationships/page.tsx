@@ -81,8 +81,26 @@ export default function RelationshipsPage() {
         <MDXRemote source={file.content} />
       </article>
 
+      {/* Compare tool */}
+      <div className="mt-12 rounded-xl border border-brand/20 bg-brand-soft/20 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <div className="flex-1">
+          <p className="text-body font-medium text-ink">
+            Compare Two Types Side by Side
+          </p>
+          <p className="text-small text-ink-muted mt-0.5">
+            Pick any two types and see how they interact at a glance.
+          </p>
+        </div>
+        <Link
+          href="/relationships/compare"
+          className="text-ui font-medium text-brand hover:text-brand-hover transition-colors shrink-0"
+        >
+          Open comparison tool &rarr;
+        </Link>
+      </div>
+
       {/* Pair Selector Matrix */}
-      <section className="mt-16 pt-12 border-t border-border">
+      <section className="mt-12 pt-12 border-t border-border">
         <h2 className="font-serif text-h2 font-semibold text-ink mb-3">
           Explore Type Pairings
         </h2>

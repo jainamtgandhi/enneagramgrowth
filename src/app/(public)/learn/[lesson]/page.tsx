@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getContentFile, getAllContentFiles, extractHeadings } from "@/lib/content/mdx";
 import type { LessonFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { LevelBadge } from "@/components/shared/level-badge";
+
 import { SuggestedReading } from "@/components/shared/suggested-reading";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { TableOfContents } from "@/components/shared/table-of-contents";
@@ -97,12 +97,6 @@ export default async function LessonPage({
             </span>
             <span>&middot;</span>
             <span>~{readTime} min read</span>
-            {file.frontmatter.level && (
-              <>
-                <span>&middot;</span>
-                <LevelBadge level={file.frontmatter.level} />
-              </>
-            )}
           </div>
           <p className="text-body-lg text-ink-muted mb-12">
             {file.frontmatter.description}

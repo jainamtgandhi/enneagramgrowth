@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getContentFile } from "@/lib/content/mdx";
 import type { ArticleFrontmatter, LessonFrontmatter } from "@/lib/content/mdx";
-import { LevelBadge } from "@/components/shared/level-badge";
+
 
 interface SuggestedReadingProps {
   slugs: string[];
@@ -31,7 +31,6 @@ export function SuggestedReading({ slugs, contentType }: SuggestedReadingProps) 
         slug: file.slug,
         title: file.frontmatter.title,
         description: file.frontmatter.description,
-        level: "level" in file.frontmatter ? file.frontmatter.level : undefined,
       };
     })
     .filter((a): a is NonNullable<typeof a> => a !== null);
@@ -57,7 +56,6 @@ export function SuggestedReading({ slugs, contentType }: SuggestedReadingProps) 
               <h3 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
                 {article.title}
               </h3>
-              {article.level && <LevelBadge level={article.level} />}
             </div>
             <p className="text-small text-ink-muted line-clamp-2 flex-1">
               {article.description}

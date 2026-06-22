@@ -49,12 +49,21 @@ export default function GrowthHubPage() {
       </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {topics.map((topic) => (
+        {topics.map((topic, i) => (
           <Link
             key={topic.slug}
             href={`/growth/${topic.slug}`}
-            className="group rounded-2xl border border-border p-6 hover:shadow-card transition-all"
+            className={`group rounded-2xl border p-6 hover:shadow-card transition-all ${
+              i === 0
+                ? "border-brand/30 bg-brand-soft/10"
+                : "border-border"
+            }`}
           >
+            {i === 0 && (
+              <span className="inline-block text-xs font-semibold uppercase tracking-wider text-brand mb-2">
+                Start here
+              </span>
+            )}
             <h2 className="font-serif text-h3 font-semibold text-ink group-hover:text-brand transition-colors mb-2">
               {topic.frontmatter.title}
             </h2>

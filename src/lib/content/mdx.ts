@@ -39,8 +39,6 @@ export function getAllContentFiles<T = Record<string, unknown>>(
     });
 }
 
-export type ContentLevel = "beginner" | "intermediate" | "advanced";
-
 export interface TypeFrontmatter {
   title: string;
   altName: string;
@@ -53,7 +51,6 @@ export interface LessonFrontmatter {
   title: string;
   order: number;
   description: string;
-  level?: ContentLevel;
   relatedSlugs?: string[];
 }
 
@@ -61,7 +58,6 @@ export interface ArticleFrontmatter {
   title: string;
   description: string;
   order: number;
-  level?: ContentLevel;
   relatedSlugs?: string[];
   relatedTypes?: number[];
 }

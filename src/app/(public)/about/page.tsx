@@ -105,23 +105,6 @@ export default function AboutPage() {
         </Link>
       </div>
 
-      {/* Meet the instructor CTA */}
-      <section className="mt-16 rounded-lg border border-border bg-surface p-8 text-center">
-        <h2 className="font-serif text-h2 font-semibold text-ink mb-3">
-          Meet Your Instructor
-        </h2>
-        <p className="text-body text-ink-muted mb-6">
-          Get to know the teacher behind Enneagram Growth.
-        </p>
-        <Button
-          render={<Link href="/about/instructor" />}
-          variant="outline"
-          className="rounded-full px-6"
-        >
-          Learn more
-        </Button>
-      </section>
-
       {/* CTA */}
       <div className="mt-16 text-center">
         <Button

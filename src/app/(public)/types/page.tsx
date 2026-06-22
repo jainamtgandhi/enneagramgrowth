@@ -24,10 +24,27 @@ export default function TypesOverviewPage() {
       <h1 className="font-serif text-display font-semibold text-ink mb-4">
         The Nine Types
       </h1>
-      <p className="text-body-lg text-ink-muted max-w-[68ch] mb-12">
+      <p className="text-body-lg text-ink-muted max-w-[68ch] mb-8">
         Nine patterns of attention, motivation, and habit. Each a different way
         of navigating the world, none better than another.
       </p>
+
+      <div className="rounded-xl border border-brand/20 bg-brand-soft/20 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-12">
+        <div className="flex-1">
+          <p className="text-body font-medium text-ink">
+            Not sure which type you are?
+          </p>
+          <p className="text-small text-ink-muted mt-0.5">
+            Try our guided discovery process: 30 questions, three phases, no diagnosis.
+          </p>
+        </div>
+        <Link
+          href="/discover"
+          className="text-ui font-medium text-brand hover:text-brand-hover transition-colors shrink-0"
+        >
+          Start discovering &rarr;
+        </Link>
+      </div>
 
       <div className="mx-auto max-w-[400px] mb-16">
         <EnneagramDiagram />

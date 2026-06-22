@@ -7,8 +7,7 @@ import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getAllContentFiles } from "@/lib/content/mdx";
-import type { ArticleFrontmatter, ContentLevel } from "@/lib/content/mdx";
-import { LevelBadge } from "@/components/shared/level-badge";
+import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 
@@ -74,12 +73,6 @@ const CENTER_ORDER: Center[] = ["body", "heart", "head"];
 
 export default function EnneagramHubPage() {
   const articles = getAllContentFiles<ArticleFrontmatter>("enneagram");
-  const levelBySlug: Record<string, ContentLevel> = {};
-  for (const article of articles) {
-    if (article.frontmatter.level) {
-      levelBySlug[article.slug] = article.frontmatter.level;
-    }
-  }
 
   return (
     <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
@@ -184,22 +177,16 @@ export default function EnneagramHubPage() {
                   {group.description}
                 </p>
                 <div className="space-y-3">
-                  {group.articles.map((article) => {
-                    const slug = article.href.split("/").pop() ?? "";
-                    const level = levelBySlug[slug];
-                    return (
+                  {group.articles.map((article) => (
                       <Link
                         key={article.href}
                         href={article.href}
                         className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 hover:border-brand hover:shadow-card transition-all"
                       >
                         <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <h4 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
-                              {article.label}
-                            </h4>
-                            {level && <LevelBadge level={level} />}
-                          </div>
+                          <h4 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
+                            {article.label}
+                          </h4>
                           <p className="text-small text-ink-muted mt-0.5">
                             {article.description}
                           </p>
@@ -208,8 +195,7 @@ export default function EnneagramHubPage() {
                           &rarr;
                         </span>
                       </Link>
-                    );
-                  })}
+                    ))}
                 </div>
               </div>
             ))}
