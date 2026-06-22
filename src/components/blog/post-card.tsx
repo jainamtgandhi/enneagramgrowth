@@ -10,7 +10,7 @@ interface PostCardProps {
 export function PostCard({ post }: PostCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group">
-      <div className="h-full rounded-xl border border-border overflow-hidden hover:border-brand hover:shadow-card transition-all">
+      <div className="h-full rounded-2xl border border-border overflow-hidden hover:border-brand hover:shadow-card transition-all">
         {post.cover_image_url && (
           <div className="relative aspect-[16/9] overflow-hidden bg-surface-sunken">
             <Image
@@ -21,7 +21,7 @@ export function PostCard({ post }: PostCardProps) {
             />
           </div>
         )}
-        <div className="p-5">
+        <div className="p-6">
           <div className="flex items-center gap-2 text-small text-ink-muted mb-2">
             {post.published_at && (
               <time>{formatDate(post.published_at)}</time>

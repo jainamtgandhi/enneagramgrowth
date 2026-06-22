@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter, ContentLevel } from "@/lib/content/mdx";
 import { LevelBadge } from "@/components/shared/level-badge";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "The Enneagram",
@@ -61,7 +62,8 @@ export default function EnneagramHubPage() {
   }
 
   return (
-    <main className="mx-auto max-w-[1200px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+    <main className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <Breadcrumbs items={[{ label: "Library" }]} />
       <h1 className="font-serif text-display font-semibold text-ink mb-4">
         The Enneagram
       </h1>
@@ -71,7 +73,7 @@ export default function EnneagramHubPage() {
       </p>
 
       {/* Start Here CTA */}
-      <div className="rounded-xl border-2 border-brand bg-brand-soft/30 p-6 mb-16 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div className="rounded-xl border border-brand bg-brand-soft/30 p-6 mb-16 flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="flex-1">
           <h2 className="font-serif text-h3 font-semibold text-ink mb-1">
             New here? Start with the basics.

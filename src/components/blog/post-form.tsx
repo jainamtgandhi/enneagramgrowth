@@ -2,13 +2,18 @@
 
 import { useState } from "react";
 
-interface PostData {
+export interface PostData {
   title: string;
   slug: string;
   excerpt: string;
   body_md: string;
   tags: string[];
   status: "draft" | "published" | "archived";
+  cover_image_url: string;
+  reading_time_min: number | null;
+  seo_title: string;
+  seo_description: string;
+  published_at: string;
 }
 
 interface BlogPostFormProps {
@@ -24,6 +29,11 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+function estimateReadingTime(text: string): number {
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 220));
+}
+
 export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps) {
   const [title, setTitle] = useState(initialData?.title ?? "");
   const [slug, setSlug] = useState(initialData?.slug ?? "");
@@ -35,7 +45,23 @@ export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps)
   const [status, setStatus] = useState<PostData["status"]>(
     initialData?.status ?? "draft"
   );
+  const [coverImageUrl, setCoverImageUrl] = useState(
+    initialData?.cover_image_url ?? ""
+  );
+  const [readingTimeMin, setReadingTimeMin] = useState<number | null>(
+    initialData?.reading_time_min ?? null
+  );
+  const [seoTitle, setSeoTitle] = useState(initialData?.seo_title ?? "");
+  const [seoDescription, setSeoDescription] = useState(
+    initialData?.seo_description ?? ""
+  );
+  const [publishedAt, setPublishedAt] = useState(
+    initialData?.published_at ?? ""
+  );
   const [autoSlug, setAutoSlug] = useState(!initialData);
+
+  const inputClass =
+    "w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink focus:border-brand focus:outline-none";
 
   function handleTitleChange(value: string) {
     setTitle(value);
@@ -44,13 +70,30 @@ export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps)
     }
   }
 
+  function handleBodyChange(value: string) {
+    setBodyMd(value);
+    setReadingTimeMin(estimateReadingTime(value));
+  }
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const tags = tagsInput
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
-    onSave({ title, slug, excerpt, body_md: bodyMd, tags, status });
+    onSave({
+      title,
+      slug,
+      excerpt,
+      body_md: bodyMd,
+      tags,
+      status,
+      cover_image_url: coverImageUrl,
+      reading_time_min: readingTimeMin,
+      seo_title: seoTitle,
+      seo_description: seoDescription,
+      published_at: publishedAt,
+    });
   }
 
   return (
@@ -64,7 +107,7 @@ export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps)
           value={title}
           onChange={(e) => handleTitleChange(e.target.value)}
           required
-          className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink focus:border-brand focus:outline-none"
+          className={inputClass}
         />
       </div>
 
@@ -80,8 +123,24 @@ export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps)
             setAutoSlug(false);
           }}
           required
-          className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink focus:border-brand focus:outline-none"
+          className={inputClass}
         />
+      </div>
+
+      <div>
+        <label className="block text-ui font-medium text-ink mb-1.5">
+          Cover Image URL
+        </label>
+        <input
+          type="url"
+          value={coverImageUrl}
+          onChange={(e) => setCoverImageUrl(e.target.value)}
+          placeholder="https://example.com/image.jpg"
+          className={inputClass}
+        />
+        <p className="text-small text-ink-muted mt-1">
+          Optional. Recommended aspect ratio 16:9.
+        </p>
       </div>
 
       <div>
@@ -92,7 +151,7 @@ export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps)
           value={excerpt}
           onChange={(e) => setExcerpt(e.target.value)}
           rows={2}
-          className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink focus:border-brand focus:outline-none resize-y"
+          className={`${inputClass} resize-y`}
         />
       </div>
 
@@ -102,11 +161,16 @@ export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps)
         </label>
         <textarea
           value={bodyMd}
-          onChange={(e) => setBodyMd(e.target.value)}
+          onChange={(e) => handleBodyChange(e.target.value)}
           rows={16}
           required
-          className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink font-mono focus:border-brand focus:outline-none resize-y"
+          className={`${inputClass} font-mono resize-y`}
         />
+        {readingTimeMin && (
+          <p className="text-small text-ink-muted mt-1">
+            Estimated reading time: {readingTimeMin} min
+          </p>
+        )}
       </div>
 
       <div>
@@ -118,24 +182,86 @@ export function BlogPostForm({ initialData, onSave, saving }: BlogPostFormProps)
           value={tagsInput}
           onChange={(e) => setTagsInput(e.target.value)}
           placeholder="enneagram, growth, type 9"
-          className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink focus:border-brand focus:outline-none"
+          className={inputClass}
         />
       </div>
 
-      <div>
-        <label className="block text-ui font-medium text-ink mb-1.5">
-          Status
-        </label>
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value as PostData["status"])}
-          className="rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink focus:border-brand focus:outline-none"
-        >
-          <option value="draft">Draft</option>
-          <option value="published">Published</option>
-          <option value="archived">Archived</option>
-        </select>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-ui font-medium text-ink mb-1.5">
+            Status
+          </label>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value as PostData["status"])}
+            className="rounded-lg border border-border bg-surface px-4 py-2.5 text-body text-ink focus:border-brand focus:outline-none"
+          >
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+            <option value="archived">Archived</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-ui font-medium text-ink mb-1.5">
+            Publish Date
+          </label>
+          <input
+            type="datetime-local"
+            value={publishedAt ? publishedAt.slice(0, 16) : ""}
+            onChange={(e) =>
+              setPublishedAt(
+                e.target.value ? new Date(e.target.value).toISOString() : ""
+              )
+            }
+            className={inputClass}
+          />
+          <p className="text-small text-ink-muted mt-1">
+            Auto-set when publishing. Override for scheduled posts.
+          </p>
+        </div>
       </div>
+
+      {/* SEO Fields */}
+      <details className="rounded-lg border border-border p-4">
+        <summary className="text-ui font-medium text-ink cursor-pointer">
+          SEO Settings
+        </summary>
+        <div className="mt-4 space-y-4">
+          <div>
+            <label className="block text-ui font-medium text-ink mb-1.5">
+              SEO Title
+            </label>
+            <input
+              type="text"
+              value={seoTitle}
+              onChange={(e) => setSeoTitle(e.target.value)}
+              placeholder={title || "Defaults to post title"}
+              maxLength={60}
+              className={inputClass}
+            />
+            <p className="text-small text-ink-muted mt-1">
+              {seoTitle.length}/60 characters
+            </p>
+          </div>
+          <div>
+            <label className="block text-ui font-medium text-ink mb-1.5">
+              SEO Description
+            </label>
+            <textarea
+              value={seoDescription}
+              onChange={(e) => setSeoDescription(e.target.value)}
+              placeholder={excerpt || "Defaults to excerpt"}
+              maxLength={160}
+              rows={2}
+              className={`${inputClass} resize-y`}
+            />
+            <p className="text-small text-ink-muted mt-1">
+              {seoDescription.length}/160 characters
+            </p>
+          </div>
+        </div>
+      </details>
 
       <div className="flex gap-3 pt-4">
         <button

@@ -4,21 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { BlogPostForm } from "@/components/blog/post-form";
+import type { PostData } from "@/components/blog/post-form";
 
 export default function NewBlogPostPage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
 
-  async function handleSave(data: {
-    title: string;
-    slug: string;
-    excerpt: string;
-    body_md: string;
-    tags: string[];
-    status: "draft" | "published" | "archived";
-  }) {
+  async function handleSave(data: PostData) {
     setSaving(true);
     const supabase = createClient();
+    const isPublishing = data.status === "published";
     const { error } = await supabase.from("blog_posts").insert({
       title: data.title,
       slug: data.slug,
@@ -26,9 +21,16 @@ export default function NewBlogPostPage() {
       body_md: data.body_md,
       tags: data.tags.length > 0 ? data.tags : null,
       status: data.status,
-      is_published: data.status === "published",
-      published_at:
-        data.status === "published" ? new Date().toISOString() : null,
+      is_published: isPublishing,
+      published_at: data.published_at
+        ? data.published_at
+        : isPublishing
+          ? new Date().toISOString()
+          : null,
+      cover_image_url: data.cover_image_url || null,
+      reading_time_min: data.reading_time_min,
+      seo_title: data.seo_title || null,
+      seo_description: data.seo_description || null,
     });
 
     if (error) {

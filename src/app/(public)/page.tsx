@@ -11,7 +11,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { getLatestPosts } from "@/lib/content/queries";
-import { formatDate } from "@/lib/utils/format";
+import { PostCard } from "@/components/blog/post-card";
 
 export default async function HomePage() {
   const latestPosts = await getLatestPosts(3);
@@ -361,31 +361,7 @@ export default async function HomePage() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {latestPosts.map((post) => (
-              <Link
-                key={post.id}
-                href={`/blog/${post.slug}`}
-                className="group rounded-2xl border border-border bg-surface p-7 hover:border-brand/40 hover:shadow-card transition-all"
-              >
-                <h3 className="font-serif text-h3 font-semibold text-ink group-hover:text-brand transition-colors mb-3">
-                  {post.title}
-                </h3>
-                {post.excerpt && (
-                  <p className="text-body text-ink-muted line-clamp-3 mb-5">
-                    {post.excerpt}
-                  </p>
-                )}
-                <div className="flex items-center gap-2 text-small text-ink-muted">
-                  {post.published_at && (
-                    <time>{formatDate(post.published_at)}</time>
-                  )}
-                  {post.reading_time_min && (
-                    <>
-                      <span>&middot;</span>
-                      <span>{post.reading_time_min} min read</span>
-                    </>
-                  )}
-                </div>
-              </Link>
+              <PostCard key={post.id} post={post} />
             ))}
           </div>
 
