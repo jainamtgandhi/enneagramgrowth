@@ -4,7 +4,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getContentFile, getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { CommentSection } from "@/components/comments/comment-section";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER, ALL_TYPES } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
@@ -141,8 +140,6 @@ export default function RelationshipsPage() {
           Click any cell to explore that pairing in depth.
         </p>
       </section>
-
-      <CommentSection postType="article" postSlug="relationships" />
 
       {/* Prev/next navigation */}
       <nav className="mt-16 flex justify-between gap-4">

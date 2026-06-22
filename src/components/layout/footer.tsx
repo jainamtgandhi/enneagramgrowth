@@ -1,10 +1,42 @@
 import Link from "next/link";
 
+const footerSections = [
+  {
+    heading: "Discover",
+    links: [
+      { href: "/discover", label: "Find Your Type" },
+      { href: "/enneagram/types", label: "The Nine Types" },
+      { href: "/enneagram/relationships", label: "Type Relationships" },
+      { href: "/enneagram/compare", label: "Compare Two Types" },
+    ],
+  },
+  {
+    heading: "Learn",
+    links: [
+      { href: "/learn", label: "Primer Course" },
+      { href: "/enneagram", label: "Library" },
+      { href: "/enneagram/workplace", label: "Workplace" },
+      { href: "/enneagram/coping", label: "Coping & Solutions" },
+      { href: "/blog", label: "Blog" },
+    ],
+  },
+  {
+    heading: "About",
+    links: [
+      { href: "/about", label: "Our Approach" },
+      { href: "/enneagram/responsible-use", label: "Responsible Use" },
+      { href: "/legal/privacy", label: "Privacy Policy" },
+      { href: "/legal/terms", label: "Terms of Service" },
+    ],
+  },
+];
+
 export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-surface-sunken/30">
       <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Brand column */}
           <div>
             <h3 className="font-serif text-lg font-semibold text-brand">
               Enneagram Growth
@@ -15,97 +47,26 @@ export function Footer() {
             </p>
           </div>
 
-          <div>
-            <h4 className="text-ui font-semibold text-ink">Explore</h4>
-            <ul className="mt-2 space-y-2">
-              <li>
-                <Link
-                  href="/enneagram"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  The Enneagram
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/enneagram/types"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  The Nine Types
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/discover"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Find Your Way In
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/learn"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Free Primer Course
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-ui font-semibold text-ink">About</h4>
-            <ul className="mt-2 space-y-2">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Our Approach
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about/instructor"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Meet the Instructor
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/enneagram/responsible-use"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Responsible Use
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/legal/privacy"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/legal/terms"
-                  className="text-small text-ink-muted hover:text-ink"
-                >
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Link columns */}
+          {footerSections.map((section) => (
+            <div key={section.heading}>
+              <h4 className="text-ui font-semibold text-ink">
+                {section.heading}
+              </h4>
+              <ul className="mt-2 space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-small text-ink-muted hover:text-ink transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className="mt-8 border-t border-border/40 pt-8 text-center">

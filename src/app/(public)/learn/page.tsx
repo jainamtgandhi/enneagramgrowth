@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getAllContentFiles } from "@/lib/content/mdx";
 import type { LessonFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { LevelBadge } from "@/components/shared/level-badge";
+import { ProgressTracker } from "@/components/learn/progress-tracker";
 
 export const metadata: Metadata = {
   title: "Learn the Enneagram",
@@ -53,9 +55,22 @@ export default function LearnHubPage() {
         A free, self-paced primer. No login, no rush, just a clear path
         through the essentials, at your own pace.
       </p>
-      <p className="text-small text-ink-muted mb-12">
+      <p className="text-small text-ink-muted mb-4">
         {lessons.length} lessons &middot; ~{totalTime} min total reading time
       </p>
+      <p className="text-small text-ink-muted mb-8">
+        Already familiar with the basics?{" "}
+        <Link
+          href="/discover"
+          className="text-brand font-medium hover:text-brand-hover transition-colors"
+        >
+          Skip to Find Your Type &rarr;
+        </Link>
+      </p>
+
+      <div className="mb-8">
+        <ProgressTracker totalLessons={lessons.length} />
+      </div>
 
       <ol className="relative space-y-4">
         {/* Timeline line */}
@@ -79,8 +94,11 @@ export default function LearnHubPage() {
                   <p className="text-small text-ink-muted mt-1">
                     {lesson.frontmatter.description}
                   </p>
-                  <span className="text-small text-ink-muted mt-1 block">
+                  <span className="text-small text-ink-muted mt-1 flex items-center gap-2">
                     ~{readTime} min read
+                    {lesson.frontmatter.level && (
+                      <LevelBadge level={lesson.frontmatter.level} />
+                    )}
                   </span>
                 </div>
               </Link>

@@ -6,6 +6,9 @@ import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getAllContentFiles } from "@/lib/content/mdx";
+import type { ArticleFrontmatter, ContentLevel } from "@/lib/content/mdx";
+import { LevelBadge } from "@/components/shared/level-badge";
 
 export const metadata: Metadata = {
   title: "The Enneagram",
@@ -39,6 +42,8 @@ const articleGroups = [
     articles: [
       { href: "/enneagram/growth-practices", label: "Growth Practices", description: "From autopilot to awareness: practices for every type." },
       { href: "/enneagram/relationships", label: "Relationships", description: "How to love and connect with each type." },
+      { href: "/enneagram/workplace", label: "The Enneagram at Work", description: "How each type shows up in teams, conflict, and leadership." },
+      { href: "/enneagram/coping", label: "Coping & Solutions", description: "When your patterns take over: practical strategies by struggle." },
       { href: "/enneagram/responsible-use", label: "Using It Responsibly", description: "Principles for ethical application." },
     ],
   },
@@ -47,6 +52,14 @@ const articleGroups = [
 const CENTER_ORDER: Center[] = ["body", "heart", "head"];
 
 export default function EnneagramHubPage() {
+  const articles = getAllContentFiles<ArticleFrontmatter>("enneagram");
+  const levelBySlug: Record<string, ContentLevel> = {};
+  for (const article of articles) {
+    if (article.frontmatter.level) {
+      levelBySlug[article.slug] = article.frontmatter.level;
+    }
+  }
+
   return (
     <main className="mx-auto max-w-[1200px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <h1 className="font-serif text-display font-semibold text-ink mb-4">
@@ -149,25 +162,32 @@ export default function EnneagramHubPage() {
                 {group.description}
               </p>
               <div className="space-y-3">
-                {group.articles.map((article) => (
-                  <Link
-                    key={article.href}
-                    href={article.href}
-                    className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 hover:border-brand hover:shadow-card transition-all"
-                  >
-                    <div className="flex-1">
-                      <h4 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
-                        {article.label}
-                      </h4>
-                      <p className="text-small text-ink-muted mt-0.5">
-                        {article.description}
-                      </p>
-                    </div>
-                    <span className="text-ink-muted group-hover:text-brand transition-colors mt-1">
-                      &rarr;
-                    </span>
-                  </Link>
-                ))}
+                {group.articles.map((article) => {
+                  const slug = article.href.split("/").pop() ?? "";
+                  const level = levelBySlug[slug];
+                  return (
+                    <Link
+                      key={article.href}
+                      href={article.href}
+                      className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 hover:border-brand hover:shadow-card transition-all"
+                    >
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
+                            {article.label}
+                          </h4>
+                          {level && <LevelBadge level={level} />}
+                        </div>
+                        <p className="text-small text-ink-muted mt-0.5">
+                          {article.description}
+                        </p>
+                      </div>
+                      <span className="text-ink-muted group-hover:text-brand transition-colors mt-1">
+                        &rarr;
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           ))}

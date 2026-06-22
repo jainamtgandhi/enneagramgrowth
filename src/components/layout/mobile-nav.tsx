@@ -3,28 +3,32 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface MobileNavProps {
-  links: { href: string; label: string }[];
-}
-
-const enneagramSubLinks = [
-  { href: "/enneagram", label: "Overview" },
-  { href: "/enneagram/types", label: "The Nine Types" },
-  { href: "/enneagram/what-is-it", label: "What Is the Enneagram?" },
-  { href: "/enneagram/centers", label: "The Three Centers" },
-  { href: "/enneagram/wings", label: "Wings" },
-  { href: "/enneagram/arrows", label: "Arrows & Growth Paths" },
-  { href: "/enneagram/instincts", label: "The Three Instincts" },
+const navSections = [
+  {
+    heading: null,
+    links: [
+      { href: "/enneagram/types", label: "Types" },
+      { href: "/learn", label: "Learn" },
+      { href: "/enneagram", label: "Library" },
+      { href: "/enneagram/workplace", label: "Workplace" },
+    ],
+  },
+  {
+    heading: "More",
+    links: [
+      { href: "/about", label: "About" },
+      { href: "/blog", label: "Blog" },
+    ],
+  },
 ];
 
-export function MobileNav({ links }: MobileNavProps) {
+export function MobileNav() {
   const [open, setOpen] = useState(false);
-  const [enneagramOpen, setEnneagramOpen] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -38,7 +42,7 @@ export function MobileNav({ links }: MobileNavProps) {
         <span className="sr-only">Toggle menu</span>
       </SheetTrigger>
       <SheetContent side="right" className="w-[280px]">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6">
           <span className="font-serif text-lg font-bold text-brand">
             Enneagram Growth
           </span>
@@ -46,76 +50,49 @@ export function MobileNav({ links }: MobileNavProps) {
             <X className="h-5 w-5" />
           </Button>
         </div>
-        <nav className="flex flex-col gap-1">
-          {links.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
 
-            if (link.href === "/enneagram") {
-              return (
-                <div key={link.href}>
-                  <button
-                    onClick={() => setEnneagramOpen(!enneagramOpen)}
+        {/* Prominent CTA */}
+        <Link
+          href="/discover"
+          onClick={() => setOpen(false)}
+          className="flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-ui font-medium text-white hover:bg-brand-hover transition-colors mb-6"
+        >
+          Find Your Type
+        </Link>
+
+        {navSections.map((section, i) => (
+          <div key={i} className={cn(i > 0 && "mt-4 pt-4 border-t border-border/40")}>
+            {section.heading && (
+              <p className="px-3 mb-2 text-small font-medium text-ink-muted">
+                {section.heading}
+              </p>
+            )}
+            <nav className="flex flex-col gap-1">
+              {section.links.map((link) => {
+                const isActive =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.href);
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
                     className={cn(
-                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-lg font-medium transition-colors",
+                      "rounded-lg px-3 py-2.5 text-lg font-medium transition-colors",
                       isActive
                         ? "text-ink bg-brand-soft/30"
                         : "text-ink-muted hover:text-ink"
                     )}
                   >
                     {link.label}
-                    <ChevronDown
-                      className={cn(
-                        "h-4 w-4 transition-transform",
-                        enneagramOpen && "rotate-180"
-                      )}
-                    />
-                  </button>
-                  {enneagramOpen && (
-                    <div className="mt-1 mb-2 ml-3 border-l-2 border-border pl-3 space-y-0.5">
-                      {enneagramSubLinks.map((sub) => {
-                        const subActive = pathname === sub.href;
-                        return (
-                          <Link
-                            key={sub.href}
-                            href={sub.href}
-                            onClick={() => setOpen(false)}
-                            className={cn(
-                              "block rounded-md px-2 py-1.5 text-base transition-colors",
-                              subActive
-                                ? "text-ink font-medium"
-                                : "text-ink-muted hover:text-ink"
-                            )}
-                          >
-                            {sub.label}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            }
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "rounded-lg px-3 py-2.5 text-lg font-medium transition-colors",
-                  isActive
-                    ? "text-ink bg-brand-soft/30"
-                    : "text-ink-muted hover:text-ink"
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        ))}
       </SheetContent>
     </Sheet>
   );

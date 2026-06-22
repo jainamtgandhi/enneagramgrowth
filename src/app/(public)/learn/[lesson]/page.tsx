@@ -5,6 +5,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getContentFile, getAllContentFiles } from "@/lib/content/mdx";
 import type { LessonFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { LevelBadge } from "@/components/shared/level-badge";
+import { SuggestedReading } from "@/components/shared/suggested-reading";
 
 const VALID_LESSONS = [
   "what-is-the-enneagram",
@@ -76,6 +78,12 @@ export default async function LessonPage({
         </span>
         <span>&middot;</span>
         <span>~{readTime} min read</span>
+        {file.frontmatter.level && (
+          <>
+            <span>&middot;</span>
+            <LevelBadge level={file.frontmatter.level} />
+          </>
+        )}
       </div>
 
       <h1 className="font-serif text-h1 font-semibold text-ink mb-4">
@@ -106,6 +114,13 @@ export default async function LessonPage({
             Start the Discovery process
           </Link>
         </div>
+      )}
+
+      {file.frontmatter.relatedSlugs && file.frontmatter.relatedSlugs.length > 0 && (
+        <SuggestedReading
+          slugs={file.frontmatter.relatedSlugs}
+          contentType="enneagram"
+        />
       )}
 
       <nav className="mt-16 flex justify-between gap-4">

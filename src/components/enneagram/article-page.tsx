@@ -3,7 +3,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getContentFile, getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { CommentSection } from "@/components/comments/comment-section";
+import { LevelBadge } from "@/components/shared/level-badge";
+import { SuggestedReading } from "@/components/shared/suggested-reading";
 
 interface ArticlePageProps {
   slug: string;
@@ -59,6 +60,12 @@ export function ArticlePage({ slug }: ArticlePageProps) {
         </span>
         <span>&middot;</span>
         <span>~{readTime} min read</span>
+        {file.frontmatter.level && (
+          <>
+            <span>&middot;</span>
+            <LevelBadge level={file.frontmatter.level} />
+          </>
+        )}
       </div>
       <p className="text-body-lg text-ink-muted mb-12">
         {file.frontmatter.description}
@@ -67,8 +74,6 @@ export function ArticlePage({ slug }: ArticlePageProps) {
       <article className="prose prose-ink max-w-none">
         <MDXRemote source={file.content} />
       </article>
-
-      <CommentSection postType="article" postSlug={slug} />
 
       {/* Last article CTA */}
       {!next && (
@@ -87,6 +92,13 @@ export function ArticlePage({ slug }: ArticlePageProps) {
             Start the Discovery process
           </Link>
         </div>
+      )}
+
+      {file.frontmatter.relatedSlugs && file.frontmatter.relatedSlugs.length > 0 && (
+        <SuggestedReading
+          slugs={file.frontmatter.relatedSlugs}
+          contentType="enneagram"
+        />
       )}
 
       <nav className="mt-16 flex justify-between gap-4">

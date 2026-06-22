@@ -7,9 +7,9 @@ import type { TypeFrontmatter } from "@/lib/content/mdx";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
-import { CommentSection } from "@/components/comments/comment-section";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { TypeNav } from "@/components/library/type-nav";
+import { ResonanceChecklist } from "@/components/enneagram/resonance-checklist";
 
 function estimateReadingTime(content: string): number {
   const words = content.trim().split(/\s+/).length;
@@ -110,7 +110,10 @@ export default async function TypeDetailPage({
             </p>
           )}
 
-          <CommentSection postType="type" postSlug={`type-${n}`} />
+          {/* Does this resonate? checklist */}
+          <div className="mt-16">
+            <ResonanceChecklist typeNum={num} />
+          </div>
 
           {/* Mobile type pills - hidden on desktop where sidebar exists */}
           <div className="mt-20 lg:hidden">

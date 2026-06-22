@@ -87,32 +87,10 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="relative rounded-2xl border border-border bg-surface p-8 hover:border-brand/40 hover:shadow-card transition-all">
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft">
-                <BookOpen className="h-6 w-6 text-brand" />
-              </div>
-              <span className="absolute top-5 right-6 font-serif text-[2.5rem] font-bold text-brand/8">
-                1
-              </span>
-              <h3 className="font-serif text-h3 font-semibold text-ink mb-2">
-                Learn
-              </h3>
-              <p className="text-body text-ink-muted mb-5 leading-relaxed">
-                Seven short lessons. What the Enneagram is, how the three centers
-                work, how to read your own patterns. Start from zero.
-              </p>
-              <Link
-                href="/learn"
-                className="text-ui font-medium text-brand hover:text-brand-hover transition-colors inline-flex items-center gap-1"
-              >
-                Start the course <ChevronRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="relative rounded-2xl border border-border bg-surface p-8 hover:border-brand/40 hover:shadow-card transition-all">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft">
                 <Compass className="h-6 w-6 text-brand" />
               </div>
               <span className="absolute top-5 right-6 font-serif text-[2.5rem] font-bold text-brand/8">
-                2
+                1
               </span>
               <h3 className="font-serif text-h3 font-semibold text-ink mb-2">
                 Discover
@@ -127,6 +105,28 @@ export default async function HomePage() {
                 className="text-ui font-medium text-brand hover:text-brand-hover transition-colors inline-flex items-center gap-1"
               >
                 Find your way in <ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="relative rounded-2xl border border-border bg-surface p-8 hover:border-brand/40 hover:shadow-card transition-all">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft">
+                <BookOpen className="h-6 w-6 text-brand" />
+              </div>
+              <span className="absolute top-5 right-6 font-serif text-[2.5rem] font-bold text-brand/8">
+                2
+              </span>
+              <h3 className="font-serif text-h3 font-semibold text-ink mb-2">
+                Learn
+              </h3>
+              <p className="text-body text-ink-muted mb-5 leading-relaxed">
+                Seven short lessons. What the Enneagram is, how the three centers
+                work, how to read your own patterns. Start from zero.
+              </p>
+              <Link
+                href="/learn"
+                className="text-ui font-medium text-brand hover:text-brand-hover transition-colors inline-flex items-center gap-1"
+              >
+                Start the course <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
 
@@ -326,7 +326,7 @@ export default async function HomePage() {
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
                 <strong className="text-ink font-medium">Library articles</strong>:
-                wings, instincts, arrows, mistyping, and responsible use
+                wings, instincts, arrows, relationships, workplace, and coping strategies
               </p>
             </div>
             <div className="flex gap-3">
