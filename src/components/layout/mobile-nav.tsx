@@ -10,20 +10,29 @@ import { cn } from "@/lib/utils";
 
 const navGroups = [
   {
-    label: "Enneagram",
+    label: null,
+    links: [{ href: "/discover", label: "Find Your Type" }],
+  },
+  {
+    label: "Understand",
     links: [
-      { href: "/learn", label: "Learn the Basics" },
       { href: "/types", label: "The Nine Types" },
-      { href: "/library", label: "Reference Library" },
-      { href: "/relationships", label: "Relationships" },
+      { href: "/learn", label: "Primer" },
+      { href: "/library", label: "All Library Articles" },
+    ],
+  },
+  {
+    label: "Grow",
+    links: [
+      { href: "/growth", label: "Growth Practices" },
+      { href: "/coping", label: "Coping & Solutions" },
     ],
   },
   {
     label: "Apply",
     links: [
       { href: "/workplace", label: "Workplace" },
-      { href: "/coping", label: "Coping & Solutions" },
-      { href: "/growth", label: "Growth Practices" },
+      { href: "/relationships", label: "Relationships" },
     ],
   },
   {
@@ -58,15 +67,6 @@ export function MobileNav() {
             <X className="h-5 w-5" />
           </Button>
         </div>
-
-        {/* Prominent CTA */}
-        <Link
-          href="/discover"
-          onClick={() => setOpen(false)}
-          className="flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-ui font-medium text-white hover:bg-brand-hover transition-colors mb-6"
-        >
-          Find Your Type
-        </Link>
 
         <nav className="flex flex-col gap-4">
           {navGroups.map((group, gi) => (

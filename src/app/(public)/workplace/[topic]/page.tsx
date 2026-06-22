@@ -4,12 +4,10 @@ import type { Metadata } from "next";
 import { getContentFile, getAllContentFiles, extractHeadings } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { LevelBadge } from "@/components/shared/level-badge";
-import { SectionSidebar, SectionMobilePills } from "@/components/layout/section-sidebar";
-import { SECTIONS } from "@/lib/content/sections";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { TypeSelectorBar } from "@/components/enneagram/type-selector-bar";
 import { TableOfContents } from "@/components/shared/table-of-contents";
+import { SECTIONS } from "@/lib/content/sections";
 
 const TOPIC_SLUGS = [
   "type-styles",
@@ -75,16 +73,11 @@ export default async function WorkplaceTopicPage({ params }: PageProps) {
   const topicConfig = SECTIONS.workplace.topics.find((t) => t.slug === topic);
   const showTypeSelector = topicConfig?.hasTypeAnchors ?? false;
   const showCenterSelector = topicConfig?.hasCenterAnchors ?? false;
-  const showToc = headings.length >= 4;
 
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
-      <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
-        <SectionSidebar
-          sectionLabel={SECTIONS.workplace.label}
-          basePath={SECTIONS.workplace.basePath}
-          topics={SECTIONS.workplace.topics}
-        />
+      <div className={headings.length >= 4 ? "lg:grid lg:grid-cols-[200px_1fr] lg:gap-12" : ""}>
+        {headings.length >= 4 && <TableOfContents headings={headings} />}
 
         <main>
           <Breadcrumbs
@@ -98,17 +91,7 @@ export default async function WorkplaceTopicPage({ params }: PageProps) {
             {file.frontmatter.title}
           </h1>
           <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
-            <span>
-              Article {file.frontmatter.order} of {allTopics.length}
-            </span>
-            <span>&middot;</span>
             <span>~{readTime} min read</span>
-            {file.frontmatter.level && (
-              <>
-                <span>&middot;</span>
-                <LevelBadge level={file.frontmatter.level} />
-              </>
-            )}
           </div>
           <p className="text-body-lg text-ink-muted mb-12">
             {file.frontmatter.description}
@@ -117,46 +100,37 @@ export default async function WorkplaceTopicPage({ params }: PageProps) {
           {showTypeSelector && <TypeSelectorBar mode="type" />}
           {showCenterSelector && <TypeSelectorBar mode="center" />}
 
-          <div className={showToc ? "xl:grid xl:grid-cols-[1fr_180px] xl:gap-8" : ""}>
-            <MdxArticle source={file.content} />
-            {showToc && <TableOfContents headings={headings} />}
-          </div>
+          <MdxArticle source={file.content} />
 
-          <SectionMobilePills
-            sectionLabel={SECTIONS.workplace.label}
-            basePath={SECTIONS.workplace.basePath}
-            topics={SECTIONS.workplace.topics}
-            currentSlug={topic}
-          />
-
-          <nav className="mt-16 flex justify-between gap-4">
-            {prev ? (
-              <Link
-                href={`/workplace/${prev.slug}`}
-                className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
-              >
-                <span className="text-small text-ink-muted">&larr; Previous</span>
-                <p className="text-ui font-medium text-ink mt-1">
-                  {prev.frontmatter.title}
-                </p>
-              </Link>
-            ) : (
-              <div className="flex-1" />
-            )}
-            {next ? (
-              <Link
-                href={`/workplace/${next.slug}`}
-                className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
-              >
-                <span className="text-small text-ink-muted">Next &rarr;</span>
-                <p className="text-ui font-medium text-ink mt-1">
-                  {next.frontmatter.title}
-                </p>
-              </Link>
-            ) : (
-              <div className="flex-1" />
-            )}
-          </nav>
+          {/* More workplace guides */}
+          {allTopics.length > 1 && (
+            <div className="mt-16 pt-8 border-t border-border">
+              <p className="text-small font-semibold text-ink-muted uppercase tracking-wider mb-4">
+                More Workplace Guides
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {allTopics
+                  .filter((a) => a.slug !== topic)
+                  .slice(0, 4)
+                  .map((a) => (
+                    <Link
+                      key={a.slug}
+                      href={`/workplace/${a.slug}`}
+                      className="rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
+                    >
+                      <p className="text-ui font-medium text-ink">
+                        {a.frontmatter.title}
+                      </p>
+                      {a.frontmatter.description && (
+                        <p className="text-small text-ink-muted mt-1 line-clamp-2">
+                          {a.frontmatter.description}
+                        </p>
+                      )}
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          )}
         </main>
       </div>
     </div>

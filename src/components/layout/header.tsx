@@ -5,7 +5,9 @@ import { SearchDialog } from "@/components/shared/search-dialog";
 import { buildSearchIndex } from "@/lib/search/index";
 
 const navLinks = [
-  { href: "/library", label: "Enneagram" },
+  { href: "/discover", label: "Discover" },
+  { href: "/understand", label: "Understand" },
+  { href: "/grow", label: "Grow" },
   { href: "/apply", label: "Apply" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },

@@ -6,7 +6,6 @@ import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER, ALL_TYPES } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { TypeNav } from "@/components/library/type-nav";
 import { MdxArticle } from "@/components/shared/mdx-article";
 
 interface TypeSectionFrontmatter {
@@ -16,20 +15,45 @@ interface TypeSectionFrontmatter {
 
 const VALID_TYPES = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-const SECTION_META: Record<string, { label: string }> = {
-  childhood: { label: "How the Pattern Forms" },
-  subtypes: { label: "Subtypes" },
-  communication: { label: "Communication Style" },
-  relationships: { label: "Relationship Guide" },
-  parenting: { label: "Parenting" },
-  careers: { label: "Career Matches" },
-  leadership: { label: "Leadership Style" },
-  "growth-path": { label: "Growth Path" },
-  spiritual: { label: "Spiritual Growth" },
-  famous: { label: "Famous Examples" },
-};
+const SECTION_GROUPS = [
+  {
+    label: "Understand",
+    sections: [
+      { slug: "childhood", label: "How the Pattern Forms" },
+      { slug: "subtypes", label: "Subtypes" },
+      { slug: "communication", label: "Communication Style" },
+      { slug: "famous", label: "Famous Examples" },
+    ],
+  },
+  {
+    label: "Grow",
+    sections: [
+      { slug: "growth-path", label: "Growth Path" },
+      { slug: "spiritual", label: "Spiritual Growth" },
+    ],
+  },
+  {
+    label: "Apply",
+    sections: [
+      { slug: "relationships", label: "Relationship Guide" },
+      { slug: "careers", label: "Career Matches" },
+      { slug: "parenting", label: "Parenting" },
+      { slug: "leadership", label: "Leadership Style" },
+    ],
+  },
+];
 
-const VALID_SECTIONS = Object.keys(SECTION_META);
+const VALID_SECTIONS = SECTION_GROUPS.flatMap((g) =>
+  g.sections.map((s) => s.slug)
+);
+
+function getSectionLabel(slug: string): string {
+  for (const group of SECTION_GROUPS) {
+    const found = group.sections.find((s) => s.slug === slug);
+    if (found) return found.label;
+  }
+  return slug;
+}
 
 export function generateStaticParams() {
   const params: { n: string; section: string }[] = [];
@@ -51,7 +75,7 @@ export async function generateMetadata({
 
   const num = Number(n) as EnneagramType;
   const info = TYPE_INFO[num];
-  const sectionLabel = SECTION_META[section]?.label ?? section;
+  const sectionLabel = getSectionLabel(section);
   const file = getContentFile<TypeSectionFrontmatter>(
     `types/type-${n}`,
     section
@@ -99,42 +123,54 @@ export default async function TypeSectionPage({
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
-        {/* Sidebar */}
+        {/* Sidebar - grouped by journey stage */}
         <aside className="hidden lg:block">
           <div className="sticky top-24">
-            <h3 className="text-small font-medium text-ink-muted mb-3">
-              The Nine Types
-            </h3>
-            <TypeNav />
+            <Link
+              href={`/types/${n}`}
+              className="block font-serif text-h4 font-semibold text-ink hover:text-brand transition-colors mb-0.5"
+            >
+              Type {n}
+            </Link>
+            <p className="text-small text-ink-muted mb-6">{info.name}</p>
 
-            <div className="mt-8 pt-6 border-t border-border">
-              <h3 className="text-small font-medium text-ink-muted mb-3">
-                Type {n} Deep Dives
-              </h3>
-              <ul className="space-y-1">
-                <li>
-                  <Link
-                    href={`/types/${n}`}
-                    className="block rounded-lg px-3 py-1.5 text-small text-ink-muted hover:text-ink hover:bg-surface-sunken transition-colors"
-                  >
-                    Full Profile
-                  </Link>
-                </li>
-                {VALID_SECTIONS.map((s) => (
-                  <li key={s}>
-                    <Link
-                      href={`/types/${n}/${s}`}
-                      className={`block rounded-lg px-3 py-1.5 text-small transition-colors ${
-                        s === section
-                          ? "bg-brand-soft text-brand font-medium"
-                          : "text-ink-muted hover:text-ink hover:bg-surface-sunken"
-                      }`}
-                    >
-                      {SECTION_META[s].label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            {SECTION_GROUPS.map((group) => (
+              <div key={group.label} className="mb-5">
+                <p className="px-3 mb-1.5 text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                  {group.label}
+                </p>
+                <ul className="space-y-0.5">
+                  {group.sections.map((s) => (
+                    <li key={s.slug}>
+                      <Link
+                        href={`/types/${n}/${s.slug}`}
+                        className={`block rounded-lg px-3 py-1.5 text-small transition-colors ${
+                          s.slug === section
+                            ? "bg-brand-soft text-brand font-medium"
+                            : "text-ink-muted hover:text-ink hover:bg-surface-sunken"
+                        }`}
+                      >
+                        {s.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            <div className="pt-4 border-t border-border space-y-0.5">
+              <Link
+                href={`/types/${n}`}
+                className="block px-3 py-1.5 text-small text-ink-muted hover:text-ink transition-colors"
+              >
+                &larr; Back to Profile
+              </Link>
+              <Link
+                href="/types"
+                className="block px-3 py-1.5 text-small text-ink-muted hover:text-ink transition-colors"
+              >
+                &larr; All Types
+              </Link>
             </div>
           </div>
         </aside>
@@ -177,7 +213,7 @@ export default async function TypeSectionPage({
                   &larr; Previous
                 </span>
                 <p className="text-ui font-medium text-ink mt-1">
-                  {SECTION_META[VALID_SECTIONS[currentSectionIndex - 1]].label}
+                  {getSectionLabel(VALID_SECTIONS[currentSectionIndex - 1])}
                 </p>
               </Link>
             ) : (
@@ -200,7 +236,7 @@ export default async function TypeSectionPage({
               >
                 <span className="text-small text-ink-muted">Next &rarr;</span>
                 <p className="text-ui font-medium text-ink mt-1">
-                  {SECTION_META[VALID_SECTIONS[currentSectionIndex + 1]].label}
+                  {getSectionLabel(VALID_SECTIONS[currentSectionIndex + 1])}
                 </p>
               </Link>
             ) : (
@@ -208,26 +244,37 @@ export default async function TypeSectionPage({
             )}
           </nav>
 
-          {/* Mobile: other types + sections */}
+          {/* Mobile: grouped sections + other types */}
           <div className="mt-12 lg:hidden">
             <h3 className="text-ui font-medium text-ink-muted mb-3">
               More about Type {n}
             </h3>
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="space-y-4 mb-8">
               <Link
                 href={`/types/${n}`}
-                className="rounded-full border border-border px-4 py-1.5 text-small font-medium text-ink-muted hover:text-brand hover:border-brand transition-colors"
+                className="inline-block rounded-full border border-border px-4 py-1.5 text-small font-medium text-ink-muted hover:text-brand hover:border-brand transition-colors"
               >
                 Full Profile
               </Link>
-              {VALID_SECTIONS.filter((s) => s !== section).map((s) => (
-                <Link
-                  key={s}
-                  href={`/types/${n}/${s}`}
-                  className="rounded-full border border-border px-4 py-1.5 text-small font-medium text-ink-muted hover:text-brand hover:border-brand transition-colors"
-                >
-                  {SECTION_META[s].label}
-                </Link>
+              {SECTION_GROUPS.map((group) => (
+                <div key={group.label}>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-ink-muted mb-2">
+                    {group.label}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {group.sections
+                      .filter((s) => s.slug !== section)
+                      .map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/types/${n}/${s.slug}`}
+                          className="rounded-full border border-border px-4 py-1.5 text-small font-medium text-ink-muted hover:text-brand hover:border-brand transition-colors"
+                        >
+                          {s.label}
+                        </Link>
+                      ))}
+                  </div>
+                </div>
               ))}
             </div>
 

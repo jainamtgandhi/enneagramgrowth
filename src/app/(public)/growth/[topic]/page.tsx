@@ -8,12 +8,10 @@ import {
 } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { LevelBadge } from "@/components/shared/level-badge";
-import { SectionSidebar, SectionMobilePills } from "@/components/layout/section-sidebar";
-import { SECTIONS } from "@/lib/content/sections";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { TypeSelectorBar } from "@/components/enneagram/type-selector-bar";
 import { TableOfContents } from "@/components/shared/table-of-contents";
+import { SECTIONS } from "@/lib/content/sections";
 
 const SLUGS = [
   "core-process",
@@ -80,16 +78,11 @@ export default async function GrowthTopicPage({
   const topicConfig = SECTIONS.growth.topics.find((t) => t.slug === topic);
   const showTypeSelector = topicConfig?.hasTypeAnchors ?? false;
   const showCenterSelector = topicConfig?.hasCenterAnchors ?? false;
-  const showToc = headings.length >= 4;
 
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
-      <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
-        <SectionSidebar
-          sectionLabel={SECTIONS.growth.label}
-          basePath={SECTIONS.growth.basePath}
-          topics={SECTIONS.growth.topics}
-        />
+      <div className={headings.length >= 4 ? "lg:grid lg:grid-cols-[200px_1fr] lg:gap-12" : ""}>
+        {headings.length >= 4 && <TableOfContents headings={headings} />}
 
         <main>
           <Breadcrumbs
@@ -103,17 +96,7 @@ export default async function GrowthTopicPage({
             {file.frontmatter.title}
           </h1>
           <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
-            <span>
-              {file.frontmatter.order} of {allTopics.length}
-            </span>
-            <span>&middot;</span>
             <span>~{readTime} min read</span>
-            {file.frontmatter.level && (
-              <>
-                <span>&middot;</span>
-                <LevelBadge level={file.frontmatter.level} />
-              </>
-            )}
           </div>
           <p className="text-body-lg text-ink-muted mb-12">
             {file.frontmatter.description}
@@ -122,10 +105,7 @@ export default async function GrowthTopicPage({
           {showTypeSelector && <TypeSelectorBar mode="type" />}
           {showCenterSelector && <TypeSelectorBar mode="center" />}
 
-          <div className={showToc ? "xl:grid xl:grid-cols-[1fr_180px] xl:gap-8" : ""}>
-            <MdxArticle source={file.content} />
-            {showToc && <TableOfContents headings={headings} />}
-          </div>
+          <MdxArticle source={file.content} />
 
           {!next && (
             <div className="mt-12 p-6 rounded-xl bg-brand-soft/30 border border-brand/20 text-center">
@@ -144,13 +124,6 @@ export default async function GrowthTopicPage({
               </Link>
             </div>
           )}
-
-          <SectionMobilePills
-            sectionLabel={SECTIONS.growth.label}
-            basePath={SECTIONS.growth.basePath}
-            topics={SECTIONS.growth.topics}
-            currentSlug={topic}
-          />
 
           <nav className="mt-16 flex justify-between gap-4">
             {prev ? (

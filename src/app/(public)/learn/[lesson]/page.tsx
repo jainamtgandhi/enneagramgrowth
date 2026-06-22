@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getContentFile, getAllContentFiles } from "@/lib/content/mdx";
+import { getContentFile, getAllContentFiles, extractHeadings } from "@/lib/content/mdx";
 import type { LessonFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { LevelBadge } from "@/components/shared/level-badge";
 import { SuggestedReading } from "@/components/shared/suggested-reading";
-import { SectionSidebar, SectionMobilePills } from "@/components/layout/section-sidebar";
-import { SECTIONS } from "@/lib/content/sections";
 import { MdxArticle } from "@/components/shared/mdx-article";
+import { TableOfContents } from "@/components/shared/table-of-contents";
 
 const VALID_LESSONS = [
   "what-is-the-enneagram",
@@ -74,20 +73,17 @@ export default async function LessonPage({
   const next =
     currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
   const readTime = estimateReadingTime(file.content);
+  const headings = extractHeadings(file.content);
 
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
-      <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
-        <SectionSidebar
-          sectionLabel={SECTIONS.learn.label}
-          basePath={SECTIONS.learn.basePath}
-          topics={SECTIONS.learn.topics}
-        />
+      <div className={headings.length >= 4 ? "lg:grid lg:grid-cols-[200px_1fr] lg:gap-12" : ""}>
+        {headings.length >= 4 && <TableOfContents headings={headings} />}
 
         <main>
           <Breadcrumbs
             items={[
-              { label: "Learn the Basics", href: "/learn" },
+              { label: "Primer", href: "/learn" },
               { label: file.frontmatter.title },
             ]}
           />
@@ -138,13 +134,6 @@ export default async function LessonPage({
               contentType="enneagram"
             />
           )}
-
-          <SectionMobilePills
-            sectionLabel={SECTIONS.learn.label}
-            basePath={SECTIONS.learn.basePath}
-            topics={SECTIONS.learn.topics}
-            currentSlug={lesson}
-          />
 
           <nav className="mt-16 flex justify-between gap-4">
             {prev ? (

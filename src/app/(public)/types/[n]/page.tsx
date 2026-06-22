@@ -8,7 +8,6 @@ import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { TypeNav } from "@/components/library/type-nav";
 import { ResonanceChecklist } from "@/components/enneagram/resonance-checklist";
 
 function estimateReadingTime(content: string): number {
@@ -23,6 +22,34 @@ const CENTER_LABEL: Record<string, string> = {
   heart: "Heart Center",
   head: "Head Center",
 };
+
+const SECTION_GROUPS = [
+  {
+    label: "Understand",
+    sections: [
+      { slug: "childhood", label: "How the Pattern Forms" },
+      { slug: "subtypes", label: "Subtypes" },
+      { slug: "communication", label: "Communication Style" },
+      { slug: "famous", label: "Famous Examples" },
+    ],
+  },
+  {
+    label: "Grow",
+    sections: [
+      { slug: "growth-path", label: "Growth Path" },
+      { slug: "spiritual", label: "Spiritual Growth" },
+    ],
+  },
+  {
+    label: "Apply",
+    sections: [
+      { slug: "relationships", label: "Relationship Guide" },
+      { slug: "careers", label: "Career Matches" },
+      { slug: "parenting", label: "Parenting" },
+      { slug: "leadership", label: "Leadership Style" },
+    ],
+  },
+];
 
 export function generateStaticParams() {
   return VALID_TYPES.map((n) => ({ n }));
@@ -83,38 +110,38 @@ export default async function TypeDetailPage({
         {/* Sidebar - desktop only */}
         <aside className="hidden lg:block">
           <div className="sticky top-24">
-            <h3 className="text-small font-medium text-ink-muted mb-3">
-              The Nine Types
-            </h3>
-            <TypeNav />
+            <p className="font-serif text-h4 font-semibold text-ink mb-0.5">
+              Type {n}
+            </p>
+            <p className="text-small text-ink-muted mb-6">{info.name}</p>
 
-            <div className="mt-8 pt-6 border-t border-border">
-              <h3 className="text-small font-medium text-ink-muted mb-3">
-                Type {n} Deep Dives
-              </h3>
-              <ul className="space-y-1">
-                {[
-                  { slug: "childhood", label: "How the Pattern Forms" },
-                  { slug: "subtypes", label: "Subtypes" },
-                  { slug: "communication", label: "Communication Style" },
-                  { slug: "relationships", label: "Relationship Guide" },
-                  { slug: "parenting", label: "Parenting" },
-                  { slug: "careers", label: "Career Matches" },
-                  { slug: "leadership", label: "Leadership Style" },
-                  { slug: "growth-path", label: "Growth Path" },
-                  { slug: "spiritual", label: "Spiritual Growth" },
-                  { slug: "famous", label: "Famous Examples" },
-                ].map((s) => (
-                  <li key={s.slug}>
-                    <Link
-                      href={`/types/${n}/${s.slug}`}
-                      className="block rounded-lg px-3 py-1.5 text-small text-ink-muted hover:text-ink hover:bg-surface-sunken transition-colors"
-                    >
-                      {s.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            {SECTION_GROUPS.map((group) => (
+              <div key={group.label} className="mb-5">
+                <p className="px-3 mb-1.5 text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                  {group.label}
+                </p>
+                <ul className="space-y-0.5">
+                  {group.sections.map((s) => (
+                    <li key={s.slug}>
+                      <Link
+                        href={`/types/${n}/${s.slug}`}
+                        className="block rounded-lg px-3 py-1.5 text-small text-ink-muted hover:text-ink hover:bg-surface-sunken transition-colors"
+                      >
+                        {s.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            <div className="pt-4 border-t border-border">
+              <Link
+                href="/types"
+                className="block px-3 py-1.5 text-small text-ink-muted hover:text-ink transition-colors"
+              >
+                &larr; All Types
+              </Link>
             </div>
           </div>
         </aside>
