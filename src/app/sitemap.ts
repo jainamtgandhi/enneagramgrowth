@@ -46,12 +46,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/legal/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
+  const typeSections = ["childhood", "communication", "famous", "careers"];
+
   const typeRoutes: MetadataRoute.Sitemap = ALL_TYPES.map((n) => ({
     url: `${SITE_URL}/types/${n}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
+
+  const typeSectionRoutes: MetadataRoute.Sitemap = ALL_TYPES.flatMap((n) =>
+    typeSections.map((section) => ({
+      url: `${SITE_URL}/types/${n}/${section}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))
+  );
 
   const relationshipRoutes: MetadataRoute.Sitemap = TYPE_PAIR_RELATIONSHIPS.map((p) => ({
     url: `${SITE_URL}/relationships/${p.type1}-${p.type2}`,
@@ -108,6 +119,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticRoutes,
     ...typeRoutes,
+    ...typeSectionRoutes,
     ...relationshipRoutes,
     ...lessonRoutes,
     ...copingRoutes,

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { getContentFile } from "@/lib/content/mdx";
 import type { TypeFrontmatter } from "@/lib/content/mdx";
+import { MdxArticle } from "@/components/shared/mdx-article";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
@@ -87,6 +87,29 @@ export default async function TypeDetailPage({
               The Nine Types
             </h3>
             <TypeNav />
+
+            <div className="mt-8 pt-6 border-t border-border">
+              <h3 className="text-small font-medium text-ink-muted mb-3">
+                Type {n} Deep Dives
+              </h3>
+              <ul className="space-y-1">
+                {[
+                  { slug: "childhood", label: "How the Pattern Forms" },
+                  { slug: "communication", label: "Communication Style" },
+                  { slug: "careers", label: "Career Matches" },
+                  { slug: "famous", label: "Famous Examples" },
+                ].map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      href={`/types/${n}/${s.slug}`}
+                      className="block rounded-lg px-3 py-1.5 text-small text-ink-muted hover:text-ink hover:bg-surface-sunken transition-colors"
+                    >
+                      {s.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </aside>
 
@@ -119,17 +142,41 @@ export default async function TypeDetailPage({
           <p className="text-body text-ink-muted mb-12 max-w-[60ch]">{info.brief}</p>
 
           {file ? (
-            <article className="prose prose-ink max-w-none">
-              <MDXRemote source={file.content} />
-            </article>
+            <MdxArticle source={file.content} />
           ) : (
             <p className="text-body text-ink-muted">
               Full type page content coming soon.
             </p>
           )}
 
+          {/* Deep Dives */}
+          <div className="mt-16 mb-8">
+            <h2 className="font-serif text-h2 font-semibold text-ink mb-6">
+              Go Deeper
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                { slug: "childhood", label: "How the Pattern Forms", desc: "The childhood experience that shaped this type" },
+                { slug: "communication", label: "Communication Style", desc: "How to talk with and understand this type" },
+                { slug: "careers", label: "Career Matches", desc: "Work strengths and ideal career paths" },
+                { slug: "famous", label: "Famous Examples", desc: "Well-known figures who share this pattern" },
+              ].map((section) => (
+                <Link
+                  key={section.slug}
+                  href={`/types/${n}/${section.slug}`}
+                  className={`group rounded-xl border border-border p-5 hover:border-center-${center} hover:shadow-card transition-all`}
+                >
+                  <h3 className="text-body font-medium text-ink group-hover:text-brand transition-colors mb-1">
+                    {section.label}
+                  </h3>
+                  <p className="text-small text-ink-muted">{section.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {/* Does this resonate? checklist */}
-          <div className="mt-16">
+          <div className="mt-8">
             <ResonanceChecklist typeNum={num} />
           </div>
 

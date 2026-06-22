@@ -1,11 +1,17 @@
 import "server-only";
 
-import { getAllContentFiles } from "@/lib/content/mdx";
+import { getAllContentFiles, getContentFile } from "@/lib/content/mdx";
 import type {
   TypeFrontmatter,
   LessonFrontmatter,
   ArticleFrontmatter,
 } from "@/lib/content/mdx";
+import { ALL_TYPES } from "@/lib/enneagram/types";
+
+interface TypeSectionFrontmatter {
+  title: string;
+  description: string;
+}
 import type { SearchEntry } from "./types";
 
 // Re-export types so the server can access everything from one import
@@ -147,6 +153,24 @@ export function buildSearchIndex(): SearchEntry[] {
       kind: "article",
       body: body.slice(0, BODY_LIMIT),
     });
+  }
+
+  // 7. Type sub-pages  ->  /types/{n}/{section}
+  const typeSections = ["childhood", "communication", "famous", "careers"];
+  for (const n of ALL_TYPES) {
+    for (const section of typeSections) {
+      const file = getContentFile<TypeSectionFrontmatter>(`types/type-${n}`, section);
+      if (file) {
+        const body = stripMarkdown(file.content);
+        entries.push({
+          title: file.frontmatter.title,
+          description: file.frontmatter.description,
+          url: `/types/${n}/${section}`,
+          kind: "type",
+          body: body.slice(0, BODY_LIMIT),
+        });
+      }
+    }
   }
 
   return entries;
