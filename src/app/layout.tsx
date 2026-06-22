@@ -28,6 +28,17 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Enneagram Growth",
     locale: "en_US",
+    images: [
+      {
+        url: "/images/hero-nature.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Enneagram Growth",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { MobileNav } from "./mobile-nav";
 import { NavLinks } from "./nav-links";
+import { SearchDialog } from "@/components/shared/search-dialog";
+import { buildSearchIndex } from "@/lib/search/index";
 
 const topLinks = [
   { href: "/about", label: "About" },
@@ -13,6 +15,10 @@ const mainLinks = [
   { href: "/enneagram", label: "Library" },
   { href: "/enneagram/workplace", label: "Workplace" },
 ];
+
+// Build the search index once on the server at render time.
+// In production this runs at build time via static rendering.
+const searchEntries = buildSearchIndex();
 
 export function Header() {
   return (
@@ -37,13 +43,19 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-8">
             <NavLinks links={mainLinks} variant="primary" />
           </nav>
-          <Link
-            href="/discover"
-            className="hidden md:inline-flex items-center rounded-full bg-brand px-5 py-1.5 text-small font-medium text-white hover:bg-brand-hover transition-colors"
-          >
-            Find Your Type
-          </Link>
-          <MobileNav />
+          <div className="hidden md:flex items-center gap-3">
+            <SearchDialog entries={searchEntries} />
+            <Link
+              href="/discover"
+              className="inline-flex items-center rounded-full bg-brand px-5 py-1.5 text-small font-medium text-white hover:bg-brand-hover transition-colors"
+            >
+              Find Your Type
+            </Link>
+          </div>
+          <div className="flex md:hidden items-center gap-1">
+            <SearchDialog entries={searchEntries} />
+            <MobileNav />
+          </div>
         </div>
       </div>
     </header>

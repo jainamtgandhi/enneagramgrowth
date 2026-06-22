@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Arrows & Growth Paths",
   description:
     "How each type shifts under growth and stress: the dynamic connections of the Enneagram.",
+  openGraph: {
+    title: "Arrows & Growth Paths | Enneagram Growth",
+    description:
+      "How each type shifts under growth and stress: the dynamic connections of the Enneagram.",
+  },
 };
 
 export default function ArrowsPage() {

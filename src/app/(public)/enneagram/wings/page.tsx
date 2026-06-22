@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Wings",
   description:
     "How adjacent types influence and shade your core Enneagram type.",
+  openGraph: {
+    title: "Enneagram Wings | Enneagram Growth",
+    description:
+      "How adjacent types influence and shade your core Enneagram type.",
+  },
 };
 
 export default function WingsPage() {

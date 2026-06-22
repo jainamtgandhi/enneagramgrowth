@@ -159,6 +159,15 @@
     margin-top: 2rem;
     margin-bottom: 0.75rem;
   }
+  .prose h4 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-body-lg);
+    line-height: var(--font-size-body-lg--line-height);
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
   .prose p {
     font-size: var(--font-size-body);
     line-height: var(--font-size-body--line-height);

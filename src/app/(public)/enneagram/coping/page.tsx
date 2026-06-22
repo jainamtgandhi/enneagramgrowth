@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Coping & Solutions",
   description:
     "When your patterns take over, here is what to do. Practical coping strategies organized by the struggles you actually face.",
+  openGraph: {
+    title: "Coping & Solutions | Enneagram Growth",
+    description:
+      "When your patterns take over, here is what to do. Practical coping strategies organized by the struggles you actually face.",
+  },
 };
 
 export default function CopingPage() {

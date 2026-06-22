@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +13,31 @@ import {
 } from "lucide-react";
 import { getLatestPosts } from "@/lib/content/queries";
 import { PostCard } from "@/components/blog/post-card";
+
+export const metadata: Metadata = {
+  title: "Enneagram Growth | Self-understanding through the nine types",
+  description:
+    "Explore the nine Enneagram types, discover your path through guided reflection, and grow at your own pace. Free, no sign-up, no paywall.",
+  openGraph: {
+    title: "Enneagram Growth | Self-understanding through the nine types",
+    description:
+      "Why do I keep doing this? The Enneagram starts with that question. Explore nine types, discover your patterns, and grow at your own pace.",
+    images: [
+      {
+        url: "/images/hero-nature.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Enneagram Growth - self-understanding through the nine types",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Enneagram Growth | Self-understanding through the nine types",
+    description:
+      "Why do I keep doing this? The Enneagram starts with that question. Explore nine types, discover your patterns, and grow at your own pace.",
+  },
+};
 
 export default async function HomePage() {
   const latestPosts = await getLatestPosts(3);

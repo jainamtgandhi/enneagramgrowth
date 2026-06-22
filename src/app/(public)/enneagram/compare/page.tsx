@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: "Compare Two Types",
   description:
     "See how any two Enneagram types differ in their core fears, desires, and patterns.",
+  openGraph: {
+    title: "Compare Two Enneagram Types | Enneagram Growth",
+    description:
+      "See how any two Enneagram types differ in their core fears, desires, and patterns.",
+  },
 };
 
 export default function ComparePage() {

@@ -11,6 +11,25 @@ export const metadata: Metadata = {
   title: "Learn the Enneagram",
   description:
     "A free, self-paced introduction to the Enneagram, from the basics to finding your type.",
+  openGraph: {
+    title: "Learn the Enneagram | Enneagram Growth",
+    description:
+      "A free, self-paced primer: 7 lessons from 'what is this?' to reading your own patterns. No login, no rush.",
+    images: [
+      {
+        url: "/images/learn-books.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Learn the Enneagram - books and learning materials",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Learn the Enneagram | Enneagram Growth",
+    description:
+      "A free, self-paced primer: 7 lessons from 'what is this?' to reading your own patterns. No login, no rush.",
+  },
 };
 
 function estimateReadingTime(content: string): number {

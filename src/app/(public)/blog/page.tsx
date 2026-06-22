@@ -9,6 +9,25 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Insights, reflections, and practical guidance on the Enneagram and personal growth.",
+  openGraph: {
+    title: "Blog | Enneagram Growth",
+    description:
+      "Insights, reflections, and practical guidance on the Enneagram and personal growth.",
+    images: [
+      {
+        url: "/images/hero-nature.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Enneagram Growth blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Enneagram Growth",
+    description:
+      "Insights, reflections, and practical guidance on the Enneagram and personal growth.",
+  },
 };
 
 export default async function BlogPage() {

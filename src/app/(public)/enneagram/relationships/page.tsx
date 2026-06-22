@@ -13,6 +13,25 @@ export const metadata: Metadata = {
   title: "Relationships & the Enneagram",
   description:
     "How to love, support, and connect with each type: practical guidance for partners, friends, and colleagues.",
+  openGraph: {
+    title: "Relationships & the Enneagram | Enneagram Growth",
+    description:
+      "How to love, support, and connect with each type. Explore all 45 type pairings with strengths, challenges, and growth tips.",
+    images: [
+      {
+        url: "/images/hero-nature.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Enneagram relationships - understanding type pairings",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Relationships & the Enneagram | Enneagram Growth",
+    description:
+      "How to love, support, and connect with each type. Explore all 45 type pairings with strengths, challenges, and growth tips.",
+  },
 };
 
 function estimateReadingTime(content: string): number {

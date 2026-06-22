@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Using the Enneagram Responsibly",
   description:
     "Ethical guidelines for working with the Enneagram, as individuals and in community.",
+  openGraph: {
+    title: "Using the Enneagram Responsibly | Enneagram Growth",
+    description:
+      "Ethical guidelines for working with the Enneagram, as individuals and in community.",
+  },
 };
 
 export default function ResponsibleUsePage() {

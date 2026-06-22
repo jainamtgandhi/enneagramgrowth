@@ -15,6 +15,25 @@ export const metadata: Metadata = {
   title: "The Enneagram",
   description:
     "Explore the Enneagram: nine paths to self-understanding. Learn about the types, centers, wings, arrows, and more.",
+  openGraph: {
+    title: "The Enneagram | Enneagram Growth",
+    description:
+      "A map of nine ways people meet the world. Explore types, centers, wings, arrows, instincts, relationships, and growth practices.",
+    images: [
+      {
+        url: "/images/hero-nature.jpg",
+        width: 1200,
+        height: 630,
+        alt: "The Enneagram - nine paths to self-understanding",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Enneagram | Enneagram Growth",
+    description:
+      "A map of nine ways people meet the world. Explore types, centers, wings, arrows, instincts, relationships, and growth practices.",
+  },
 };
 
 const articleGroups = [

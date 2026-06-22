@@ -37,9 +37,28 @@ export async function generateMetadata({
   if (!VALID_TYPES.includes(n)) return {};
   const num = Number(n) as EnneagramType;
   const info = TYPE_INFO[num];
+  const title = `Type ${n}: ${info.name} | Enneagram Growth`;
+  const description = info.brief;
   return {
     title: `Type ${n}: ${info.name}`,
-    description: info.brief,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: "/images/hero-nature.jpg",
+          width: 1200,
+          height: 630,
+          alt: `Enneagram Type ${n}: ${info.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

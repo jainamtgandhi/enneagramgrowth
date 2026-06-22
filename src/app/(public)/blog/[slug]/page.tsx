@@ -21,12 +21,21 @@ export async function generateMetadata({
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Not Found" };
 
+  const title = post.seo_title || post.title;
+  const description =
+    post.seo_description || post.excerpt || post.body_md.slice(0, 160);
+
   return {
-    title: post.seo_title || post.title,
-    description:
-      post.seo_description || post.excerpt || post.body_md.slice(0, 160),
+    title,
+    description,
     openGraph: {
-      title: post.seo_title || post.title,
+      title,
+      description: post.seo_description || post.excerpt || undefined,
+      images: post.cover_image_url ? [post.cover_image_url] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
       description: post.seo_description || post.excerpt || undefined,
       images: post.cover_image_url ? [post.cover_image_url] : undefined,
     },
@@ -41,7 +50,8 @@ export async function generateStaticParams() {
   const { data: posts } = await supabase
     .from("blog_posts")
     .select("slug")
-    .eq("is_published", true);
+    .eq("is_published", true)
+    .lte("published_at", new Date().toISOString());
   return (posts ?? []).map((post) => ({ slug: post.slug }));
 }
 

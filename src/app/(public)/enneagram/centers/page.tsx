@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "The Three Centers of Intelligence",
   description:
     "Body, Heart, and Head: understanding the three triads that organize the nine types.",
+  openGraph: {
+    title: "The Three Centers of Intelligence | Enneagram Growth",
+    description:
+      "Body, Heart, and Head: understanding the three triads that organize the nine types.",
+  },
 };
 
 export default function CentersPage() {

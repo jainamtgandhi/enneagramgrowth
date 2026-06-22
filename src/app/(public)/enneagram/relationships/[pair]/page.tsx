@@ -6,7 +6,6 @@ import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { CommentSection } from "@/components/comments/comment-section";
 
 function parsePair(pair: string): [EnneagramType, EnneagramType] | null {
   const match = pair.match(/^([1-9])-([1-9])$/);
@@ -33,9 +32,20 @@ export async function generateMetadata({
   if (!parsed) return {};
   const rel = getPairRelationship(parsed[0], parsed[1]);
   if (!rel) return {};
+  const title = `Type ${rel.type1} & Type ${rel.type2} Relationship | Enneagram Growth`;
+  const description = rel.overview.slice(0, 160);
   return {
     title: `Type ${rel.type1} & Type ${rel.type2} Relationship`,
-    description: rel.overview.slice(0, 160),
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
@@ -57,7 +67,7 @@ export default async function PairPage({
   const center2 = TYPE_TO_CENTER[rel.type2];
 
   return (
-    <main className="mx-auto max-w-[720px] px-4 py-16">
+    <main className="mx-auto max-w-[720px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <Breadcrumbs
         items={[
           { label: "Enneagram", href: "/enneagram" },
@@ -147,8 +157,6 @@ export default async function PairPage({
         </p>
         <p className="text-body text-ink">{rel.keyInsight}</p>
       </section>
-
-      <CommentSection postType="article" postSlug={`relationship-${pair}`} />
 
       {/* Navigation */}
       <div className="mt-16 flex flex-col sm:flex-row gap-4">

@@ -36,9 +36,20 @@ export async function generateMetadata({
   if (!VALID_LESSONS.includes(lesson)) return {};
   const file = getContentFile<LessonFrontmatter>("learn", lesson);
   if (!file) return {};
+  const title = `${file.frontmatter.title} | Enneagram Growth`;
+  const description = file.frontmatter.description;
   return {
     title: file.frontmatter.title,
-    description: file.frontmatter.description,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Growth Practices",
   description:
     "The inner process of growth, from autopilot to awareness, and practical exercises for each type and center.",
+  openGraph: {
+    title: "Growth Practices | Enneagram Growth",
+    description:
+      "The inner process of growth, from autopilot to awareness, and practical exercises for each type and center.",
+  },
 };
 
 export default function GrowthPracticesPage() {

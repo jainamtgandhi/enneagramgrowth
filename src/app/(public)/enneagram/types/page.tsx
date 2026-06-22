@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "The Nine Types",
   description:
     "Explore all nine Enneagram types: their core patterns, motivations, and paths to growth.",
+  openGraph: {
+    title: "The Nine Enneagram Types | Enneagram Growth",
+    description:
+      "Explore all nine Enneagram types: their core patterns, motivations, and paths to growth.",
+  },
 };
 
 const CENTER_ORDER: Center[] = ["body", "heart", "head"];
