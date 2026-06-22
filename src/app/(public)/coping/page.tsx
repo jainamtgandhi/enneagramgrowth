@@ -4,8 +4,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { LevelBadge } from "@/components/shared/level-badge";
 import { getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
-import { SectionSubNav } from "@/components/layout/section-sub-nav";
-import { SECTIONS } from "@/lib/content/sections";
+
 
 export const metadata: Metadata = {
   title: "Coping & Solutions",
@@ -38,13 +37,7 @@ export default function CopingHubPage() {
   );
 
   return (
-    <>
-      <SectionSubNav
-        sectionLabel={SECTIONS.coping.label}
-        basePath={SECTIONS.coping.basePath}
-        topics={SECTIONS.coping.topics}
-      />
-      <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+    <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
         <Breadcrumbs items={[{ label: "Coping & Solutions" }]} />
 
         <h1 className="font-serif text-display font-semibold text-ink mb-4">
@@ -80,6 +73,5 @@ export default function CopingHubPage() {
           ))}
         </div>
       </div>
-    </>
   );
 }

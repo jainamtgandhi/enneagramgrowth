@@ -87,6 +87,24 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Ethics guide link */}
+      <div className="mt-10 rounded-xl border border-brand/20 bg-brand-soft/20 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <div className="flex-1">
+          <p className="text-body font-medium text-ink">
+            Using the Enneagram Responsibly
+          </p>
+          <p className="text-small text-ink-muted mt-0.5">
+            Our full guide to ethical application, as individuals and in community.
+          </p>
+        </div>
+        <Link
+          href="/library/responsible-use"
+          className="text-ui font-medium text-brand hover:text-brand-hover transition-colors shrink-0"
+        >
+          Read the guide &rarr;
+        </Link>
+      </div>
+
       {/* Meet the instructor CTA */}
       <section className="mt-16 rounded-lg border border-border bg-surface p-8 text-center">
         <h2 className="font-serif text-h2 font-semibold text-ink mb-3">

@@ -10,8 +10,7 @@ import { getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter, ContentLevel } from "@/lib/content/mdx";
 import { LevelBadge } from "@/components/shared/level-badge";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { SectionSubNav } from "@/components/layout/section-sub-nav";
-import { SECTIONS } from "@/lib/content/sections";
+
 
 export const metadata: Metadata = {
   title: "The Enneagram",
@@ -83,13 +82,7 @@ export default function EnneagramHubPage() {
   }
 
   return (
-    <>
-      <SectionSubNav
-        sectionLabel={SECTIONS.library.label}
-        basePath={SECTIONS.library.basePath}
-        topics={SECTIONS.library.topics}
-      />
-      <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+    <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
         <Breadcrumbs items={[{ label: "Library" }]} />
         <h1 className="font-serif text-display font-semibold text-ink mb-4">
           The Enneagram
@@ -223,6 +216,5 @@ export default function EnneagramHubPage() {
           </div>
         </section>
       </div>
-    </>
   );
 }

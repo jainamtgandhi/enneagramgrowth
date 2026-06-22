@@ -1,5 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 
 interface MdxArticleProps {
   source: string;
@@ -11,7 +12,12 @@ export function MdxArticle({ source, components }: MdxArticleProps) {
     <article className="prose prose-ink max-w-none">
       <MDXRemote
         source={source}
-        options={{ mdxOptions: { rehypePlugins: [rehypeSlug] } }}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [rehypeSlug],
+          },
+        }}
         components={components}
       />
     </article>

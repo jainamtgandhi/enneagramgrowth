@@ -6,8 +6,7 @@ import type { LessonFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { LevelBadge } from "@/components/shared/level-badge";
 import { ProgressTracker } from "@/components/learn/progress-tracker";
-import { SectionSubNav } from "@/components/layout/section-sub-nav";
-import { SECTIONS } from "@/lib/content/sections";
+
 
 export const metadata: Metadata = {
   title: "Learn the Enneagram",
@@ -50,13 +49,7 @@ export default function LearnHubPage() {
   );
 
   return (
-    <>
-      <SectionSubNav
-        sectionLabel={SECTIONS.learn.label}
-        basePath={SECTIONS.learn.basePath}
-        topics={SECTIONS.learn.topics}
-      />
-      <div className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+    <div className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -150,6 +143,5 @@ export default function LearnHubPage() {
           </Link>
         </div>
       </div>
-    </>
   );
 }

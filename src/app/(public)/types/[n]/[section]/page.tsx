@@ -18,15 +18,15 @@ const VALID_TYPES = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 const SECTION_META: Record<string, { label: string }> = {
   childhood: { label: "How the Pattern Forms" },
-  communication: { label: "Communication Style" },
-  famous: { label: "Famous Examples" },
-  careers: { label: "Career Matches" },
-  relationships: { label: "Relationship Guide" },
-  "growth-path": { label: "Growth Path" },
   subtypes: { label: "Subtypes" },
+  communication: { label: "Communication Style" },
+  relationships: { label: "Relationship Guide" },
   parenting: { label: "Parenting" },
+  careers: { label: "Career Matches" },
   leadership: { label: "Leadership Style" },
+  "growth-path": { label: "Growth Path" },
   spiritual: { label: "Spiritual Growth" },
+  famous: { label: "Famous Examples" },
 };
 
 const VALID_SECTIONS = Object.keys(SECTION_META);

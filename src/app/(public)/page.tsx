@@ -167,8 +167,8 @@ export default async function HomePage() {
                 Go deep
               </h3>
               <p className="text-body text-ink-muted mb-5 leading-relaxed">
-                5,000+ word profiles for every type. Subtypes, wings, growth
-                arrows, relationship dynamics, and real practices, not
+                Comprehensive profiles, 10 deep-dive topics per type, 45
+                relationship guides, and real practices for growth, not
                 horoscope fluff.
               </p>
               <Link
@@ -329,16 +329,17 @@ export default async function HomePage() {
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">9 deep type profiles</strong>:
-                5,000+ words each, with subtypes, wings, arrows, and growth
-                practices
+                <strong className="text-ink font-medium">9 in-depth type profiles</strong>:
+                5,000+ words each, plus 10 deep-dive pages per type covering
+                childhood patterns, subtypes, careers, relationships, and more
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">7 primer lessons</strong>:
-                from &ldquo;what is this?&rdquo; to reading your own patterns
+                <strong className="text-ink font-medium">45 relationship guides</strong>:
+                every type pairing, with dynamics, strengths, friction points,
+                and growth paths for each combination
               </p>
             </div>
             <div className="flex gap-3">
@@ -351,22 +352,23 @@ export default async function HomePage() {
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">Library articles</strong>:
-                wings, instincts, arrows, relationships, workplace, and coping strategies
+                <strong className="text-ink font-medium">7 primer lessons</strong>:
+                from &ldquo;what is this?&rdquo; to reading your own patterns
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
-                <strong className="text-ink font-medium">All 27 subtypes</strong>:
-                self-preservation, social, and sexual for every type
+                <strong className="text-ink font-medium">Workplace, growth, and coping</strong>:
+                practical guides for stress, leadership, parenting, and
+                spiritual development by type
               </p>
             </div>
             <div className="flex gap-3">
               <span className="text-brand font-semibold mt-0.5">&bull;</span>
               <p className="text-body text-ink-muted">
                 <strong className="text-ink font-medium">No paywall</strong>:
-                everything is free, no account needed, no upsell
+                200+ pages of content, all free, no account needed, no upsell
               </p>
             </div>
           </div>

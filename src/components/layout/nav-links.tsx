@@ -34,8 +34,6 @@ const exploreLinks = [
 ];
 
 const applyLinks = [
-  { href: "/relationships", label: "Relationships" },
-  { href: "/relationships/compare", label: "Compare Types" },
   { href: "/workplace", label: "Workplace" },
   { href: "/coping", label: "Coping & Solutions" },
   { href: "/growth", label: "Growth Practices" },

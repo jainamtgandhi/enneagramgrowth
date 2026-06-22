@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { SectionSubNav } from "@/components/layout/section-sub-nav";
-import { SECTIONS } from "@/lib/content/sections";
+
 
 export const metadata: Metadata = {
   title: "The Enneagram at Work",
@@ -56,13 +55,7 @@ const topics = [
 
 export default function WorkplaceHubPage() {
   return (
-    <>
-      <SectionSubNav
-        sectionLabel={SECTIONS.workplace.label}
-        basePath={SECTIONS.workplace.basePath}
-        topics={SECTIONS.workplace.topics}
-      />
-      <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+    <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
         <Breadcrumbs items={[{ label: "Workplace" }]} />
 
         <h1 className="font-serif text-display font-semibold text-ink mb-4">
@@ -95,6 +88,5 @@ export default function WorkplaceHubPage() {
           ))}
         </div>
       </div>
-    </>
   );
 }

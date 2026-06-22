@@ -95,15 +95,15 @@ export default async function TypeDetailPage({
               <ul className="space-y-1">
                 {[
                   { slug: "childhood", label: "How the Pattern Forms" },
-                  { slug: "communication", label: "Communication Style" },
-                  { slug: "careers", label: "Career Matches" },
-                  { slug: "famous", label: "Famous Examples" },
-                  { slug: "relationships", label: "Relationship Guide" },
-                  { slug: "growth-path", label: "Growth Path" },
                   { slug: "subtypes", label: "Subtypes" },
+                  { slug: "communication", label: "Communication Style" },
+                  { slug: "relationships", label: "Relationship Guide" },
                   { slug: "parenting", label: "Parenting" },
+                  { slug: "careers", label: "Career Matches" },
                   { slug: "leadership", label: "Leadership Style" },
+                  { slug: "growth-path", label: "Growth Path" },
                   { slug: "spiritual", label: "Spiritual Growth" },
+                  { slug: "famous", label: "Famous Examples" },
                 ].map((s) => (
                   <li key={s.slug}>
                     <Link
@@ -163,15 +163,15 @@ export default async function TypeDetailPage({
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { slug: "childhood", label: "How the Pattern Forms", desc: "The childhood experience that shaped this type" },
-                { slug: "communication", label: "Communication Style", desc: "How to talk with and understand this type" },
-                { slug: "careers", label: "Career Matches", desc: "Work strengths and ideal career paths" },
-                { slug: "famous", label: "Famous Examples", desc: "Well-known figures who share this pattern" },
-                { slug: "relationships", label: "Relationship Guide", desc: "How this type connects, loves, and navigates partnership" },
-                { slug: "growth-path", label: "Growth Path", desc: "A structured program for lasting personal change" },
                 { slug: "subtypes", label: "Subtypes", desc: "Self-pres, social, and sexual variants of this type" },
+                { slug: "communication", label: "Communication Style", desc: "How to talk with and understand this type" },
+                { slug: "relationships", label: "Relationship Guide", desc: "How this type connects, loves, and navigates partnership" },
                 { slug: "parenting", label: "Parenting", desc: "Parenting gifts, blind spots, and what your kids need" },
+                { slug: "careers", label: "Career Matches", desc: "Work strengths and ideal career paths" },
                 { slug: "leadership", label: "Leadership Style", desc: "How this type leads and their development edge" },
+                { slug: "growth-path", label: "Growth Path", desc: "A structured program for lasting personal change" },
                 { slug: "spiritual", label: "Spiritual Growth", desc: "Contemplative practices and the path to virtue" },
+                { slug: "famous", label: "Famous Examples", desc: "Well-known figures who share this pattern" },
               ].map((section) => (
                 <Link
                   key={section.slug}
@@ -197,10 +197,10 @@ export default async function TypeDetailPage({
             </p>
             <div className="flex flex-wrap gap-3">
               {[
-                { href: `/workplace/type-styles#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Workplace Style" },
-                { href: `/workplace/managing#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Being Managed" },
-                { href: `/workplace/stress#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Stress at Work" },
-                { href: `/growth/by-type#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Growth Practices" },
+                { href: `/workplace/type-styles#type-${n}-${info.name.toLowerCase().replace(/\s+/g, "-")}`, label: "Workplace Style" },
+                { href: `/workplace/managing#type-${n}-${info.name.toLowerCase().replace(/\s+/g, "-")}`, label: "Being Managed" },
+                { href: `/workplace/stress#type-${n}-${info.name.toLowerCase().replace(/\s+/g, "-")}`, label: "Stress at Work" },
+                { href: `/growth/by-type#type-${n}-${info.name.toLowerCase().replace(/\s+/g, "-")}`, label: "Growth Practices" },
                 { href: `/relationships`, label: "Relationship Pairings" },
                 { href: `/coping`, label: "Coping Strategies" },
               ].map((link) => (

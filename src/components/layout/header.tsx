@@ -9,7 +9,6 @@ const navLinks = [
   { href: "/library", label: "Enneagram" },
   { href: "/types", label: "Types" },
   { href: "/relationships", label: "Relationships" },
-  { href: "/discover", label: "Discover" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];

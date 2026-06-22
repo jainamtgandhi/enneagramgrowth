@@ -10,13 +10,12 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/learn", label: "Learn" },
-  { href: "/library", label: "Library" },
-  { href: "/types", label: "The Nine Types" },
+  { href: "/types", label: "Types" },
+  { href: "/library", label: "Enneagram" },
   { href: "/relationships", label: "Relationships" },
   { href: "/workplace", label: "Workplace" },
   { href: "/coping", label: "Coping" },
   { href: "/growth", label: "Growth" },
-  { href: "/discover", label: "Discover" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];

@@ -9,7 +9,7 @@ import {
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { LevelBadge } from "@/components/shared/level-badge";
-import { SectionSubNav } from "@/components/layout/section-sub-nav";
+import { SectionSidebar, SectionMobilePills } from "@/components/layout/section-sidebar";
 import { SECTIONS } from "@/lib/content/sections";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { TypeSelectorBar } from "@/components/enneagram/type-selector-bar";
@@ -83,96 +83,105 @@ export default async function GrowthTopicPage({
   const showToc = headings.length >= 4;
 
   return (
-    <>
-      <SectionSubNav
-        sectionLabel={SECTIONS.growth.label}
-        basePath={SECTIONS.growth.basePath}
-        topics={SECTIONS.growth.topics}
-      />
-      <div className={`mx-auto px-5 py-12 sm:px-8 sm:py-16 lg:py-20 ${showToc ? "max-w-[960px]" : "max-w-[720px]"}`}>
-        <Breadcrumbs
-          items={[
-            { label: "Growth Practices", href: "/growth" },
-            { label: file.frontmatter.title },
-          ]}
+    <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
+        <SectionSidebar
+          sectionLabel={SECTIONS.growth.label}
+          basePath={SECTIONS.growth.basePath}
+          topics={SECTIONS.growth.topics}
         />
 
-        <h1 className="font-serif text-display font-semibold text-ink mb-4">
-          {file.frontmatter.title}
-        </h1>
-        <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
-          <span>
-            {file.frontmatter.order} of {allTopics.length}
-          </span>
-          <span>&middot;</span>
-          <span>~{readTime} min read</span>
-          {file.frontmatter.level && (
-            <>
-              <span>&middot;</span>
-              <LevelBadge level={file.frontmatter.level} />
-            </>
-          )}
-        </div>
-        <p className="text-body-lg text-ink-muted mb-12">
-          {file.frontmatter.description}
-        </p>
+        <main>
+          <Breadcrumbs
+            items={[
+              { label: "Growth Practices", href: "/growth" },
+              { label: file.frontmatter.title },
+            ]}
+          />
 
-        {showTypeSelector && <TypeSelectorBar mode="type" />}
-        {showCenterSelector && <TypeSelectorBar mode="center" />}
-
-        <div className={showToc ? "lg:grid lg:grid-cols-[1fr_200px] lg:gap-10" : ""}>
-          <MdxArticle source={file.content} />
-          {showToc && <TableOfContents headings={headings} />}
-        </div>
-
-        {/* Last topic CTA */}
-        {!next && (
-          <div className="mt-12 p-6 rounded-xl bg-brand-soft/30 border border-brand/20 text-center">
-            <p className="font-serif text-h3 font-semibold text-ink mb-2">
-              Ready to put this into practice?
-            </p>
-            <p className="text-body text-ink-muted mb-4">
-              Try the Discovery process: a guided reflection to help you see
-              which patterns resonate most.
-            </p>
-            <Link
-              href="/discover"
-              className="inline-block rounded-full bg-brand px-6 py-2.5 text-ui font-medium text-white hover:bg-brand-hover transition-colors"
-            >
-              Start the Discovery process
-            </Link>
+          <h1 className="font-serif text-display font-semibold text-ink mb-4">
+            {file.frontmatter.title}
+          </h1>
+          <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
+            <span>
+              {file.frontmatter.order} of {allTopics.length}
+            </span>
+            <span>&middot;</span>
+            <span>~{readTime} min read</span>
+            {file.frontmatter.level && (
+              <>
+                <span>&middot;</span>
+                <LevelBadge level={file.frontmatter.level} />
+              </>
+            )}
           </div>
-        )}
+          <p className="text-body-lg text-ink-muted mb-12">
+            {file.frontmatter.description}
+          </p>
 
-        <nav className="mt-16 flex justify-between gap-4">
-          {prev ? (
-            <Link
-              href={`/growth/${prev.slug}`}
-              className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
-            >
-              <span className="text-small text-ink-muted">&larr; Previous</span>
-              <p className="text-ui font-medium text-ink mt-1">
-                {prev.frontmatter.title}
+          {showTypeSelector && <TypeSelectorBar mode="type" />}
+          {showCenterSelector && <TypeSelectorBar mode="center" />}
+
+          <div className={showToc ? "xl:grid xl:grid-cols-[1fr_180px] xl:gap-8" : ""}>
+            <MdxArticle source={file.content} />
+            {showToc && <TableOfContents headings={headings} />}
+          </div>
+
+          {!next && (
+            <div className="mt-12 p-6 rounded-xl bg-brand-soft/30 border border-brand/20 text-center">
+              <p className="font-serif text-h3 font-semibold text-ink mb-2">
+                Ready to put this into practice?
               </p>
-            </Link>
-          ) : (
-            <div className="flex-1" />
-          )}
-          {next ? (
-            <Link
-              href={`/growth/${next.slug}`}
-              className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
-            >
-              <span className="text-small text-ink-muted">Next &rarr;</span>
-              <p className="text-ui font-medium text-ink mt-1">
-                {next.frontmatter.title}
+              <p className="text-body text-ink-muted mb-4">
+                Try the Discovery process: a guided reflection to help you see
+                which patterns resonate most.
               </p>
-            </Link>
-          ) : (
-            <div className="flex-1" />
+              <Link
+                href="/discover"
+                className="inline-block rounded-full bg-brand px-6 py-2.5 text-ui font-medium text-white hover:bg-brand-hover transition-colors"
+              >
+                Start the Discovery process
+              </Link>
+            </div>
           )}
-        </nav>
+
+          <SectionMobilePills
+            sectionLabel={SECTIONS.growth.label}
+            basePath={SECTIONS.growth.basePath}
+            topics={SECTIONS.growth.topics}
+            currentSlug={topic}
+          />
+
+          <nav className="mt-16 flex justify-between gap-4">
+            {prev ? (
+              <Link
+                href={`/growth/${prev.slug}`}
+                className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
+              >
+                <span className="text-small text-ink-muted">&larr; Previous</span>
+                <p className="text-ui font-medium text-ink mt-1">
+                  {prev.frontmatter.title}
+                </p>
+              </Link>
+            ) : (
+              <div className="flex-1" />
+            )}
+            {next ? (
+              <Link
+                href={`/growth/${next.slug}`}
+                className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
+              >
+                <span className="text-small text-ink-muted">Next &rarr;</span>
+                <p className="text-ui font-medium text-ink mt-1">
+                  {next.frontmatter.title}
+                </p>
+              </Link>
+            ) : (
+              <div className="flex-1" />
+            )}
+          </nav>
+        </main>
       </div>
-    </>
+    </div>
   );
 }

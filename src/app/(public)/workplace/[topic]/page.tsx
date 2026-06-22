@@ -5,7 +5,7 @@ import { getContentFile, getAllContentFiles, extractHeadings } from "@/lib/conte
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { LevelBadge } from "@/components/shared/level-badge";
-import { SectionSubNav } from "@/components/layout/section-sub-nav";
+import { SectionSidebar, SectionMobilePills } from "@/components/layout/section-sidebar";
 import { SECTIONS } from "@/lib/content/sections";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { TypeSelectorBar } from "@/components/enneagram/type-selector-bar";
@@ -78,77 +78,87 @@ export default async function WorkplaceTopicPage({ params }: PageProps) {
   const showToc = headings.length >= 4;
 
   return (
-    <>
-      <SectionSubNav
-        sectionLabel={SECTIONS.workplace.label}
-        basePath={SECTIONS.workplace.basePath}
-        topics={SECTIONS.workplace.topics}
-      />
-      <div className={`mx-auto px-5 py-12 sm:px-8 sm:py-16 lg:py-20 ${showToc ? "max-w-[960px]" : "max-w-[720px]"}`}>
-        <Breadcrumbs
-          items={[
-            { label: "Workplace", href: "/workplace" },
-            { label: file.frontmatter.title },
-          ]}
+    <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
+        <SectionSidebar
+          sectionLabel={SECTIONS.workplace.label}
+          basePath={SECTIONS.workplace.basePath}
+          topics={SECTIONS.workplace.topics}
         />
 
-        <h1 className="font-serif text-display font-semibold text-ink mb-4">
-          {file.frontmatter.title}
-        </h1>
-        <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
-          <span>
-            Article {file.frontmatter.order} of {allTopics.length}
-          </span>
-          <span>&middot;</span>
-          <span>~{readTime} min read</span>
-          {file.frontmatter.level && (
-            <>
-              <span>&middot;</span>
-              <LevelBadge level={file.frontmatter.level} />
-            </>
-          )}
-        </div>
-        <p className="text-body-lg text-ink-muted mb-12">
-          {file.frontmatter.description}
-        </p>
+        <main>
+          <Breadcrumbs
+            items={[
+              { label: "Workplace", href: "/workplace" },
+              { label: file.frontmatter.title },
+            ]}
+          />
 
-        {showTypeSelector && <TypeSelectorBar mode="type" />}
-        {showCenterSelector && <TypeSelectorBar mode="center" />}
+          <h1 className="font-serif text-display font-semibold text-ink mb-4">
+            {file.frontmatter.title}
+          </h1>
+          <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
+            <span>
+              Article {file.frontmatter.order} of {allTopics.length}
+            </span>
+            <span>&middot;</span>
+            <span>~{readTime} min read</span>
+            {file.frontmatter.level && (
+              <>
+                <span>&middot;</span>
+                <LevelBadge level={file.frontmatter.level} />
+              </>
+            )}
+          </div>
+          <p className="text-body-lg text-ink-muted mb-12">
+            {file.frontmatter.description}
+          </p>
 
-        <div className={showToc ? "lg:grid lg:grid-cols-[1fr_200px] lg:gap-10" : ""}>
-          <MdxArticle source={file.content} />
-          {showToc && <TableOfContents headings={headings} />}
-        </div>
+          {showTypeSelector && <TypeSelectorBar mode="type" />}
+          {showCenterSelector && <TypeSelectorBar mode="center" />}
 
-        <nav className="mt-16 flex justify-between gap-4">
-          {prev ? (
-            <Link
-              href={`/workplace/${prev.slug}`}
-              className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
-            >
-              <span className="text-small text-ink-muted">&larr; Previous</span>
-              <p className="text-ui font-medium text-ink mt-1">
-                {prev.frontmatter.title}
-              </p>
-            </Link>
-          ) : (
-            <div className="flex-1" />
-          )}
-          {next ? (
-            <Link
-              href={`/workplace/${next.slug}`}
-              className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
-            >
-              <span className="text-small text-ink-muted">Next &rarr;</span>
-              <p className="text-ui font-medium text-ink mt-1">
-                {next.frontmatter.title}
-              </p>
-            </Link>
-          ) : (
-            <div className="flex-1" />
-          )}
-        </nav>
+          <div className={showToc ? "xl:grid xl:grid-cols-[1fr_180px] xl:gap-8" : ""}>
+            <MdxArticle source={file.content} />
+            {showToc && <TableOfContents headings={headings} />}
+          </div>
+
+          <SectionMobilePills
+            sectionLabel={SECTIONS.workplace.label}
+            basePath={SECTIONS.workplace.basePath}
+            topics={SECTIONS.workplace.topics}
+            currentSlug={topic}
+          />
+
+          <nav className="mt-16 flex justify-between gap-4">
+            {prev ? (
+              <Link
+                href={`/workplace/${prev.slug}`}
+                className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
+              >
+                <span className="text-small text-ink-muted">&larr; Previous</span>
+                <p className="text-ui font-medium text-ink mt-1">
+                  {prev.frontmatter.title}
+                </p>
+              </Link>
+            ) : (
+              <div className="flex-1" />
+            )}
+            {next ? (
+              <Link
+                href={`/workplace/${next.slug}`}
+                className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
+              >
+                <span className="text-small text-ink-muted">Next &rarr;</span>
+                <p className="text-ui font-medium text-ink mt-1">
+                  {next.frontmatter.title}
+                </p>
+              </Link>
+            ) : (
+              <div className="flex-1" />
+            )}
+          </nav>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
