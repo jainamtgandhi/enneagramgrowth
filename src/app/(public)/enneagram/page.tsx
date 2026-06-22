@@ -13,17 +13,35 @@ export const metadata: Metadata = {
     "Explore the Enneagram: nine paths to self-understanding. Learn about the types, centers, wings, arrows, and more.",
 };
 
-const articles = [
-  { href: "/enneagram/what-is-it", label: "What Is the Enneagram?", description: "The basics: a map, not a box." },
-  { href: "/enneagram/centers", label: "The Three Centers", description: "Body, Heart, and Head intelligence." },
-  { href: "/enneagram/wings", label: "Wings", description: "The types that shade your core pattern." },
-  { href: "/enneagram/arrows", label: "Arrows & Growth Paths", description: "How you move in growth and stress." },
-  { href: "/enneagram/instincts", label: "The Three Instincts", description: "Self-preservation, social, and one-to-one." },
-  { href: "/enneagram/mistyping", label: "Common Misidentifications", description: "Why types get confused, and how to tell." },
-  { href: "/enneagram/responsible-use", label: "Using It Responsibly", description: "Principles for ethical application." },
-  { href: "/enneagram/glossary", label: "Glossary", description: "Key terms and definitions." },
-  { href: "/enneagram/growth-practices", label: "Growth Practices", description: "From autopilot to awareness: practices for every type." },
-  { href: "/enneagram/relationships", label: "Relationships", description: "How to love and connect with each type." },
+const articleGroups = [
+  {
+    title: "Foundations",
+    description: "Start here. These build on each other.",
+    articles: [
+      { href: "/enneagram/what-is-it", label: "What Is the Enneagram?", description: "The basics: a map, not a box." },
+      { href: "/enneagram/centers", label: "The Three Centers", description: "Body, Heart, and Head intelligence." },
+      { href: "/enneagram/wings", label: "Wings", description: "The types that shade your core pattern." },
+      { href: "/enneagram/arrows", label: "Arrows & Growth Paths", description: "How you move in growth and stress." },
+    ],
+  },
+  {
+    title: "Going Deeper",
+    description: "Nuances that deepen your understanding.",
+    articles: [
+      { href: "/enneagram/instincts", label: "The Three Instincts", description: "Self-preservation, social, and one-to-one." },
+      { href: "/enneagram/mistyping", label: "Common Misidentifications", description: "Why types get confused, and how to tell." },
+      { href: "/enneagram/glossary", label: "Glossary", description: "Key terms and definitions." },
+    ],
+  },
+  {
+    title: "Living It",
+    description: "From theory to practice.",
+    articles: [
+      { href: "/enneagram/growth-practices", label: "Growth Practices", description: "From autopilot to awareness: practices for every type." },
+      { href: "/enneagram/relationships", label: "Relationships", description: "How to love and connect with each type." },
+      { href: "/enneagram/responsible-use", label: "Using It Responsibly", description: "Principles for ethical application." },
+    ],
+  },
 ];
 
 const CENTER_ORDER: Center[] = ["body", "heart", "head"];
@@ -112,37 +130,46 @@ export default function EnneagramHubPage() {
         </Link>
       </section>
 
-      {/* Explore the System - numbered learning path */}
+      {/* Explore the System - grouped articles */}
       <section>
         <h2 className="font-serif text-h2 font-semibold text-ink mb-3">
           Explore the System
         </h2>
-        <p className="text-body text-ink-muted mb-8 max-w-[56ch]">
-          Go deeper into the framework. Concepts build on each other, so
-          reading in order helps, but jump wherever you like.
+        <p className="text-body text-ink-muted mb-10 max-w-[56ch]">
+          Go deeper into the framework. Start with the foundations, then
+          explore at your own pace.
         </p>
-        <div className="space-y-3">
-          {articles.map((article, index) => (
-            <Link
-              key={article.href}
-              href={article.href}
-              className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 hover:border-brand hover:shadow-card transition-all"
-            >
-              <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-brand-soft text-brand font-serif font-bold text-ui">
-                {index + 1}
-              </span>
-              <div className="flex-1">
-                <h3 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
-                  {article.label}
-                </h3>
-                <p className="text-small text-ink-muted mt-0.5">
-                  {article.description}
-                </p>
+        <div className="space-y-12">
+          {articleGroups.map((group) => (
+            <div key={group.title}>
+              <h3 className="font-serif text-h3 font-semibold text-ink mb-1">
+                {group.title}
+              </h3>
+              <p className="text-small text-ink-muted mb-4">
+                {group.description}
+              </p>
+              <div className="space-y-3">
+                {group.articles.map((article) => (
+                  <Link
+                    key={article.href}
+                    href={article.href}
+                    className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 hover:border-brand hover:shadow-card transition-all"
+                  >
+                    <div className="flex-1">
+                      <h4 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
+                        {article.label}
+                      </h4>
+                      <p className="text-small text-ink-muted mt-0.5">
+                        {article.description}
+                      </p>
+                    </div>
+                    <span className="text-ink-muted group-hover:text-brand transition-colors mt-1">
+                      &rarr;
+                    </span>
+                  </Link>
+                ))}
               </div>
-              <span className="text-ink-muted group-hover:text-brand transition-colors mt-1">
-                &rarr;
-              </span>
-            </Link>
+            </div>
           ))}
         </div>
       </section>

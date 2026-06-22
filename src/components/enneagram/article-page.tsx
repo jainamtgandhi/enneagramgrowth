@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getContentFile } from "@/lib/content/mdx";
+import { getContentFile, getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { CommentSection } from "@/components/comments/comment-section";
@@ -30,6 +30,15 @@ export function ArticlePage({ slug }: ArticlePageProps) {
     );
   }
 
+  const allArticles = getAllContentFiles<ArticleFrontmatter>("enneagram").sort(
+    (a, b) => a.frontmatter.order - b.frontmatter.order
+  );
+  const currentIndex = allArticles.findIndex((a) => a.slug === slug);
+  const prev = currentIndex > 0 ? allArticles[currentIndex - 1] : null;
+  const next =
+    currentIndex < allArticles.length - 1
+      ? allArticles[currentIndex + 1]
+      : null;
   const readTime = estimateReadingTime(file.content);
 
   return (
@@ -45,6 +54,10 @@ export function ArticlePage({ slug }: ArticlePageProps) {
         {file.frontmatter.title}
       </h1>
       <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
+        <span>
+          Article {file.frontmatter.order} of {allArticles.length}
+        </span>
+        <span>&middot;</span>
         <span>~{readTime} min read</span>
       </div>
       <p className="text-body-lg text-ink-muted mb-12">
@@ -57,14 +70,53 @@ export function ArticlePage({ slug }: ArticlePageProps) {
 
       <CommentSection postType="article" postSlug={slug} />
 
-      <div className="mt-16">
-        <Link
-          href="/enneagram"
-          className="text-ui font-medium text-brand hover:text-brand-hover transition-colors"
-        >
-          &larr; Back to the Enneagram
-        </Link>
-      </div>
+      {/* Last article CTA */}
+      {!next && (
+        <div className="mt-12 p-6 rounded-xl bg-brand-soft/30 border border-brand/20 text-center">
+          <p className="font-serif text-h3 font-semibold text-ink mb-2">
+            You&apos;ve explored the full system!
+          </p>
+          <p className="text-body text-ink-muted mb-4">
+            Ready to see which patterns resonate most? Try the Discovery
+            process: a guided reflection, not a test.
+          </p>
+          <Link
+            href="/discover"
+            className="inline-block rounded-full bg-brand px-6 py-2.5 text-ui font-medium text-white hover:bg-brand-hover transition-colors"
+          >
+            Start the Discovery process
+          </Link>
+        </div>
+      )}
+
+      <nav className="mt-16 flex justify-between gap-4">
+        {prev ? (
+          <Link
+            href={`/enneagram/${prev.slug}`}
+            className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
+          >
+            <span className="text-small text-ink-muted">&larr; Previous</span>
+            <p className="text-ui font-medium text-ink mt-1">
+              {prev.frontmatter.title}
+            </p>
+          </Link>
+        ) : (
+          <div className="flex-1" />
+        )}
+        {next ? (
+          <Link
+            href={`/enneagram/${next.slug}`}
+            className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
+          >
+            <span className="text-small text-ink-muted">Next &rarr;</span>
+            <p className="text-ui font-medium text-ink mt-1">
+              {next.frontmatter.title}
+            </p>
+          </Link>
+        ) : (
+          <div className="flex-1" />
+        )}
+      </nav>
     </main>
   );
 }

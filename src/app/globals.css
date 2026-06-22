@@ -15,7 +15,7 @@
   --color-brand-soft: var(--brand-soft);
   --color-gold: var(--gold);
 
-  /* Center colors — semantic, used inside type content */
+  /* Center colors - semantic, used inside type content */
   --color-center-body: var(--center-body);
   --color-center-body-soft: var(--center-body-soft);
   --color-center-body-ink: var(--center-body-ink);
@@ -93,7 +93,7 @@
 }
 
 /* ============================================
-   LIGHT MODE — Bright & Airy palette
+   LIGHT MODE - Bright & Airy palette
    ============================================ */
 :root {
   --ink: #1A2B1E;
@@ -140,7 +140,7 @@
   .prose {
     max-width: 68ch;
   }
-  /* MDX prose styling — raw CSS to avoid @apply issues with theme utils */
+  /* MDX prose styling - raw CSS to avoid @apply issues with theme utils */
   .prose h2 {
     font-family: var(--font-serif);
     font-size: var(--font-size-h2);

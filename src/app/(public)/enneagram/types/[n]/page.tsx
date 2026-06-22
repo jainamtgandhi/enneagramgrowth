@@ -9,6 +9,7 @@ import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
 import { CommentSection } from "@/components/comments/comment-section";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { TypeNav } from "@/components/library/type-nav";
 
 function estimateReadingTime(content: string): number {
   const words = content.trim().split(/\s+/).length;
@@ -58,64 +59,80 @@ export default async function TypeDetailPage({
   const readTime = file ? estimateReadingTime(file.content) : 0;
 
   return (
-    <main className="mx-auto max-w-[860px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
-      <Breadcrumbs
-        items={[
-          { label: "Enneagram", href: "/enneagram" },
-          { label: "Types", href: "/enneagram/types" },
-          { label: `Type ${n}: ${info.name}` },
-        ]}
-      />
+    <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
+        {/* Sidebar - desktop only */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24">
+            <h3 className="text-small font-medium text-ink-muted mb-3">
+              The Nine Types
+            </h3>
+            <TypeNav />
+          </div>
+        </aside>
 
-      <div className="mb-6 flex flex-wrap items-center gap-3">
-        <span
-          className={`inline-block rounded-full px-3 py-1 text-small font-medium bg-center-${center}-soft text-center-${center}-ink`}
-        >
-          {CENTER_LABEL[center]}
-        </span>
-        {readTime > 0 && (
-          <span className="text-small text-ink-muted">
-            ~{readTime} min read
-          </span>
-        )}
+        {/* Main content */}
+        <main>
+          <Breadcrumbs
+            items={[
+              { label: "Enneagram", href: "/enneagram" },
+              { label: "Types", href: "/enneagram/types" },
+              { label: `Type ${n}: ${info.name}` },
+            ]}
+          />
+
+          <div className="mb-6 flex flex-wrap items-center gap-3">
+            <span
+              className={`inline-block rounded-full px-3 py-1 text-small font-medium bg-center-${center}-soft text-center-${center}-ink`}
+            >
+              {CENTER_LABEL[center]}
+            </span>
+            {readTime > 0 && (
+              <span className="text-small text-ink-muted">
+                ~{readTime} min read
+              </span>
+            )}
+          </div>
+
+          <h1 className="font-serif text-[2rem] sm:text-display font-semibold text-ink mb-2">
+            Type {n}: {info.name}
+          </h1>
+          <p className="text-body-lg text-ink-muted mb-2">{info.altName}</p>
+          <p className="text-body text-ink-muted mb-12 max-w-[60ch]">{info.brief}</p>
+
+          {file ? (
+            <article className="prose prose-ink max-w-none">
+              <MDXRemote source={file.content} />
+            </article>
+          ) : (
+            <p className="text-body text-ink-muted">
+              Full type page content coming soon.
+            </p>
+          )}
+
+          <CommentSection postType="type" postSlug={`type-${n}`} />
+
+          {/* Mobile type pills - hidden on desktop where sidebar exists */}
+          <div className="mt-20 lg:hidden">
+            <h3 className="text-ui font-medium text-ink-muted mb-4">Explore other types</h3>
+            <div className="flex flex-wrap gap-2.5">
+              {VALID_TYPES.filter((t) => t !== n).map((t) => {
+                const typeNum = Number(t) as EnneagramType;
+                const typeCenter = TYPE_TO_CENTER[typeNum];
+                return (
+                  <Link
+                    key={t}
+                    href={`/enneagram/types/${t}`}
+                    className={`rounded-full border border-border px-5 py-2 text-small font-medium text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
+                  >
+                    Type {t}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </main>
       </div>
-
-      <h1 className="font-serif text-[2rem] sm:text-display font-semibold text-ink mb-2">
-        Type {n}: {info.name}
-      </h1>
-      <p className="text-body-lg text-ink-muted mb-2">{info.altName}</p>
-      <p className="text-body text-ink-muted mb-12 max-w-[60ch]">{info.brief}</p>
-
-      {file ? (
-        <article className="prose prose-ink max-w-none">
-          <MDXRemote source={file.content} />
-        </article>
-      ) : (
-        <p className="text-body text-ink-muted">
-          Full type page content coming soon.
-        </p>
-      )}
-
-      <CommentSection postType="type" postSlug={`type-${n}`} />
-
-      <div className="mt-20">
-        <h3 className="text-ui font-medium text-ink-muted mb-4">Explore other types</h3>
-        <div className="flex flex-wrap gap-2.5">
-          {VALID_TYPES.filter((t) => t !== n).map((t) => {
-            const typeNum = Number(t) as EnneagramType;
-            const typeCenter = TYPE_TO_CENTER[typeNum];
-            return (
-              <Link
-                key={t}
-                href={`/enneagram/types/${t}`}
-                className={`rounded-full border border-border px-5 py-2 text-small font-medium text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
-              >
-                Type {t}
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </main>
+    </div>
   );
 }
