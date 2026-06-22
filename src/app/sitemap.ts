@@ -46,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/legal/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const typeSections = ["childhood", "communication", "famous", "careers"];
+  const typeSections = ["childhood", "communication", "famous", "careers", "relationships", "growth-path", "subtypes", "parenting", "leadership", "spiritual"];
 
   const typeRoutes: MetadataRoute.Sitemap = ALL_TYPES.map((n) => ({
     url: `${SITE_URL}/types/${n}`,

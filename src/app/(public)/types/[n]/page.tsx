@@ -98,6 +98,12 @@ export default async function TypeDetailPage({
                   { slug: "communication", label: "Communication Style" },
                   { slug: "careers", label: "Career Matches" },
                   { slug: "famous", label: "Famous Examples" },
+                  { slug: "relationships", label: "Relationship Guide" },
+                  { slug: "growth-path", label: "Growth Path" },
+                  { slug: "subtypes", label: "Subtypes" },
+                  { slug: "parenting", label: "Parenting" },
+                  { slug: "leadership", label: "Leadership Style" },
+                  { slug: "spiritual", label: "Spiritual Growth" },
                 ].map((s) => (
                   <li key={s.slug}>
                     <Link
@@ -154,12 +160,18 @@ export default async function TypeDetailPage({
             <h2 className="font-serif text-h2 font-semibold text-ink mb-6">
               Go Deeper
             </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { slug: "childhood", label: "How the Pattern Forms", desc: "The childhood experience that shaped this type" },
                 { slug: "communication", label: "Communication Style", desc: "How to talk with and understand this type" },
                 { slug: "careers", label: "Career Matches", desc: "Work strengths and ideal career paths" },
                 { slug: "famous", label: "Famous Examples", desc: "Well-known figures who share this pattern" },
+                { slug: "relationships", label: "Relationship Guide", desc: "How this type connects, loves, and navigates partnership" },
+                { slug: "growth-path", label: "Growth Path", desc: "A structured program for lasting personal change" },
+                { slug: "subtypes", label: "Subtypes", desc: "Self-pres, social, and sexual variants of this type" },
+                { slug: "parenting", label: "Parenting", desc: "Parenting gifts, blind spots, and what your kids need" },
+                { slug: "leadership", label: "Leadership Style", desc: "How this type leads and their development edge" },
+                { slug: "spiritual", label: "Spiritual Growth", desc: "Contemplative practices and the path to virtue" },
               ].map((section) => (
                 <Link
                   key={section.slug}
@@ -170,6 +182,34 @@ export default async function TypeDetailPage({
                     {section.label}
                   </h3>
                   <p className="text-small text-ink-muted">{section.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Cross-section links */}
+          <div className="mt-8 mb-8">
+            <h2 className="font-serif text-h2 font-semibold text-ink mb-4">
+              Type {n} Across the Site
+            </h2>
+            <p className="text-body text-ink-muted mb-6">
+              See how this type shows up in other areas of life and practice.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { href: `/workplace/type-styles#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Workplace Style" },
+                { href: `/workplace/managing#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Being Managed" },
+                { href: `/workplace/stress#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Stress at Work" },
+                { href: `/growth/by-type#type-${n}-${info.name.toLowerCase().replace("the ", "")}`, label: "Growth Practices" },
+                { href: `/relationships`, label: "Relationship Pairings" },
+                { href: `/coping`, label: "Coping Strategies" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded-full border border-border px-4 py-2 text-small font-medium text-ink-muted hover:text-center-${center}-ink hover:border-center-${center} hover:bg-center-${center}-soft/30 transition-colors`}
+                >
+                  {link.label}
                 </Link>
               ))}
             </div>

@@ -16,11 +16,17 @@ interface TypeSectionFrontmatter {
 
 const VALID_TYPES = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-const SECTION_META: Record<string, { label: string; emoji: string }> = {
-  childhood: { label: "How the Pattern Forms", emoji: "" },
-  communication: { label: "Communication Style", emoji: "" },
-  famous: { label: "Famous Examples", emoji: "" },
-  careers: { label: "Career Matches", emoji: "" },
+const SECTION_META: Record<string, { label: string }> = {
+  childhood: { label: "How the Pattern Forms" },
+  communication: { label: "Communication Style" },
+  famous: { label: "Famous Examples" },
+  careers: { label: "Career Matches" },
+  relationships: { label: "Relationship Guide" },
+  "growth-path": { label: "Growth Path" },
+  subtypes: { label: "Subtypes" },
+  parenting: { label: "Parenting" },
+  leadership: { label: "Leadership Style" },
+  spiritual: { label: "Spiritual Growth" },
 };
 
 const VALID_SECTIONS = Object.keys(SECTION_META);

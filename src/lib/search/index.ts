@@ -156,7 +156,7 @@ export function buildSearchIndex(): SearchEntry[] {
   }
 
   // 7. Type sub-pages  ->  /types/{n}/{section}
-  const typeSections = ["childhood", "communication", "famous", "careers"];
+  const typeSections = ["childhood", "communication", "famous", "careers", "relationships", "growth-path", "subtypes", "parenting", "leadership", "spiritual"];
   for (const n of ALL_TYPES) {
     for (const section of typeSections) {
       const file = getContentFile<TypeSectionFrontmatter>(`types/type-${n}`, section);
