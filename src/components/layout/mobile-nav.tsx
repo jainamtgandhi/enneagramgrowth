@@ -8,16 +8,31 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { href: "/learn", label: "Learn" },
-  { href: "/types", label: "Types" },
-  { href: "/library", label: "Enneagram" },
-  { href: "/relationships", label: "Relationships" },
-  { href: "/workplace", label: "Workplace" },
-  { href: "/coping", label: "Coping" },
-  { href: "/growth", label: "Growth" },
-  { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
+const navGroups = [
+  {
+    label: "Enneagram",
+    links: [
+      { href: "/learn", label: "Learn the Basics" },
+      { href: "/types", label: "The Nine Types" },
+      { href: "/library", label: "Reference Library" },
+      { href: "/relationships", label: "Relationships" },
+    ],
+  },
+  {
+    label: "Apply",
+    links: [
+      { href: "/workplace", label: "Workplace" },
+      { href: "/coping", label: "Coping & Solutions" },
+      { href: "/growth", label: "Growth Practices" },
+    ],
+  },
+  {
+    label: null,
+    links: [
+      { href: "/blog", label: "Blog" },
+      { href: "/about", label: "About" },
+    ],
+  },
 ];
 
 export function MobileNav() {
@@ -53,29 +68,40 @@ export function MobileNav() {
           Find Your Type
         </Link>
 
-        <nav className="flex flex-col gap-1">
-          {navLinks.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
+        <nav className="flex flex-col gap-4">
+          {navGroups.map((group, gi) => (
+            <div key={gi}>
+              {group.label && (
+                <p className="px-3 mb-1 text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                  {group.label}
+                </p>
+              )}
+              <div className="flex flex-col gap-0.5">
+                {group.links.map((link) => {
+                  const isActive =
+                    link.href === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(link.href);
 
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "rounded-lg px-3 py-2.5 text-lg font-medium transition-colors",
-                  isActive
-                    ? "text-ink bg-brand-soft/30"
-                    : "text-ink-muted hover:text-ink"
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        "rounded-lg px-3 py-2 text-body font-medium transition-colors",
+                        isActive
+                          ? "text-ink bg-brand-soft/30"
+                          : "text-ink-muted hover:text-ink"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
       </SheetContent>
     </Sheet>

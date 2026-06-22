@@ -25,7 +25,8 @@ interface NavLinksProps {
 
 const CENTER_ORDER: Center[] = ["body", "heart", "head"];
 
-const exploreLinks = [
+const learnLinks = [
+  { href: "/learn", label: "Start the Primer", description: "7 free lessons from the basics" },
   { href: "/library/what-is-it", label: "What Is the Enneagram?" },
   { href: "/library/centers", label: "The Three Centers" },
   { href: "/library/wings", label: "Wings" },
@@ -34,10 +35,13 @@ const exploreLinks = [
 ];
 
 const applyLinks = [
-  { href: "/workplace", label: "Workplace" },
-  { href: "/coping", label: "Coping & Solutions" },
-  { href: "/growth", label: "Growth Practices" },
+  { href: "/workplace", label: "Workplace", description: "How types show up at work" },
+  { href: "/coping", label: "Coping & Solutions", description: "When patterns take over" },
+  { href: "/growth", label: "Growth Practices", description: "From autopilot to awareness" },
 ];
+
+const enneagramPaths = ["/learn", "/library", "/types", "/relationships"];
+const applyPaths = ["/workplace", "/coping", "/growth"];
 
 const linkBase =
   "!bg-transparent !px-0 !rounded-none text-ui font-medium transition-colors relative py-[18px]";
@@ -52,12 +56,8 @@ export function NavLinks({ links }: NavLinksProps) {
     <NavigationMenu>
       <NavigationMenuList className="gap-7">
         {links.map((link) => {
-          const isActive =
-            link.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(link.href);
-
           if (link.href === "/library") {
+            const isActive = enneagramPaths.some((p) => pathname.startsWith(p));
             return (
               <NavigationMenuItem key={link.href}>
                 <NavigationMenuTrigger
@@ -69,11 +69,11 @@ export function NavLinks({ links }: NavLinksProps) {
                   {link.label}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="p-0">
-                  <div className="grid grid-cols-[200px_1fr_1fr] gap-0 w-[600px]">
+                  <div className="grid grid-cols-[200px_1fr_1fr] gap-0 w-[640px]">
                     {/* Col 1: The Nine Types */}
                     <div className="p-5 border-r border-border/60 bg-surface-sunken/40">
                       <p className="text-xs font-semibold uppercase tracking-wider text-ink-muted mb-3">
-                        Types
+                        The Nine Types
                       </p>
                       <div className="space-y-3">
                         {CENTER_ORDER.map((center) => {
@@ -102,43 +102,38 @@ export function NavLinks({ links }: NavLinksProps) {
                           );
                         })}
                       </div>
-                      <NavigationMenuLink
-                        render={<Link href="/types" />}
-                        className="mt-3 !p-0 text-xs font-semibold text-brand hover:text-brand-hover"
-                      >
-                        All types &rarr;
-                      </NavigationMenuLink>
+                      <div className="mt-3 space-y-1">
+                        <NavigationMenuLink
+                          render={<Link href="/types" />}
+                          className="!p-0 text-xs font-semibold text-brand hover:text-brand-hover"
+                        >
+                          All types &rarr;
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          render={<Link href="/relationships" />}
+                          className="!p-0 text-xs font-semibold text-brand hover:text-brand-hover block"
+                        >
+                          Relationships &rarr;
+                        </NavigationMenuLink>
+                      </div>
                     </div>
 
-                    {/* Col 2: Learn the System */}
+                    {/* Col 2: Learn */}
                     <div className="p-5 border-r border-border/60">
                       <p className="text-xs font-semibold uppercase tracking-wider text-ink-muted mb-3">
                         Learn
                       </p>
                       <div className="space-y-0.5">
-                        {exploreLinks.map((a) => (
+                        {learnLinks.map((a, i) => (
                           <NavigationMenuLink
                             key={a.href}
                             render={<Link href={a.href} />}
-                            className="!px-2 !py-1.5 text-small text-ink-muted hover:text-ink"
-                          >
-                            {a.label}
-                          </NavigationMenuLink>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Col 3: Apply */}
-                    <div className="p-5">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-ink-muted mb-3">
-                        Apply
-                      </p>
-                      <div className="space-y-0.5">
-                        {applyLinks.map((a) => (
-                          <NavigationMenuLink
-                            key={a.href}
-                            render={<Link href={a.href} />}
-                            className="!px-2 !py-1.5 text-small text-ink-muted hover:text-ink"
+                            className={cn(
+                              "!px-2 !py-1.5 text-small hover:text-ink",
+                              i === 0
+                                ? "text-brand font-medium"
+                                : "text-ink-muted"
+                            )}
                           >
                             {a.label}
                           </NavigationMenuLink>
@@ -148,14 +143,82 @@ export function NavLinks({ links }: NavLinksProps) {
                         render={<Link href="/library" />}
                         className="mt-3 !px-2 !py-0 text-xs font-semibold text-brand hover:text-brand-hover"
                       >
-                        Browse all &rarr;
+                        Full library &rarr;
                       </NavigationMenuLink>
+                    </div>
+
+                    {/* Col 3: Apply */}
+                    <div className="p-5">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-ink-muted mb-3">
+                        Apply
+                      </p>
+                      <div className="space-y-1">
+                        {applyLinks.map((a) => (
+                          <NavigationMenuLink
+                            key={a.href}
+                            render={<Link href={a.href} />}
+                            className="!px-2 !py-2 block"
+                          >
+                            <span className="text-small font-medium text-ink">
+                              {a.label}
+                            </span>
+                            {a.description && (
+                              <span className="block text-xs text-ink-muted mt-0.5">
+                                {a.description}
+                              </span>
+                            )}
+                          </NavigationMenuLink>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             );
           }
+
+          if (link.href === "/apply") {
+            const isActive = applyPaths.some((p) => pathname.startsWith(p));
+            return (
+              <NavigationMenuItem key={link.href}>
+                <NavigationMenuTrigger
+                  className={cn(
+                    linkBase,
+                    isActive ? activeClasses : inactiveClasses
+                  )}
+                >
+                  {link.label}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="p-0">
+                  <div className="w-[280px] p-5">
+                    <div className="space-y-1">
+                      {applyLinks.map((a) => (
+                        <NavigationMenuLink
+                          key={a.href}
+                          render={<Link href={a.href} />}
+                          className="!px-3 !py-2.5 block rounded-lg hover:bg-surface-sunken"
+                        >
+                          <span className="text-small font-medium text-ink">
+                            {a.label}
+                          </span>
+                          {a.description && (
+                            <span className="block text-xs text-ink-muted mt-0.5">
+                              {a.description}
+                            </span>
+                          )}
+                        </NavigationMenuLink>
+                      ))}
+                    </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            );
+          }
+
+          const isActive =
+            link.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(link.href);
 
           return (
             <NavigationMenuItem key={link.href}>
