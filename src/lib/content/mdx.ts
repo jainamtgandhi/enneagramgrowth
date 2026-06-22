@@ -63,4 +63,33 @@ export interface ArticleFrontmatter {
   order: number;
   level?: ContentLevel;
   relatedSlugs?: string[];
+  relatedTypes?: number[];
+}
+
+export interface TocHeading {
+  id: string;
+  text: string;
+  level: 2 | 3;
+}
+
+/** Extract H2/H3 headings from raw MDX content (server-side). */
+export function extractHeadings(content: string): TocHeading[] {
+  const headings: TocHeading[] = [];
+  const regex = /^(#{2,3})\s+(.+)$/gm;
+  let match;
+
+  while ((match = regex.exec(content)) !== null) {
+    const level = match[1].length as 2 | 3;
+    const text = match[2]
+      .replace(/\{#[\w-]+\}/, "")
+      .replace(/\*\*/g, "")
+      .trim();
+    const id = text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-");
+    headings.push({ id, text, level });
+  }
+
+  return headings;
 }

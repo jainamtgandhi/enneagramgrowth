@@ -1,11 +1,15 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { getContentFile, getAllContentFiles } from "@/lib/content/mdx";
+import { getContentFile, getAllContentFiles, extractHeadings } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { LevelBadge } from "@/components/shared/level-badge";
+import { SectionSubNav } from "@/components/layout/section-sub-nav";
+import { SECTIONS } from "@/lib/content/sections";
+import { MdxArticle } from "@/components/shared/mdx-article";
+import { TypeSelectorBar } from "@/components/enneagram/type-selector-bar";
+import { TableOfContents } from "@/components/shared/table-of-contents";
 
 const TOPIC_SLUGS = [
   "type-styles",
@@ -67,68 +71,84 @@ export default async function WorkplaceTopicPage({ params }: PageProps) {
       ? allTopics[currentIndex + 1]
       : null;
   const readTime = estimateReadingTime(file.content);
+  const headings = extractHeadings(file.content);
+  const topicConfig = SECTIONS.workplace.topics.find((t) => t.slug === topic);
+  const showTypeSelector = topicConfig?.hasTypeAnchors ?? false;
+  const showCenterSelector = topicConfig?.hasCenterAnchors ?? false;
+  const showToc = headings.length >= 4;
 
   return (
-    <main className="mx-auto max-w-[720px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
-      <Breadcrumbs
-        items={[
-          { label: "Workplace", href: "/workplace" },
-          { label: file.frontmatter.title },
-        ]}
+    <>
+      <SectionSubNav
+        sectionLabel={SECTIONS.workplace.label}
+        basePath={SECTIONS.workplace.basePath}
+        topics={SECTIONS.workplace.topics}
       />
+      <div className={`mx-auto px-5 py-12 sm:px-8 sm:py-16 lg:py-20 ${showToc ? "max-w-[960px]" : "max-w-[720px]"}`}>
+        <Breadcrumbs
+          items={[
+            { label: "Workplace", href: "/workplace" },
+            { label: file.frontmatter.title },
+          ]}
+        />
 
-      <h1 className="font-serif text-display font-semibold text-ink mb-4">
-        {file.frontmatter.title}
-      </h1>
-      <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
-        <span>
-          Article {file.frontmatter.order} of {allTopics.length}
-        </span>
-        <span>&middot;</span>
-        <span>~{readTime} min read</span>
-        {file.frontmatter.level && (
-          <>
-            <span>&middot;</span>
-            <LevelBadge level={file.frontmatter.level} />
-          </>
-        )}
+        <h1 className="font-serif text-display font-semibold text-ink mb-4">
+          {file.frontmatter.title}
+        </h1>
+        <div className="flex items-center gap-3 text-small text-ink-muted mb-4">
+          <span>
+            Article {file.frontmatter.order} of {allTopics.length}
+          </span>
+          <span>&middot;</span>
+          <span>~{readTime} min read</span>
+          {file.frontmatter.level && (
+            <>
+              <span>&middot;</span>
+              <LevelBadge level={file.frontmatter.level} />
+            </>
+          )}
+        </div>
+        <p className="text-body-lg text-ink-muted mb-12">
+          {file.frontmatter.description}
+        </p>
+
+        {showTypeSelector && <TypeSelectorBar mode="type" />}
+        {showCenterSelector && <TypeSelectorBar mode="center" />}
+
+        <div className={showToc ? "lg:grid lg:grid-cols-[1fr_200px] lg:gap-10" : ""}>
+          <MdxArticle source={file.content} />
+          {showToc && <TableOfContents headings={headings} />}
+        </div>
+
+        <nav className="mt-16 flex justify-between gap-4">
+          {prev ? (
+            <Link
+              href={`/workplace/${prev.slug}`}
+              className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
+            >
+              <span className="text-small text-ink-muted">&larr; Previous</span>
+              <p className="text-ui font-medium text-ink mt-1">
+                {prev.frontmatter.title}
+              </p>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+          {next ? (
+            <Link
+              href={`/workplace/${next.slug}`}
+              className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
+            >
+              <span className="text-small text-ink-muted">Next &rarr;</span>
+              <p className="text-ui font-medium text-ink mt-1">
+                {next.frontmatter.title}
+              </p>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+        </nav>
       </div>
-      <p className="text-body-lg text-ink-muted mb-12">
-        {file.frontmatter.description}
-      </p>
-
-      <article className="prose prose-ink max-w-none">
-        <MDXRemote source={file.content} />
-      </article>
-
-      <nav className="mt-16 flex justify-between gap-4">
-        {prev ? (
-          <Link
-            href={`/workplace/${prev.slug}`}
-            className="flex-1 rounded-xl border border-border p-4 hover:border-brand hover:shadow-card transition-all"
-          >
-            <span className="text-small text-ink-muted">&larr; Previous</span>
-            <p className="text-ui font-medium text-ink mt-1">
-              {prev.frontmatter.title}
-            </p>
-          </Link>
-        ) : (
-          <div className="flex-1" />
-        )}
-        {next ? (
-          <Link
-            href={`/workplace/${next.slug}`}
-            className="flex-1 rounded-xl border border-border p-4 text-right hover:border-brand hover:shadow-card transition-all"
-          >
-            <span className="text-small text-ink-muted">Next &rarr;</span>
-            <p className="text-ui font-medium text-ink mt-1">
-              {next.frontmatter.title}
-            </p>
-          </Link>
-        ) : (
-          <div className="flex-1" />
-        )}
-      </nav>
-    </main>
+    </>
   );
 }

@@ -136,6 +136,11 @@
   html {
     scroll-behavior: smooth;
   }
+  /* Scrollbar hiding for horizontal nav scrolling */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  /* Offset heading anchors for sticky header + sub-nav */
+  .prose :is(h2, h3)[id] { scroll-margin-top: 8rem; }
   /* Reading measure constraint per spec §4 */
   .prose {
     max-width: 68ch;
