@@ -4,6 +4,7 @@ import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { CENTER_INFO } from "@/lib/enneagram/types";
 import type { Center } from "@/lib/enneagram/types";
 import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
+import { YourTypeBadge } from "@/components/enneagram/your-type-badge";
 
 export const metadata: Metadata = {
   title: "The Nine Types",
@@ -80,6 +81,7 @@ export default function TypesOverviewPage() {
                       <span className="font-serif text-body-lg font-medium text-ink">
                         {type.name}
                       </span>
+                      <YourTypeBadge typeNum={n} />
                     </div>
                     <p className="text-small text-ink-muted">{type.brief}</p>
                     <div className="mt-4 flex flex-wrap gap-1.5">

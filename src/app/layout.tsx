@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { MyTypeProvider } from "@/contexts/my-type-context";
 import "./globals.css";
 
 const inter = Inter({
@@ -50,8 +51,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="min-h-dvh flex flex-col antialiased">
-        {children}
-        <Toaster />
+        <MyTypeProvider>
+          {children}
+          <Toaster />
+        </MyTypeProvider>
       </body>
     </html>
   );

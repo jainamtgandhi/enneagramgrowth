@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useMyType } from "@/contexts/my-type-context";
+import { TYPE_INFO } from "@/lib/enneagram/descriptions";
+import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import { Menu, X } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -47,6 +50,7 @@ const navGroups = [
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { myType } = useMyType();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -67,6 +71,21 @@ export function MobileNav() {
             <X className="h-5 w-5" />
           </Button>
         </div>
+
+        {myType && (
+          <Link
+            href={`/types/${myType}`}
+            onClick={() => setOpen(false)}
+            className={`mb-4 flex items-center gap-2 rounded-lg px-3 py-2 bg-center-${TYPE_TO_CENTER[myType]}-soft/30 transition-colors`}
+          >
+            <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full bg-center-${TYPE_TO_CENTER[myType]}-soft text-small font-bold text-center-${TYPE_TO_CENTER[myType]}-ink`}>
+              {myType}
+            </span>
+            <span className="text-body font-medium text-ink">
+              My Type: {TYPE_INFO[myType].name}
+            </span>
+          </Link>
+        )}
 
         <nav className="flex flex-col gap-4">
           {navGroups.map((group, gi) => (

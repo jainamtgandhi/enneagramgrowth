@@ -7,6 +7,8 @@ import { TYPE_TO_CENTER, ALL_TYPES } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { MdxArticle } from "@/components/shared/mdx-article";
+import { ReadingProgress } from "@/components/shared/reading-progress";
+import { VisitMarker } from "@/components/shared/visit-marker";
 
 interface TypeSectionFrontmatter {
   title: string;
@@ -122,6 +124,8 @@ export default async function TypeSectionPage({
 
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <ReadingProgress />
+      <VisitMarker />
       <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12">
         {/* Sidebar - grouped by journey stage */}
         <aside className="hidden lg:block">

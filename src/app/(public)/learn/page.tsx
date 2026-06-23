@@ -6,7 +6,7 @@ import type { LessonFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 import { ProgressTracker } from "@/components/learn/progress-tracker";
-
+import { LearnPath } from "@/components/learn/learn-path";
 
 export const metadata: Metadata = {
   title: "Learn the Enneagram",
@@ -89,40 +89,21 @@ export default function LearnHubPage() {
         </p>
 
         <div className="mb-8">
-          <ProgressTracker totalLessons={lessons.length} />
+          <ProgressTracker
+            totalLessons={lessons.length}
+            lessonSlugs={lessons.map((l) => l.slug)}
+          />
         </div>
 
-        <ol className="relative space-y-4">
-          {/* Timeline line */}
-          <div className="absolute left-[15px] top-[20px] bottom-[20px] w-px bg-border" />
-
-          {lessons.map((lesson) => {
-            const readTime = estimateReadingTime(lesson.content);
-            return (
-              <li key={lesson.slug} className="relative">
-                <Link
-                  href={`/learn/${lesson.slug}`}
-                  className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 hover:border-brand hover:shadow-card transition-all"
-                >
-                  <span className="relative z-10 flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-brand-soft text-brand font-serif font-bold text-ui border-2 border-surface">
-                    {lesson.frontmatter.order}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <h2 className="text-body font-medium text-ink group-hover:text-brand transition-colors">
-                      {lesson.frontmatter.title}
-                    </h2>
-                    <p className="text-small text-ink-muted mt-1">
-                      {lesson.frontmatter.description}
-                    </p>
-                    <span className="text-small text-ink-muted mt-1 flex items-center gap-2">
-                      ~{readTime} min read
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ol>
+        <LearnPath
+          lessons={lessons.map((lesson) => ({
+            slug: lesson.slug,
+            title: lesson.frontmatter.title,
+            description: lesson.frontmatter.description,
+            order: lesson.frontmatter.order,
+            readTime: estimateReadingTime(lesson.content),
+          }))}
+        />
 
         <div className="mt-12 p-6 rounded-xl bg-brand-soft/30 border border-brand/20 text-center">
           <p className="font-serif text-h3 font-semibold text-ink mb-2">

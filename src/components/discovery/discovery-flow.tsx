@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import { useMyType } from "@/contexts/my-type-context";
+import type { EnneagramType } from "@/lib/enneagram/types";
 import {
   PHASE_1_QUESTIONS,
   getPhase2Questions,
@@ -331,6 +333,8 @@ function ResultView({
   result: DiscoveryResult;
   onRestart: () => void;
 }) {
+  const { myType, setMyType } = useMyType();
+  const [saved, setSaved] = useState(false);
   const centerInfo = CENTER_INFO[result.center];
 
   const sortedTypes = [...result.candidateTypes].sort((a, b) => {
@@ -421,6 +425,41 @@ function ResultView({
           explore the other types in your center, or browse all nine.
         </p>
       </div>
+
+      {sortedTypes.length > 0 && !saved && !myType && (
+        <div className="rounded-xl border border-brand/20 bg-brand-soft/10 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <div className="flex-1">
+            <p className="text-body font-medium text-ink">
+              Set Type {sortedTypes[0]} as your type?
+            </p>
+            <p className="text-small text-ink-muted mt-0.5">
+              This personalizes the site for you. No account needed, stored
+              locally in your browser. You can change it anytime.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              setMyType(sortedTypes[0] as EnneagramType);
+              setSaved(true);
+            }}
+            className="rounded-full bg-brand px-5 py-2 text-small font-semibold text-white hover:bg-brand-hover transition-colors shadow-sm shrink-0"
+          >
+            This is my type
+          </button>
+        </div>
+      )}
+
+      {saved && (
+        <div className="rounded-xl border border-brand/20 bg-brand-soft/10 p-5">
+          <p className="text-body font-medium text-ink">
+            Type {sortedTypes[0]} saved as your type.
+          </p>
+          <p className="text-small text-ink-muted mt-0.5">
+            The site will now highlight content relevant to you. You can
+            change this anytime from the header.
+          </p>
+        </div>
+      )}
 
       <div className="flex flex-col sm:flex-row gap-3">
         <button

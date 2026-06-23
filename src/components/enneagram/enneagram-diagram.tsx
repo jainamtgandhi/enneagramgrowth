@@ -3,6 +3,8 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import type { EnneagramType, Center } from "@/lib/enneagram/types";
+import { TYPE_MOTIVATIONS } from "@/lib/enneagram/motivations";
+import { useMyType } from "@/contexts/my-type-context";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -132,9 +134,14 @@ export function EnneagramDiagram({
 }: EnneagramDiagramProps) {
   const [hoveredType, setHoveredType] = useState<EnneagramType | null>(null);
   const [selectedType, setSelectedType] = useState<EnneagramType | null>(null);
+  const { myType } = useMyType();
 
   // In interactive mode, "active" means selected by click
   const resolvedActive = interactive ? selectedType : activeType;
+
+  // The type whose arrows/wings to show (hovered takes priority)
+  const focusedType = hoveredType ?? resolvedActive ?? null;
+  const focusedMotivations = focusedType ? TYPE_MOTIVATIONS[focusedType] : null;
 
   const handleClick = useCallback(
     (typeNum: EnneagramType) => {
@@ -185,6 +192,73 @@ export function EnneagramDiagram({
           strokeWidth={1.5}
           opacity={0.35}
         />
+
+        {/* ---- Arrow markers ---- */}
+        <defs>
+          <marker
+            id="arrow-growth"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a" />
+          </marker>
+          <marker
+            id="arrow-stress"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97706" />
+          </marker>
+        </defs>
+
+        {/* ---- Dynamic wing + arrow lines for focused type ---- */}
+        {focusedType && focusedMotivations && (() => {
+          const from = pointPosition(focusedType);
+          const growth = pointPosition(focusedMotivations.growthArrow);
+          const stress = pointPosition(focusedMotivations.stressArrow);
+          const wing1 = pointPosition(focusedMotivations.wing1);
+          const wing2 = pointPosition(focusedMotivations.wing2);
+          return (
+            <g style={{ pointerEvents: "none" }}>
+              {/* Wing lines (dotted) */}
+              <line x1={from.x} y1={from.y} x2={wing1.x} y2={wing1.y}
+                stroke="var(--ink-muted)" strokeWidth={2} strokeDasharray="4 4" opacity={0.5} />
+              <line x1={from.x} y1={from.y} x2={wing2.x} y2={wing2.y}
+                stroke="var(--ink-muted)" strokeWidth={2} strokeDasharray="4 4" opacity={0.5} />
+              {/* Growth arrow (green) */}
+              <line x1={from.x} y1={from.y} x2={growth.x} y2={growth.y}
+                stroke="#16a34a" strokeWidth={2.5} markerEnd="url(#arrow-growth)" opacity={0.8} />
+              {/* Stress arrow (amber) */}
+              <line x1={from.x} y1={from.y} x2={stress.x} y2={stress.y}
+                stroke="#d97706" strokeWidth={2.5} markerEnd="url(#arrow-stress)" opacity={0.8} />
+            </g>
+          );
+        })()}
+
+        {/* ---- My Type persistent ring ---- */}
+        {myType && !resolvedActive && (() => {
+          const pos = pointPosition(myType);
+          return (
+            <circle
+              cx={pos.x}
+              cy={pos.y}
+              r={POINT_R + 6}
+              fill="none"
+              stroke="var(--brand)"
+              strokeWidth={2}
+              opacity={0.6}
+              style={{ pointerEvents: "none" }}
+            />
+          );
+        })()}
 
         {/* ---- Points ---- */}
         {CLOCKWISE_ORDER.map((typeNum) => {
@@ -311,6 +385,19 @@ export function EnneagramDiagram({
           );
         })}
       </svg>
+
+      {/* Legend */}
+      <div className="flex items-center justify-center gap-4 mt-2 text-[11px] text-ink-muted">
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-4 h-0.5 bg-[#16a34a]" /> Growth
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-4 h-0.5 bg-[#d97706]" /> Stress
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-4 h-0.5 border-t border-dashed border-ink-muted" style={{ width: 16 }} /> Wings
+        </span>
+      </div>
 
       {/* Interactive mode tooltip below the diagram */}
       {interactive && (

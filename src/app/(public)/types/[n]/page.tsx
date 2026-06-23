@@ -9,6 +9,10 @@ import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { ResonanceChecklist } from "@/components/enneagram/resonance-checklist";
+import { TypeQuickRef } from "@/components/enneagram/type-quick-ref";
+import { StrengthsBlindSpots } from "@/components/enneagram/strengths-blindspots";
+import { YourTypeBadge } from "@/components/enneagram/your-type-badge";
+import { GoDeeperGrid } from "@/components/enneagram/go-deeper-grid";
 
 function estimateReadingTime(content: string): number {
   const words = content.trim().split(/\s+/).length;
@@ -168,11 +172,17 @@ export default async function TypeDetailPage({
             )}
           </div>
 
-          <h1 className="font-serif text-[2rem] sm:text-display font-semibold text-ink mb-2">
-            Type {n}: {info.name}
-          </h1>
+          <div className="flex items-center gap-3 mb-2">
+            <h1 className="font-serif text-[2rem] sm:text-display font-semibold text-ink">
+              Type {n}: {info.name}
+            </h1>
+            <YourTypeBadge typeNum={num} />
+          </div>
           <p className="text-body-lg text-ink-muted mb-2">{info.altName}</p>
-          <p className="text-body text-ink-muted mb-12 max-w-[60ch]">{info.brief}</p>
+          <p className="text-body text-ink-muted mb-8 max-w-[60ch]">{info.brief}</p>
+
+          <TypeQuickRef typeNum={num} />
+          <StrengthsBlindSpots typeNum={num} />
 
           {file ? (
             <MdxArticle source={file.content} />
@@ -182,13 +192,12 @@ export default async function TypeDetailPage({
             </p>
           )}
 
-          {/* Deep Dives */}
+          {/* Deep Dives — with visited indicators */}
           <div className="mt-16 mb-8">
-            <h2 className="font-serif text-h2 font-semibold text-ink mb-6">
-              Go Deeper
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {[
+            <GoDeeperGrid
+              typeNum={n}
+              center={center}
+              sections={[
                 { slug: "childhood", label: "How the Pattern Forms", desc: "The childhood experience that shaped this type" },
                 { slug: "subtypes", label: "Subtypes", desc: "Self-pres, social, and sexual variants of this type" },
                 { slug: "communication", label: "Communication Style", desc: "How to talk with and understand this type" },
@@ -199,19 +208,8 @@ export default async function TypeDetailPage({
                 { slug: "growth-path", label: "Growth Path", desc: "A structured program for lasting personal change" },
                 { slug: "spiritual", label: "Spiritual Growth", desc: "Contemplative practices and the path to virtue" },
                 { slug: "famous", label: "Famous Examples", desc: "Well-known figures who share this pattern" },
-              ].map((section) => (
-                <Link
-                  key={section.slug}
-                  href={`/types/${n}/${section.slug}`}
-                  className={`group rounded-xl border border-border p-5 hover:border-center-${center} hover:shadow-card transition-all`}
-                >
-                  <h3 className="text-body font-medium text-ink group-hover:text-brand transition-colors mb-1">
-                    {section.label}
-                  </h3>
-                  <p className="text-small text-ink-muted">{section.desc}</p>
-                </Link>
-              ))}
-            </div>
+              ]}
+            />
           </div>
 
           {/* Cross-section links */}

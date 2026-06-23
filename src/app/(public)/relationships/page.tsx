@@ -4,10 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getContentFile, getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { TYPE_INFO } from "@/lib/enneagram/descriptions";
-import { TYPE_TO_CENTER, ALL_TYPES } from "@/lib/enneagram/types";
-import type { EnneagramType } from "@/lib/enneagram/types";
-import { getPairKey } from "@/lib/enneagram/relationships";
+import { RelationshipMatrix } from "@/components/enneagram/relationship-matrix";
 
 export const metadata: Metadata = {
   title: "Relationships & the Enneagram",
@@ -109,69 +106,8 @@ export default function RelationshipsPage() {
           strengths, challenges, and growth tips.
         </p>
 
-        {/* Grid matrix */}
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr>
-                <th className="p-1" />
-                {ALL_TYPES.map((t) => {
-                  const center = TYPE_TO_CENTER[t];
-                  return (
-                    <th key={t} className="p-1 text-center">
-                      <span
-                        className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-small font-bold bg-center-${center}-soft text-center-${center}-ink`}
-                      >
-                        {t}
-                      </span>
-                    </th>
-                  );
-                })}
-              </tr>
-            </thead>
-            <tbody>
-              {ALL_TYPES.map((row) => {
-                const rowCenter = TYPE_TO_CENTER[row];
-                return (
-                  <tr key={row}>
-                    <td className="p-1">
-                      <span
-                        className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-small font-bold bg-center-${rowCenter}-soft text-center-${rowCenter}-ink`}
-                      >
-                        {row}
-                      </span>
-                    </td>
-                    {ALL_TYPES.map((col) => {
-                      if (col < row) {
-                        return <td key={col} className="p-1" />;
-                      }
-                      const pairKey = getPairKey(
-                        row as EnneagramType,
-                        col as EnneagramType
-                      );
-                      const isSame = row === col;
-                      return (
-                        <td key={col} className="p-1 text-center">
-                          <Link
-                            href={`/relationships/${pairKey}`}
-                            className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-border text-small font-medium text-ink-muted hover:border-brand hover:text-brand hover:bg-brand-soft/20 transition-all"
-                            title={`Type ${row} & Type ${col}`}
-                          >
-                            {isSame ? (
-                              <span className="text-[10px]">{row}&times;{col}</span>
-                            ) : (
-                              <span className="text-[10px]">{row}&times;{col}</span>
-                            )}
-                          </Link>
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        {/* Grid matrix — highlights user's type row/column if set */}
+        <RelationshipMatrix />
         <p className="text-small text-ink-muted mt-4">
           Click any cell to explore that pairing in depth.
         </p>

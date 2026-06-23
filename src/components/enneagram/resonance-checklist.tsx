@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type { EnneagramType, Center } from "@/lib/enneagram/types";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
@@ -41,7 +41,25 @@ export function ResonanceChecklist({ typeNum }: ResonanceChecklistProps) {
   const center = TYPE_TO_CENTER[typeNum];
   const info = TYPE_INFO[typeNum];
 
-  const [checked, setChecked] = useState<Set<number>>(new Set());
+  const storageKey = `enneagram-resonance-${typeNum}`;
+
+  const [checked, setChecked] = useState<Set<number>>(() => {
+    if (typeof window === "undefined") return new Set();
+    try {
+      const stored = localStorage.getItem(storageKey);
+      return stored ? new Set(JSON.parse(stored) as number[]) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify([...checked]));
+    } catch {
+      // Storage unavailable
+    }
+  }, [checked, storageKey]);
 
   const toggle = useCallback((index: number) => {
     setChecked((prev) => {

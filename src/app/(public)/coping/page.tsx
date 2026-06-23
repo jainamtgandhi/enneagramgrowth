@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { getAllContentFiles } from "@/lib/content/mdx";
 import type { ArticleFrontmatter } from "@/lib/content/mdx";
+import { CopingCenterBadge } from "@/components/enneagram/coping-center-badge";
+import type { Center } from "@/lib/enneagram/types";
 
 export const metadata: Metadata = {
   title: "Coping & Solutions",
@@ -29,12 +31,20 @@ export const metadata: Metadata = {
   },
 };
 
-const COPING_BY_CENTER = [
+const COPING_BY_CENTER: {
+  label: string;
+  description: string;
+  colorClass: string;
+  borderClass: string;
+  center: Center;
+  slugs: string[];
+}[] = [
   {
     label: "Body Patterns",
     description: "When anger, control, or numbness takes over",
     colorClass: "text-center-body-ink",
     borderClass: "border-center-body/30",
+    center: "body",
     slugs: ["controlling", "anger", "numbing"],
   },
   {
@@ -42,6 +52,7 @@ const COPING_BY_CENTER = [
     description: "When shame, performance, or longing takes over",
     colorClass: "text-center-heart-ink",
     borderClass: "border-center-heart/30",
+    center: "heart",
     slugs: ["over-giving", "performing", "sadness", "shame"],
   },
   {
@@ -49,6 +60,7 @@ const COPING_BY_CENTER = [
     description: "When fear, anxiety, or restlessness takes over",
     colorClass: "text-center-head-ink",
     borderClass: "border-center-head/30",
+    center: "head",
     slugs: ["withdrawing", "anxiety", "restlessness", "fear"],
   },
 ];
@@ -79,8 +91,9 @@ export default function CopingHubPage() {
           return (
             <section key={center.label}>
               <div className="mb-4">
-                <h2 className={`font-serif text-h3 font-semibold ${center.colorClass}`}>
+                <h2 className={`font-serif text-h3 font-semibold ${center.colorClass} inline-flex items-center gap-2`}>
                   {center.label}
+                  <CopingCenterBadge center={center.center} />
                 </h2>
                 <p className="text-small text-ink-muted mt-1">
                   {center.description}

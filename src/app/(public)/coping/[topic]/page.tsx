@@ -10,6 +10,8 @@ import type { ArticleFrontmatter } from "@/lib/content/mdx";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { TableOfContents } from "@/components/shared/table-of-contents";
+import { ReadingProgress } from "@/components/shared/reading-progress";
+import { VisitMarker } from "@/components/shared/visit-marker";
 
 const COPING_BY_CENTER: {
   label: string;
@@ -85,6 +87,8 @@ export default async function CopingTopicPage({
 
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <ReadingProgress />
+      <VisitMarker />
       <div className={headings.length >= 4 ? "lg:grid lg:grid-cols-[200px_1fr] lg:gap-12" : ""}>
         {headings.length >= 4 && <TableOfContents headings={headings} />}
 

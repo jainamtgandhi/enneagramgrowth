@@ -132,9 +132,11 @@
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.7;
+    overflow-x: hidden;
   }
   html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
   }
   /* Scrollbar hiding for horizontal nav scrolling */
   .scrollbar-hide::-webkit-scrollbar { display: none; }

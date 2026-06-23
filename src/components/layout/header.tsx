@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MobileNav } from "./mobile-nav";
 import { NavLinks } from "./nav-links";
 import { SearchDialog } from "@/components/shared/search-dialog";
+import { MyTypeButton } from "./my-type-button";
 import { buildSearchIndex } from "@/lib/search/index";
 
 const navLinks = [
@@ -34,12 +35,7 @@ export function Header() {
         {/* Actions — pinned right */}
         <div className="hidden lg:flex items-center gap-2 ml-6">
           <SearchDialog entries={searchEntries} />
-          <Link
-            href="/discover"
-            className="inline-flex items-center rounded-full bg-brand px-5 py-2 text-small font-semibold text-white hover:bg-brand-hover transition-colors shadow-sm"
-          >
-            Find Your Type
-          </Link>
+          <MyTypeButton />
         </div>
 
         {/* Mobile — pinned right */}

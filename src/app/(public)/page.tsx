@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { getLatestPosts } from "@/lib/content/queries";
 import { PostCard } from "@/components/blog/post-card";
+import { PersonalizedCta } from "@/components/home/personalized-cta";
+import { DailyPrompt } from "@/components/enneagram/daily-prompt";
 
 export const metadata: Metadata = {
   title: "Enneagram Growth | Self-understanding through the nine types",
@@ -375,6 +377,11 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Daily Reflection */}
+      <section className="mx-auto max-w-[640px] px-5 py-12 sm:px-8">
+        <DailyPrompt />
+      </section>
+
       {/* Featured Blog Posts */}
       {latestPosts.length > 0 && (
         <section className="mx-auto max-w-[1080px] px-5 py-20 sm:px-8 sm:py-28">
@@ -434,6 +441,7 @@ export default async function HomePage() {
               Or learn the basics first
             </Button>
           </div>
+          <PersonalizedCta />
         </div>
       </section>
     </>
