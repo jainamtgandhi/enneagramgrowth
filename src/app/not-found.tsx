@@ -18,7 +18,7 @@ export default function NotFound() {
             Go home
           </Link>
           <Link
-            href="/enneagram"
+            href="/library"
             className="rounded-full border border-border px-6 py-2 text-ui font-medium text-ink hover:bg-surface-sunken transition-colors"
           >
             Explore the Enneagram

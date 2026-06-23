@@ -20,6 +20,7 @@ import type { DiscoveryResult } from "@/lib/discovery/scoring";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { CENTER_INFO } from "@/lib/enneagram/types";
 import type { Center } from "@/lib/enneagram/types";
+import { centerText, centerBg, centerHoverBorder } from "@/lib/enneagram/center-classes";
 
 type Phase = "intro" | "center" | "type" | "confirm" | "result";
 
@@ -353,7 +354,7 @@ function ResultView({
           Your responses suggest you lead with the
         </p>
         <h2
-          className={`font-serif text-h1 font-bold text-center-${result.center}-ink mb-3`}
+          className={`font-serif text-h1 font-bold ${centerText[result.center]} mb-3`}
         >
           {centerInfo.label}
         </h2>
@@ -379,11 +380,11 @@ function ResultView({
               <Link
                 key={n}
                 href={`/types/${n}`}
-                className={`rounded-xl border border-border p-5 hover:border-center-${result.center} hover:shadow-card transition-all`}
+                className={`rounded-xl border border-border p-5 ${centerHoverBorder[result.center]} hover:shadow-card transition-all`}
               >
                 <div className="flex items-baseline gap-2 mb-2">
                   <span
-                    className={`font-serif text-h2 font-bold text-center-${result.center}-ink`}
+                    className={`font-serif text-h2 font-bold ${centerText[result.center]}`}
                   >
                     {n}
                   </span>
@@ -398,7 +399,7 @@ function ResultView({
                   </div>
                   <div className="h-1.5 w-full rounded-full bg-border overflow-hidden">
                     <div
-                      className={`h-full rounded-full bg-center-${result.center} transition-all`}
+                      className={`h-full rounded-full ${centerBg[result.center]} transition-all`}
                       style={{ width: `${strength}%` }}
                     />
                   </div>

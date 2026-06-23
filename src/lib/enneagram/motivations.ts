@@ -35,7 +35,7 @@ export const TYPE_MOTIVATIONS: Record<EnneagramType, TypeMotivation> = {
   3: {
     basicFear: "Being worthless or without value",
     basicDesire: "To be valuable and worthwhile",
-    coreEmotion: "Deceit (self-deception about identity)",
+    coreEmotion: "Vanity (image-driven self-deception)",
     superego: "I am good or okay if I am successful",
     growthArrow: 6,
     stressArrow: 9,

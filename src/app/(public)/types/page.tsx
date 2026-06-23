@@ -6,6 +6,30 @@ import type { Center } from "@/lib/enneagram/types";
 import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
 import { YourTypeBadge } from "@/components/enneagram/your-type-badge";
 
+const centerHeadingClass: Record<Center, string> = {
+  body: "text-center-body-ink",
+  heart: "text-center-heart-ink",
+  head: "text-center-head-ink",
+};
+
+const centerHoverBorder: Record<Center, string> = {
+  body: "hover:border-center-body",
+  heart: "hover:border-center-heart",
+  head: "hover:border-center-head",
+};
+
+const centerNumberClass: Record<Center, string> = {
+  body: "text-center-body-ink",
+  heart: "text-center-heart-ink",
+  head: "text-center-head-ink",
+};
+
+const centerTagClass: Record<Center, string> = {
+  body: "bg-center-body-soft text-center-body-ink",
+  heart: "bg-center-heart-soft text-center-heart-ink",
+  head: "bg-center-head-soft text-center-head-ink",
+};
+
 export const metadata: Metadata = {
   title: "The Nine Types",
   description:
@@ -56,7 +80,7 @@ export default function TypesOverviewPage() {
         return (
           <section key={center} className="mb-16">
             <h2
-              className={`font-serif text-h2 font-semibold text-center-${center}-ink mb-2`}
+              className={`font-serif text-h2 font-semibold ${centerHeadingClass[center]} mb-2`}
             >
               {info.label}
             </h2>
@@ -70,11 +94,11 @@ export default function TypesOverviewPage() {
                   <Link
                     key={n}
                     href={`/types/${n}`}
-                    className={`group rounded-xl border border-border p-6 hover:border-center-${center} hover:shadow-card transition-all`}
+                    className={`group rounded-xl border border-border p-6 ${centerHoverBorder[center]} hover:shadow-card transition-all`}
                   >
                     <div className="flex items-baseline gap-2 mb-2">
                       <span
-                        className={`font-serif text-h2 font-bold text-center-${center}-ink`}
+                        className={`font-serif text-h2 font-bold ${centerNumberClass[center]}`}
                       >
                         {n}
                       </span>
@@ -88,7 +112,7 @@ export default function TypesOverviewPage() {
                       {type.keywords.map((kw) => (
                         <span
                           key={kw}
-                          className={`rounded-full bg-center-${center}-soft px-2.5 py-0.5 text-small text-center-${center}-ink`}
+                          className={`rounded-full px-2.5 py-0.5 text-small ${centerTagClass[center]}`}
                         >
                           {kw}
                         </span>

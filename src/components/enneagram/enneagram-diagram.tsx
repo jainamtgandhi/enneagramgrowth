@@ -204,7 +204,7 @@ export function EnneagramDiagram({
             markerHeight="6"
             orient="auto-start-reverse"
           >
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a" />
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--success)" />
           </marker>
           <marker
             id="arrow-stress"
@@ -215,7 +215,7 @@ export function EnneagramDiagram({
             markerHeight="6"
             orient="auto-start-reverse"
           >
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97706" />
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--warning)" />
           </marker>
         </defs>
 
@@ -235,10 +235,10 @@ export function EnneagramDiagram({
                 stroke="var(--ink-muted)" strokeWidth={2} strokeDasharray="4 4" opacity={0.5} />
               {/* Growth arrow (green) */}
               <line x1={from.x} y1={from.y} x2={growth.x} y2={growth.y}
-                stroke="#16a34a" strokeWidth={2.5} markerEnd="url(#arrow-growth)" opacity={0.8} />
+                stroke="var(--success)" strokeWidth={2.5} markerEnd="url(#arrow-growth)" opacity={0.8} />
               {/* Stress arrow (amber) */}
               <line x1={from.x} y1={from.y} x2={stress.x} y2={stress.y}
-                stroke="#d97706" strokeWidth={2.5} markerEnd="url(#arrow-stress)" opacity={0.8} />
+                stroke="var(--warning)" strokeWidth={2.5} markerEnd="url(#arrow-stress)" opacity={0.8} />
             </g>
           );
         })()}
@@ -389,10 +389,10 @@ export function EnneagramDiagram({
       {/* Legend */}
       <div className="flex items-center justify-center gap-4 mt-2 text-[11px] text-ink-muted">
         <span className="flex items-center gap-1">
-          <span className="inline-block w-4 h-0.5 bg-[#16a34a]" /> Growth
+          <span className="inline-block w-4 h-0.5 bg-[var(--success)]" /> Growth
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block w-4 h-0.5 bg-[#d97706]" /> Stress
+          <span className="inline-block w-4 h-0.5 bg-[var(--warning)]" /> Stress
         </span>
         <span className="flex items-center gap-1">
           <span className="inline-block w-4 h-0.5 border-t border-dashed border-ink-muted" style={{ width: 16 }} /> Wings

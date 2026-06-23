@@ -1,6 +1,7 @@
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
+import { centerBadge } from "@/lib/enneagram/center-classes";
 
 interface TypeBadgeProps {
   type: EnneagramType;
@@ -23,7 +24,7 @@ export function TypeBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full font-medium bg-center-${center}-soft text-center-${center}-ink ${sizeClasses[size]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full font-medium ${centerBadge[center]} ${sizeClasses[size]}`}
     >
       <span>{type}</span>
       {showName && <span>{info.name}</span>}

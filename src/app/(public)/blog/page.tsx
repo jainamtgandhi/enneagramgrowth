@@ -61,7 +61,7 @@ export default async function BlogPage() {
             We are working on articles about applying the Enneagram to real
             life. In the meantime, explore the{" "}
             <Link
-              href="/enneagram"
+              href="/library"
               className="text-brand hover:text-brand-hover transition-colors font-medium"
             >
               Library

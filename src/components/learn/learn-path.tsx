@@ -54,7 +54,7 @@ export function LearnPath({ lessons }: LearnPathProps) {
                 <span className="text-small text-ink-muted mt-1 flex items-center gap-2">
                   ~{lesson.readTime} min read
                   {visited && (
-                    <span className="text-emerald-600 font-medium">
+                    <span className="text-success font-medium">
                       Read
                     </span>
                   )}

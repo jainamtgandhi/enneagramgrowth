@@ -6,7 +6,20 @@ import { usePathname } from "next/navigation";
 import { useMyType } from "@/contexts/my-type-context";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
+import type { Center } from "@/lib/enneagram/types";
 import { Menu, X } from "lucide-react";
+
+const myTypeBgClass: Record<Center, string> = {
+  body: "bg-center-body-soft/30",
+  heart: "bg-center-heart-soft/30",
+  head: "bg-center-head-soft/30",
+};
+
+const myTypeBadgeClass: Record<Center, string> = {
+  body: "bg-center-body-soft text-center-body-ink",
+  heart: "bg-center-heart-soft text-center-heart-ink",
+  head: "bg-center-head-soft text-center-head-ink",
+};
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -56,7 +69,7 @@ export function MobileNav() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         render={
-          <Button variant="ghost" size="icon" className="md:hidden" />
+          <Button variant="ghost" size="icon" />
         }
       >
         <Menu className="h-5 w-5" />
@@ -67,7 +80,7 @@ export function MobileNav() {
           <span className="font-serif text-lg font-bold text-brand">
             Enneagram Growth
           </span>
-          <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+          <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label="Close menu">
             <X className="h-5 w-5" />
           </Button>
         </div>
@@ -76,9 +89,9 @@ export function MobileNav() {
           <Link
             href={`/types/${myType}`}
             onClick={() => setOpen(false)}
-            className={`mb-4 flex items-center gap-2 rounded-lg px-3 py-2 bg-center-${TYPE_TO_CENTER[myType]}-soft/30 transition-colors`}
+            className={`mb-4 flex items-center gap-2 rounded-lg px-3 py-2 ${myTypeBgClass[TYPE_TO_CENTER[myType]]} transition-colors`}
           >
-            <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full bg-center-${TYPE_TO_CENTER[myType]}-soft text-small font-bold text-center-${TYPE_TO_CENTER[myType]}-ink`}>
+            <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-small font-bold ${myTypeBadgeClass[TYPE_TO_CENTER[myType]]}`}>
               {myType}
             </span>
             <span className="text-body font-medium text-ink">

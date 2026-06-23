@@ -5,6 +5,7 @@ import { useMyType } from "@/contexts/my-type-context";
 import { TYPE_TO_CENTER, ALL_TYPES } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
 import { getPairKey } from "@/lib/enneagram/relationships";
+import { centerBadge } from "@/lib/enneagram/center-classes";
 
 export function RelationshipMatrix() {
   const { myType } = useMyType();
@@ -21,7 +22,7 @@ export function RelationshipMatrix() {
               return (
                 <th key={t} className="p-1 text-center">
                   <span
-                    className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-small font-bold bg-center-${center}-soft text-center-${center}-ink ${isHighlighted ? "ring-2 ring-brand" : ""}`}
+                    className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-small font-bold ${centerBadge[center]} ${isHighlighted ? "ring-2 ring-brand" : ""}`}
                   >
                     {t}
                   </span>
@@ -38,7 +39,7 @@ export function RelationshipMatrix() {
               <tr key={row}>
                 <td className="p-1">
                   <span
-                    className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-small font-bold bg-center-${rowCenter}-soft text-center-${rowCenter}-ink ${isRowHighlighted ? "ring-2 ring-brand" : ""}`}
+                    className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-small font-bold ${centerBadge[rowCenter]} ${isRowHighlighted ? "ring-2 ring-brand" : ""}`}
                   >
                     {row}
                   </span>

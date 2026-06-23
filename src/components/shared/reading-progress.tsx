@@ -19,8 +19,6 @@ export function ReadingProgress() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (progress === 0) return null;
-
   return (
     <div
       className="fixed top-[60px] left-0 right-0 z-40 h-[2px] bg-transparent pointer-events-none"

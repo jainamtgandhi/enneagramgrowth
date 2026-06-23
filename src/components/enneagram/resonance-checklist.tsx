@@ -43,16 +43,21 @@ export function ResonanceChecklist({ typeNum }: ResonanceChecklistProps) {
 
   const storageKey = `enneagram-resonance-${typeNum}`;
 
-  const [checked, setChecked] = useState<Set<number>>(() => {
-    if (typeof window === "undefined") return new Set();
+  const [checked, setChecked] = useState<Set<number>>(new Set());
+
+  // Restore from localStorage on mount (avoids hydration mismatch)
+  useEffect(() => {
     try {
       const stored = localStorage.getItem(storageKey);
-      return stored ? new Set(JSON.parse(stored) as number[]) : new Set();
+      if (stored) {
+        setChecked(new Set(JSON.parse(stored) as number[]));
+      }
     } catch {
-      return new Set();
+      // Storage unavailable
     }
-  });
+  }, [storageKey]);
 
+  // Persist changes to localStorage
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify([...checked]));

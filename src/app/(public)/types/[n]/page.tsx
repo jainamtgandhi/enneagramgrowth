@@ -6,7 +6,8 @@ import type { TypeFrontmatter } from "@/lib/content/mdx";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
-import type { EnneagramType } from "@/lib/enneagram/types";
+import type { EnneagramType, Center } from "@/lib/enneagram/types";
+import { centerBadge, centerHoverBorder, centerHoverText, centerHoverBgSoft30 } from "@/lib/enneagram/center-classes";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { ResonanceChecklist } from "@/components/enneagram/resonance-checklist";
 import { TypeQuickRef } from "@/components/enneagram/type-quick-ref";
@@ -161,7 +162,7 @@ export default async function TypeDetailPage({
 
           <div className="mb-6 flex flex-wrap items-center gap-3">
             <span
-              className={`inline-block rounded-full px-3 py-1 text-small font-medium bg-center-${center}-soft text-center-${center}-ink`}
+              className={`inline-block rounded-full px-3 py-1 text-small font-medium ${centerBadge[center]}`}
             >
               {CENTER_LABEL[center]}
             </span>
@@ -232,7 +233,7 @@ export default async function TypeDetailPage({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`rounded-full border border-border px-4 py-2 text-small font-medium text-ink-muted hover:text-center-${center}-ink hover:border-center-${center} hover:bg-center-${center}-soft/30 transition-colors`}
+                  className={`rounded-full border border-border px-4 py-2 text-small font-medium text-ink-muted ${centerHoverText[center]} ${centerHoverBorder[center]} ${centerHoverBgSoft30[center]} transition-colors`}
                 >
                   {link.label}
                 </Link>
@@ -256,7 +257,7 @@ export default async function TypeDetailPage({
                   <Link
                     key={t}
                     href={`/types/${t}`}
-                    className={`rounded-full border border-border px-5 py-2 text-small font-medium text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
+                    className={`rounded-full border border-border px-5 py-2 text-small font-medium text-ink-muted ${centerHoverText[typeCenter]} ${centerHoverBorder[typeCenter]} ${centerHoverBgSoft30[typeCenter]} transition-colors`}
                   >
                     Type {t}
                   </Link>

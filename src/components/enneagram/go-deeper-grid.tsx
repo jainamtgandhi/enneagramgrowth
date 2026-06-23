@@ -7,6 +7,12 @@ import { useVisited } from "@/hooks/use-visited";
 import type { Center } from "@/lib/enneagram/types";
 import { Check } from "lucide-react";
 
+const centerHoverBorder: Record<Center, string> = {
+  body: "hover:border-center-body",
+  heart: "hover:border-center-heart",
+  head: "hover:border-center-head",
+};
+
 interface Section {
   slug: string;
   label: string;
@@ -51,10 +57,10 @@ export function GoDeeperGrid({ typeNum, center, sections }: GoDeeperGridProps) {
             <Link
               key={section.slug}
               href={path}
-              className={`group relative rounded-xl border border-border p-5 hover:border-center-${center} hover:shadow-card transition-all`}
+              className={`group relative rounded-xl border border-border p-5 ${centerHoverBorder[center]} hover:shadow-card transition-all`}
             >
               {wasVisited && (
-                <span className="absolute top-3 right-3 flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                <span className="absolute top-3 right-3 flex items-center justify-center w-5 h-5 rounded-full bg-brand-soft text-success">
                   <Check className="h-3 w-3" />
                 </span>
               )}

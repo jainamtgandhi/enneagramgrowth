@@ -9,6 +9,7 @@ import {
   type Center,
 } from "@/lib/enneagram/types";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
+import { centerActiveState, centerInactiveHover } from "@/lib/enneagram/center-classes";
 import { useActiveHeading } from "@/hooks/use-active-heading";
 
 interface TypeSelectorBarProps {
@@ -80,8 +81,8 @@ export function TypeSelectorBar({
                 onClick={() => handleClick(id)}
                 className={`shrink-0 rounded-full px-4 py-1.5 text-small font-medium transition-all whitespace-nowrap ${
                   isActive
-                    ? `bg-center-${center}-soft text-center-${center}-ink ring-2 ring-center-${center}/30`
-                    : `text-ink-muted hover:bg-center-${center}-soft/50 hover:text-center-${center}-ink`
+                    ? centerActiveState[center]
+                    : centerInactiveHover[center]
                 }`}
               >
                 {info.label}
@@ -119,8 +120,8 @@ export function TypeSelectorBar({
                       onClick={() => handleClick(id)}
                       className={`shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-small font-medium transition-all whitespace-nowrap ${
                         isActive
-                          ? `bg-center-${center}-soft text-center-${center}-ink ring-2 ring-center-${center}/30`
-                          : `text-ink-muted hover:bg-center-${center}-soft/50 hover:text-center-${center}-ink`
+                          ? centerActiveState[center]
+                          : centerInactiveHover[center]
                       }`}
                     >
                       <span className="font-semibold">{typeNum}</span>

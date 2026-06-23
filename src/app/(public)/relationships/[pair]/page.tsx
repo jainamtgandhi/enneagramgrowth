@@ -5,6 +5,7 @@ import { getPairRelationship, TYPE_PAIR_RELATIONSHIPS } from "@/lib/enneagram/re
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
+import { centerBadge, centerText, centerHoverRing40 } from "@/lib/enneagram/center-classes";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 function parsePair(pair: string): [EnneagramType, EnneagramType] | null {
@@ -79,14 +80,14 @@ export default async function PairPage({
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <Link
           href={`/types/${rel.type1}`}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-small font-medium bg-center-${center1}-soft text-center-${center1}-ink hover:ring-2 hover:ring-center-${center1}/40 transition-all`}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-small font-medium ${centerBadge[center1]} hover:ring-2 ${centerHoverRing40[center1]} transition-all`}
         >
           <span className="font-bold">{rel.type1}</span> {info1.name}
         </Link>
         <span className="text-ink-muted">&</span>
         <Link
           href={`/types/${rel.type2}`}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-small font-medium bg-center-${center2}-soft text-center-${center2}-ink hover:ring-2 hover:ring-center-${center2}/40 transition-all`}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-small font-medium ${centerBadge[center2]} hover:ring-2 ${centerHoverRing40[center2]} transition-all`}
         >
           <span className="font-bold">{rel.type2}</span> {info2.name}
         </Link>
@@ -135,13 +136,13 @@ export default async function PairPage({
         </h2>
         <div className="space-y-4">
           <div className="rounded-xl border border-border bg-surface p-5">
-            <p className={`text-small font-medium text-center-${center1}-ink mb-2`}>
+            <p className={`text-small font-medium ${centerText[center1]} mb-2`}>
               For the {info1.name} (Type {rel.type1})
             </p>
             <p className="text-body text-ink">{rel.tipForType1}</p>
           </div>
           <div className="rounded-xl border border-border bg-surface p-5">
-            <p className={`text-small font-medium text-center-${center2}-ink mb-2`}>
+            <p className={`text-small font-medium ${centerText[center2]} mb-2`}>
               For the {info2.name} (Type {rel.type2})
             </p>
             <p className="text-body text-ink">{rel.tipForType2}</p>

@@ -123,7 +123,7 @@ export default async function TeachDashboardPage() {
               </div>
             </Link>
             <Link
-              href="/enneagram"
+              href="/library"
               className="flex items-center gap-3 rounded-lg border border-border p-4 hover:border-brand hover:shadow-card transition-all"
             >
               <TrendingUp className="h-5 w-5 text-brand" />

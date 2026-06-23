@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { ALL_TYPES, TYPE_TO_CENTER } from "@/lib/enneagram/types";
+import { centerBadge } from "@/lib/enneagram/center-classes";
 import { cn } from "@/lib/utils";
 
 export function TypeNav() {
@@ -29,7 +30,7 @@ export function TypeNav() {
             )}
           >
             <div
-              className={`h-5 w-5 rounded-full flex items-center justify-center text-small font-bold bg-center-${center}-soft text-center-${center}-ink`}
+              className={`h-5 w-5 rounded-full flex items-center justify-center text-small font-bold ${centerBadge[center]}`}
             >
               {type}
             </div>

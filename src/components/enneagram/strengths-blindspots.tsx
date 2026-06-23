@@ -15,7 +15,7 @@ export function StrengthsBlindSpots({ typeNum }: { typeNum: EnneagramType }) {
         <ul className="space-y-2">
           {strengths.map((s) => (
             <li key={s} className="flex items-start gap-2 text-small text-ink">
-              <span className="mt-0.5 shrink-0 text-emerald-600" aria-hidden>
+              <span className="mt-0.5 shrink-0 text-success" aria-hidden>
                 +
               </span>
               {s}
@@ -33,7 +33,7 @@ export function StrengthsBlindSpots({ typeNum }: { typeNum: EnneagramType }) {
               key={b}
               className="flex items-start gap-2 text-small text-ink-muted"
             >
-              <span className="mt-0.5 shrink-0 text-amber-600" aria-hidden>
+              <span className="mt-0.5 shrink-0 text-warning" aria-hidden>
                 &ndash;
               </span>
               {b}

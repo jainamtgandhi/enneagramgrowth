@@ -2,6 +2,7 @@ import Link from "next/link";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
+import { centerHoverBorder, centerBadge } from "@/lib/enneagram/center-classes";
 
 interface TypeCardProps {
   type: EnneagramType;
@@ -15,11 +16,11 @@ export function TypeCard({ type }: TypeCardProps) {
   return (
     <Link
       href={href}
-      className={`group block rounded-xl border border-border p-6 hover:border-center-${center} hover:shadow-card transition-all`}
+      className={`group block rounded-xl border border-border p-6 ${centerHoverBorder[center]} hover:shadow-card transition-all`}
     >
       <div className="flex items-center gap-3 mb-3">
         <div
-          className={`flex h-10 w-10 items-center justify-center rounded-full bg-center-${center}-soft text-center-${center}-ink font-serif font-bold text-body`}
+          className={`flex h-10 w-10 items-center justify-center rounded-full ${centerBadge[center]} font-serif font-bold text-body`}
         >
           {type}
         </div>
@@ -32,7 +33,7 @@ export function TypeCard({ type }: TypeCardProps) {
         {info.keywords.slice(0, 3).map((keyword) => (
           <span
             key={keyword}
-            className={`inline-block rounded-full bg-center-${center}-soft px-2 py-0.5 text-small text-center-${center}-ink`}
+            className={`inline-block rounded-full px-2 py-0.5 text-small ${centerBadge[center]}`}
           >
             {keyword}
           </span>

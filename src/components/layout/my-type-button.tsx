@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useMyType } from "@/contexts/my-type-context";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
@@ -22,6 +22,22 @@ const centerDotMap = {
 export function MyTypeButton() {
   const { myType, setMyType, clearMyType } = useMyType();
   const [showPicker, setShowPicker] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const closePicker = useCallback(() => {
+    setShowPicker(false);
+    buttonRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (!showPicker) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") closePicker();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [showPicker, closePicker]);
 
   if (!myType) {
     return (
@@ -41,9 +57,12 @@ export function MyTypeButton() {
   return (
     <div className="relative">
       <button
+        ref={buttonRef}
         onClick={() => setShowPicker(!showPicker)}
         className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-small font-semibold transition-colors ${colors}`}
         aria-label={`My Type: ${info.name}. Click to change.`}
+        aria-expanded={showPicker}
+        aria-haspopup="true"
       >
         <span className={`h-2 w-2 rounded-full ${centerDotMap[center]}`} />
         Type {myType}
@@ -62,9 +81,10 @@ export function MyTypeButton() {
         <>
           <div
             className="fixed inset-0 z-40"
-            onClick={() => setShowPicker(false)}
+            onClick={closePicker}
+            aria-hidden="true"
           />
-          <div className="absolute right-0 top-full mt-2 z-50 w-[280px] rounded-xl border border-border bg-paper p-4 shadow-lg">
+          <div ref={panelRef} role="dialog" aria-label="Change your Enneagram type" className="absolute right-0 top-full mt-2 z-50 w-[280px] rounded-xl border border-border bg-paper p-4 shadow-lg">
             <div className="mb-3">
               <p className="text-small font-semibold text-ink">{info.name}</p>
               <Link

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CENTER_INFO } from "@/lib/enneagram/types";
 import type { Center } from "@/lib/enneagram/types";
+import { centerText, centerHoverBorder } from "@/lib/enneagram/center-classes";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { EnneagramDiagram } from "@/components/enneagram/enneagram-diagram";
 import { ArrowRight } from "lucide-react";
@@ -119,7 +120,7 @@ export default function EnneagramHubPage() {
             return (
               <div key={center} className="mb-8">
                 <h3
-                  className={`text-ui font-medium text-center-${center}-ink mb-3`}
+                  className={`text-ui font-medium ${centerText[center]} mb-3`}
                 >
                   {info.label}
                 </h3>
@@ -130,10 +131,10 @@ export default function EnneagramHubPage() {
                       <Link
                         key={n}
                         href={`/types/${n}`}
-                        className={`rounded-lg border border-border bg-surface p-4 hover:border-center-${center} hover:shadow-card transition-all`}
+                        className={`rounded-lg border border-border bg-surface p-4 ${centerHoverBorder[center]} hover:shadow-card transition-all`}
                       >
                         <span
-                          className={`font-serif text-h3 font-bold text-center-${center}-ink`}
+                          className={`font-serif text-h3 font-bold ${centerText[center]}`}
                         >
                           {n}
                         </span>

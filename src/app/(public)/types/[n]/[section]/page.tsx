@@ -5,6 +5,7 @@ import { getContentFile } from "@/lib/content/mdx";
 import { TYPE_INFO } from "@/lib/enneagram/descriptions";
 import { TYPE_TO_CENTER, ALL_TYPES } from "@/lib/enneagram/types";
 import type { EnneagramType } from "@/lib/enneagram/types";
+import { centerBadge, centerHoverText, centerHoverBorder, centerHoverBgSoft30 } from "@/lib/enneagram/center-classes";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { MdxArticle } from "@/components/shared/mdx-article";
 import { ReadingProgress } from "@/components/shared/reading-progress";
@@ -191,7 +192,7 @@ export default async function TypeSectionPage({
 
           <div className="mb-6 flex flex-wrap items-center gap-3">
             <span
-              className={`inline-block rounded-full px-3 py-1 text-small font-medium bg-center-${center}-soft text-center-${center}-ink`}
+              className={`inline-block rounded-full px-3 py-1 text-small font-medium ${centerBadge[center]}`}
             >
               Type {n}
             </span>
@@ -292,7 +293,7 @@ export default async function TypeSectionPage({
                   <Link
                     key={t}
                     href={`/types/${t}/${section}`}
-                    className={`rounded-full border border-border px-4 py-1.5 text-small font-medium text-ink-muted hover:text-center-${typeCenter}-ink hover:border-center-${typeCenter} hover:bg-center-${typeCenter}-soft/30 transition-colors`}
+                    className={`rounded-full border border-border px-4 py-1.5 text-small font-medium text-ink-muted ${centerHoverText[typeCenter]} ${centerHoverBorder[typeCenter]} ${centerHoverBgSoft30[typeCenter]} transition-colors`}
                   >
                     Type {t}
                   </Link>
